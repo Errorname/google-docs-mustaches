@@ -1,7 +1,7 @@
 {
   "name": "google-doc-to-pdf",
-  "version": "0.1.0",
-  "description": "Google doc to pdf",
+  "version": "0.1.1",
+  "description": "📝Generate PDF from Google Doc templates",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -9,13 +9,15 @@
     "build": "tsc",
     "test": ""
   },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/errorname/google-doc-to-pdf.git"
   },
   "keywords": [
-    "google",
-    "doc",
+    "google-doc",
     "pdf",
     "template"
   ],

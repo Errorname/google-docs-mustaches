@@ -3,7 +3,7 @@
 📝Generate PDF from Google Doc templates
 
 [![](https://img.shields.io/npm/v/google-doc-to-pdf.svg)](https://www.npmjs.com/package/google-doc-to-pdf)
-[![](https://img.shields.io/github/license/Errorname/google-doc-topdf.svg)](https://github.com/Errorname/google-doc-to-pdf/blob/master/LICENSE)
+[![](https://img.shields.io/github/license/Errorname/google-doc-to-pdf.svg)](https://github.com/Errorname/google-doc-to-pdf/blob/master/LICENSE)
 
 ## How does this work?
 
