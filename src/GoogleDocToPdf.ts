@@ -1,4 +1,4 @@
-import { ID } from './types'
+import { ID, GoogleDocToPdfOptions, ToPdfOptions } from './types'
 import interpolate from './interpolation'
 import { GDoc, Request } from './interpolation/types'
 import apis, { multipart } from './apis'
@@ -6,31 +6,26 @@ import apis, { multipart } from './apis'
 class GoogleDocToPdf {
   apis: any
 
-  constructor(options: { token: Function }) {
+  constructor(options: GoogleDocToPdfOptions) {
     this.apis = apis(options.token)
   }
 
-  async toPdf(
-    source: ID,
-    optDestination?: ID | null,
-    options?: {
-      data?: Object
-      name?: string
-    }
-  ): Promise<ID> {
+  async toPdf(source: ID, optDestination?: ID, options?: ToPdfOptions): Promise<ID> {
     // If no destination given, use same folder as source
     let destination: ID = optDestination || (await this.getParent(source))
 
+    const { name = null, data = null, formatters = {} } = options || {}
+
     // If some data is given, we consider the source to be a template
-    if (options && options.data) {
-      let copyOptions: any = options.name ? { name: options.name } : {}
+    if (data) {
+      let copyOptions: any = name ? { name } : {}
 
       // Copy template to destination
       source = await this.copyFile(source, destination, copyOptions)
 
       // Compute interpolations
       const doc = await this.readDoc(source)
-      const updates = interpolate(doc, options.data)
+      const updates = interpolate(doc, data, formatters)
 
       // Update copy with interpolations
       await this.updateDoc(source, updates)
@@ -40,7 +35,7 @@ class GoogleDocToPdf {
     const pdf: Blob = await this.exportPdf(source)
 
     // Upload PDF to destination
-    const id: ID = await this.uploadPdf('Export PDF', destination, pdf)
+    const id: ID = await this.uploadPdf(name || 'Export PDF', destination, pdf)
 
     return id
   }

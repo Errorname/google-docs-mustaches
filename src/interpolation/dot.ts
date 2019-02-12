@@ -1,8 +1,6 @@
-export default (
-  data: any,
-  interpolation: string,
-  options?: { transformers: { [name: string]: Function } }
-): any => {
+import { Formatters } from '../types'
+
+export default (data: any, interpolation: string, options?: { formatters: Formatters }): any => {
   const [path, ...transformations] = interpolation.split('|').map(s => s.trim())
 
   const iterative: string[] = []
@@ -19,11 +17,11 @@ export default (
 
   let prop = iterative.reduce((acc, accessor) => acc[accessor], data)
 
-  if (options && options.transformers) {
+  if (options && options.formatters) {
     transformations.map(transformation => {
-      const transformer = options.transformers[transformation.toLowerCase()]
-      if (transformer) {
-        prop = transformer(prop)
+      const formatter = options.formatters[transformation.toLowerCase()]
+      if (formatter) {
+        prop = formatter(prop)
       }
     })
   }

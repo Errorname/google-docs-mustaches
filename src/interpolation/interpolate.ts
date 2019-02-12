@@ -1,10 +1,11 @@
 import { GDoc, Request } from './types'
+import { Formatters } from '../types'
 
 import dot from './dot'
 
-const interpolate = (doc: GDoc, data: any): Request[] => {
+const interpolate = (doc: GDoc, data: any, formatters: Formatters): Request[] => {
   const placeholders = findPlaceholders(doc)
-  return computeUpdates(placeholders, data)
+  return computeUpdates(placeholders, data, formatters)
 }
 
 const findPlaceholders = (doc: GDoc): string[] => {
@@ -24,15 +25,17 @@ const findPlaceholders = (doc: GDoc): string[] => {
   return placeholders
 }
 
-const transformers = {
+const availableFormatters: Formatters = {
   lowercase: (s: string) => s.toLowerCase(),
   uppercase: (s: string) => s.toUpperCase()
 }
 
-const computeUpdates = (placeholders: string[], data: any): Request[] => {
+const computeUpdates = (placeholders: string[], data: any, formatters: Formatters): Request[] => {
+  formatters = { ...availableFormatters, ...formatters }
+
   const replacements = placeholders.map(
     (placeholder): [string, string] => {
-      const computed: string = `${dot(data, placeholder, { transformers })}`
+      const computed: string = `${dot(data, placeholder, { formatters })}`
       return [placeholder, computed]
     }
   )

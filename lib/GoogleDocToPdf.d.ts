@@ -1,13 +1,8 @@
-import { ID } from './types';
+import { ID, GoogleDocToPdfOptions, ToPdfOptions } from './types';
 declare class GoogleDocToPdf {
     apis: any;
-    constructor(options: {
-        token: Function;
-    });
-    toPdf(source: ID, optDestination?: ID | null, options?: {
-        data?: Object;
-        name?: string;
-    }): Promise<ID>;
+    constructor(options: GoogleDocToPdfOptions);
+    toPdf(source: ID, optDestination?: ID, options?: ToPdfOptions): Promise<ID>;
     private copyFile;
     private getParent;
     private exportPdf;
