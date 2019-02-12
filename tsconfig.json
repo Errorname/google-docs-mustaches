@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "lib",
+    "strict": true,
+    "removeComments": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.spec.*"]
+}

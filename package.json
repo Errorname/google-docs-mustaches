@@ -1,0 +1,38 @@
+{
+  "name": "google-doc-to-pdf",
+  "version": "0.1.0",
+  "description": "Google doc to pdf",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/errorname/google-doc-to-pdf.git"
+  },
+  "keywords": [
+    "google",
+    "doc",
+    "pdf",
+    "template"
+  ],
+  "author": {
+    "name": "Thibaud Courtoison",
+    "email": "do.not.press.enter@gmail.com",
+    "url": "https://errorna.me"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/errorname/google-doc-to-pdf/issues"
+  },
+  "homepage": "https://github.com/errorname/google-doc-to-pdf#readme",
+  "dependencies": {
+    "cross-fetch": "^3.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.3"
+  }
+}
