@@ -1,3 +1,5 @@
+![logo](https://raw.githubusercontent.com/Errorname/google-docs-mustaches/master/logo.png)
+
 # google-docs-mustaches
 
 📝Interpolate Google Docs files using mustaches and formatters
