@@ -1,14 +1,21 @@
 export declare type ID = string;
 export declare type AccessToken = string;
-export interface GoogleDocToPdfOptions {
+export interface ConstructorOptions {
     token: () => AccessToken;
 }
-export interface ToPdfOptions {
+export interface InterpolationOptions {
+    source: ID;
+    destination?: ID;
     name?: string;
-    data?: Object;
+    data: Object;
     formatters?: Formatters;
+    export?: MimeType;
 }
 export interface Formatters {
     [name: string]: Formatter;
 }
 export declare type Formatter = (value: any) => string;
+export declare enum MimeType {
+    pdf = "application/pdf",
+    text = "plain/text"
+}

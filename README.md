@@ -1,18 +1,18 @@
-# google-doc-to-pdf
+# google-docs-mustaches
 
-📝Generate PDF from Google Doc templates
+📝Interpolate Google Docs files using mustaches and formatters
 
-[![](https://img.shields.io/npm/v/google-doc-to-pdf.svg)](https://www.npmjs.com/package/google-doc-to-pdf)
-[![](https://img.shields.io/github/license/Errorname/google-doc-to-pdf.svg)](https://github.com/Errorname/google-doc-to-pdf/blob/master/LICENSE)
+[![](https://img.shields.io/npm/v/google-docs-mustaches.svg)](https://www.npmjs.com/package/google-docs-mustaches)
+[![](https://img.shields.io/github/license/Errorname/google-docs-mustaches.svg)](https://github.com/Errorname/google-docs-mustaches/blob/master/LICENSE)
 
 ## How does this work?
 
-**google-doc-to-pdf** will execute requests to the [Google Drive](https://developers.google.com/drive/api/v3/about-sdk) and [Google Docs](https://developers.google.com/docs/api/how-tos/overview) APIs to copy the file, interpolate its placeholders and generate the according PDF.
+**google-docs-mustaches** will execute requests to the [Google Drive](https://developers.google.com/drive/api/v3/about-sdk) and [Google Docs](https://developers.google.com/docs/api/how-tos/overview) APIs to copy the file and interpolate its placeholders using the given data.
 
 ## Installation
 
 ```sh
-npm install google-doc-to-pdf
+npm install google-docs-mustaches
 ```
 
 ## Basic usage
@@ -28,9 +28,9 @@ You have {{ accounts[0].money }}€ in you account...
 Then execute the following code
 
 ```js
-import GoogleDocToPdf from 'google-doc-to-pdf'
+import Mustaches from 'google-docs-mustaches'
 
-const gdoc = new GoogleDocToPdf({
+const mustaches = new Mustaches{
   token: () => gapi.auth.getToken().access_token
 })
 
@@ -40,8 +40,9 @@ const source = '11rGORd6FRxOGERe7fh6LNQfyB48ZvOgQNH6GScK_FfA'
 // ID of the destination folder
 const destination = '18mcqwbaXS8NOqZjztB3OUQAc5_P8M6-l'
 
-gdoc.toPdf(source, destination, {
-  name: 'Export PDF',
+mustaches.interpolate({
+  source,
+  destination,
   data: {
     firstname: 'Thibaud',
     lastname: 'Courtoison',
@@ -52,12 +53,12 @@ gdoc.toPdf(source, destination, {
 
 ## Documentation
 
-### `new GoogleDocToPdf(options: GoogleDocToPdfOptions)`
+### `new Mustaches(options: ConstructorOptions)`
 
 ```ts
 type AccessToken = string
 
-interface GoogleDocToPdfOptions {
+interface ConstructorOptions {
   token: () => AccessToken
 }
 ```
@@ -69,19 +70,20 @@ interface GoogleDocToPdfOptions {
 > - https://www.googleapis.com/auth/drive
 > - https://www.googleapis.com/auth/documents
 
-### `gdoc.toPdf(source: ID, destination?: ID, options?: ToPdfOptions): ID`
+### `mustaches.interpolate(options: ToPdfOptions): ID`
 
-This method will create a new Google Doc file from the `source` and into the `destination` folder.
-
-If `options.data` is provided, this method will try to [interpolate](#interpolation) placeholders from the source file.
+This method will interpolate from the `source` file and put the generated file into the `destination` folder.
 
 ```ts
 type ID = string
 
-interface ToPdfOptions {
+export interface InterpolationOptions {
+  source: ID
+  destination?: ID
   name?: string
-  data?: Object
-  formatters: Formatters
+  data: Object
+  formatters?: Formatters
+  export?: MimeType
 }
 
 interface Formatters {
@@ -89,11 +91,19 @@ interface Formatters {
 }
 
 type Formatter = (value: any) => string
+
+export enum MimeType {
+  pdf = 'application/pdf',
+  text = 'plain/text'
+}
 ```
 
-- `name` will be the name of both the newly created and completed google doc file and the corresponding PDF
-- `data` will be used for [interpolation](#interpolation)
+- `source` is the ID of the file which will be interpolated.
+- `destination` is the ID of the destination folder where the new file will be put. If no destination is given, the new file will be put next to the `source` file.
+- `name` is the name of the newly created and interpolated google doc file.
+- `data` is the data given for the [interpolation](#interpolation)
 - `formatters` will be used for [interpolation](#interpolation)
+- `export` can be specified to export the file after the [interpolation](#interpolation)
 
 ## Interpolation
 

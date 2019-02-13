@@ -1,14 +1,17 @@
 export type ID = string
 export type AccessToken = string
 
-export interface GoogleDocToPdfOptions {
+export interface ConstructorOptions {
   token: () => AccessToken
 }
 
-export interface ToPdfOptions {
+export interface InterpolationOptions {
+  source: ID
+  destination?: ID
   name?: string
-  data?: Object
+  data: Object
   formatters?: Formatters
+  export?: MimeType
 }
 
 export interface Formatters {
@@ -16,3 +19,8 @@ export interface Formatters {
 }
 
 export type Formatter = (value: any) => string
+
+export enum MimeType {
+  pdf = 'application/pdf',
+  text = 'plain/text'
+}

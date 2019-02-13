@@ -1,7 +1,7 @@
 {
-  "name": "google-doc-to-pdf",
-  "version": "0.1.1",
-  "description": "📝Generate PDF from Google Doc templates",
+  "name": "google-docs-mustaches",
+  "version": "0.1.0",
+  "description": "📝Interpolate Google Doc files using mustaches and formatters",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/errorname/google-doc-to-pdf.git"
+    "url": "git+https://github.com/errorname/google-docs-mustaches.git"
   },
   "keywords": [
     "google-doc",
@@ -28,9 +28,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/errorname/google-doc-to-pdf/issues"
+    "url": "https://github.com/errorname/google-docs-mustaches/issues"
   },
-  "homepage": "https://github.com/errorname/google-doc-to-pdf#readme",
+  "homepage": "https://github.com/errorname/google-docs-mustaches#readme",
   "dependencies": {
     "cross-fetch": "^3.0.1"
   },

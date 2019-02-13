@@ -1,1 +1,1 @@
-export { default } from './GoogleDocToPdf';
+export { default } from './Mustaches';

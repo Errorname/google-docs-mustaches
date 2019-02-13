@@ -1,4 +1,4 @@
-import { ID } from '../types'
+import { ID, MimeType } from '../types'
 import { fetch } from './fetch'
 
 const DRIVE_URL = 'https://www.googleapis.com/drive/v3/files'
@@ -14,8 +14,8 @@ const apis = (token: Function) => {
       create: (...args: any[]) => f(`${DRIVE_UPLOAD_URL}?uploadType=multipart&alt=json`, ...args),
       get: (id: ID, ...args: any[]) => f(`${DRIVE_URL}/${id}?fields=parents`, ...args),
       copy: (id: ID, ...args: any[]) => f(`${DRIVE_URL}/${id}/copy`, ...args),
-      export: (id: ID, ...args: any[]) =>
-        f(`${DRIVE_URL}/${id}/export?mimeType=application/pdf`, ...args),
+      export: (id: ID, mimeType: MimeType, ...args: any[]) =>
+        f(`${DRIVE_URL}/${id}/export?mimeType=${mimeType}`, ...args),
       ids: (count: number, ...args: any[]) => f(`${DRIVE_URL}/generateIds?count=${count}`, ...args)
     },
     docs: {
