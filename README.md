@@ -32,7 +32,7 @@ Then execute the following code
 ```js
 import Mustaches from 'google-docs-mustaches'
 
-const mustaches = new Mustaches{
+const mustaches = new Mustaches({
   token: () => gapi.auth.getToken().access_token
 })
 
@@ -188,7 +188,7 @@ With the following `options`:
 Will become:
 
 ```
-Hi COURTOISON. Today is Thursday, tomorrow is Wednesday.
+Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 ```
 
 **Available formatters:**
