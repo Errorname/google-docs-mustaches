@@ -196,3 +196,14 @@ Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 - **lowercase**: `HeLLo` => `hello`
 - **uppercase**: `wOrLd` => `WORLD`
 - _More to come..._
+
+## How to retrieve the Google token?
+
+If you are using `google-docs-mustaches` from inside a browser, you can follow [this tutorial](https://developers.google.com/api-client-library/javascript/start/start-js).
+
+If you are using `google-docs-mustaches` from in Node.js, you can follow [this one](https://github.com/googleapis/google-api-nodejs-client#oauth2-client).
+
+> **Note:** Your AccessToken must have the following scopes:
+>
+> - https://www.googleapis.com/auth/drive
+> - https://www.googleapis.com/auth/documents
