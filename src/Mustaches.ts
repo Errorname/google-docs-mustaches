@@ -2,6 +2,7 @@ import { ID, ConstructorOptions, InterpolationOptions, MimeType } from './types'
 import interpolate from './interpolation'
 import { GDoc, Request } from './interpolation/types'
 import apis, { multipart } from './apis'
+import Blob from './polyfills/Blob'
 
 class Mustaches {
   apis: any

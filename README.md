@@ -207,3 +207,14 @@ If you are using `google-docs-mustaches` from in Node.js, you can follow [this o
 >
 > - https://www.googleapis.com/auth/drive
 > - https://www.googleapis.com/auth/documents
+
+## Supported environments
+
+We use `cross-fetch` for compatibility with most environment.
+
+Those are the `cross-fetch` supported environments:
+
+- Node 6+
+- React-Native
+
+[![Browser compat](https://saucelabs.com/browser-matrix/cross-fetch.svg)](https://github.com/lquixada/cross-fetch)
