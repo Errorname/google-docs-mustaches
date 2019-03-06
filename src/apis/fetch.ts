@@ -1,4 +1,5 @@
 import crossFetch from 'cross-fetch'
+import Blob from '../polyfills/Blob'
 
 export const fetch = (token: Function) => (
   url: string,
