@@ -72,6 +72,8 @@ interface ConstructorOptions {
 > - https://www.googleapis.com/auth/drive
 > - https://www.googleapis.com/auth/documents
 
+See also: [How to retrieve the Google token?](#how-to-retrieve-the-google-token)
+
 ### `mustaches.interpolate(options: ToPdfOptions): ID`
 
 This method will interpolate from the `source` file and put the generated file into the `destination` folder.
