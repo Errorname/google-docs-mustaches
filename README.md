@@ -196,3 +196,14 @@ Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 - **lowercase**: `HeLLo` => `hello`
 - **uppercase**: `wOrLd` => `WORLD`
 - _More to come..._
+
+## Supported environments
+
+We use `cross-fetch` for compatibility with most environment.
+
+Those are the `cross-fetch` supported environments:
+
+- Node 6+
+- React-Native
+
+[![Browser compat](https://saucelabs.com/browser-matrix/cross-fetch.svg)](https://github.com/lquixada/cross-fetch)
