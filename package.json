@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc",
-    "test": "",
+    "test": "jest --coverage --coverage-reporters=text",
     "lint": "eslint src/**/*",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier src/**/*",
@@ -41,17 +41,27 @@
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.1",
+    "@babel/preset-typescript": "^7.3.3",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
+    "babel-jest": "^24.5.0",
     "eslint": "^5.15.3",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.4",
-    "typescript": "^3.3.3"
+    "jest": "^24.5.0",
+    "prettier": "^1.16.4"
   },
   "prettier": {
     "printWidth": 100,
     "semi": false,
     "singleQuote": true
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/polyfills"
+    ]
   }
 }

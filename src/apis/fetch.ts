@@ -13,7 +13,7 @@ export const fetch = (token: Function): Function => (
   }
 
   return crossFetch(url, {
-    method: method || body ? 'POST' : 'GET',
+    method: method || (body ? 'POST' : 'GET'),
     body,
     headers: {
       authorization: `Bearer ${token()}`,

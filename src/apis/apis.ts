@@ -4,7 +4,7 @@ import { fetch } from './fetch'
 const DRIVE_URL = 'https://www.googleapis.com/drive/v3/files'
 const DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v3/files'
 const DOCS_URL = 'https://docs.googleapis.com/v1/documents'
-const DOCS_EXPORT_URL = 'https://docs.google.com/document'
+// const DOCS_EXPORT_URL = 'https://docs.google.com/document'
 
 const apis = (token: Function): { [api: string]: { [method: string]: Function } } => {
   const f = fetch(token)
@@ -15,13 +15,13 @@ const apis = (token: Function): { [api: string]: { [method: string]: Function } 
       get: (id: ID, ...args: any[]) => f(`${DRIVE_URL}/${id}?fields=parents`, ...args),
       copy: (id: ID, ...args: any[]) => f(`${DRIVE_URL}/${id}/copy`, ...args),
       export: (id: ID, mimeType: MimeType, ...args: any[]) =>
-        f(`${DRIVE_URL}/${id}/export?mimeType=${mimeType}`, ...args),
-      ids: (count: number, ...args: any[]) => f(`${DRIVE_URL}/generateIds?count=${count}`, ...args)
+        f(`${DRIVE_URL}/${id}/export?mimeType=${mimeType}`, ...args)
+      // ids: (count: number, ...args: any[]) => f(`${DRIVE_URL}/generateIds?count=${count}`, ...args)
     },
     docs: {
       get: (id: ID, ...args: any[]) => f(`${DOCS_URL}/${id}`, ...args),
-      update: (id: ID, ...args: any[]) => f(`${DOCS_URL}/${id}:batchUpdate`, ...args),
-      export: (id: ID, ...args: any[]) => f(`${DOCS_EXPORT_URL}/d/${id}/export?format=pdf`, ...args)
+      update: (id: ID, ...args: any[]) => f(`${DOCS_URL}/${id}:batchUpdate`, ...args)
+      // export: (id: ID, format: string, ...args: any[]) => f(`${DOCS_EXPORT_URL}/d/${id}/export?format=${format}`, ...args)
     }
   }
 }

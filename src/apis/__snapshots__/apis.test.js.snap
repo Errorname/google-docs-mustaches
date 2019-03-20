@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`docs 1`] = `"https://docs.googleapis.com/v1/documents/abcd123 / (token: my-token)"`;
+
+exports[`docs 2`] = `"https://docs.googleapis.com/v1/documents/abcd123:batchUpdate / (token: my-token)"`;
+
+exports[`drive 1`] = `"https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&alt=json / (token: my-token)"`;
+
+exports[`drive 2`] = `"https://www.googleapis.com/drive/v3/files/abcd123?fields=parents / (token: my-token)"`;
+
+exports[`drive 3`] = `"https://www.googleapis.com/drive/v3/files/abcd123/copy / (token: my-token)"`;
+
+exports[`drive 4`] = `"https://www.googleapis.com/drive/v3/files/abcd123/export?mimeType=plain/text / (token: my-token)"`;
