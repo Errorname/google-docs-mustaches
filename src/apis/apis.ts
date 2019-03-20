@@ -6,7 +6,7 @@ const DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v3/files'
 const DOCS_URL = 'https://docs.googleapis.com/v1/documents'
 const DOCS_EXPORT_URL = 'https://docs.google.com/document'
 
-const apis = (token: Function) => {
+const apis = (token: Function): { [api: string]: { [method: string]: Function } } => {
   const f = fetch(token)
 
   return {
