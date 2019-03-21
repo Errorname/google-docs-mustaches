@@ -124,7 +124,7 @@ If you now have a working playground, check out the list of [available commands]
 | **npm run lint:fix** | Run **eslint** to fix lint issues. |
 | **npm run prettier:write** | Run **Prettier** to prettify the files. |
 | **npm run prettier:check** | Run **Prettier** to check against prettier rules. |
-| **npm run token** | Generate a new token and write it in `dev/token.json` |
+| **npm run token** | Generate a new OAuth token and write it in `dev/token.json` |
 | **npm run playground** | Run the `dev/playground.js` file |
 
 <!-- prettier-ignore-end -->
