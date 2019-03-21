@@ -3,11 +3,6 @@ import { Formatters } from '../types'
 
 import dot from './dot'
 
-const interpolate = (doc: GDoc, data: any, formatters: Formatters): Request[] => {
-  const placeholders = findPlaceholders(doc)
-  return computeUpdates(placeholders, data, formatters)
-}
-
 const findPlaceholders = (doc: GDoc): string[] => {
   const placeholders: string[] = []
 
@@ -49,6 +44,11 @@ const computeUpdates = (placeholders: string[], data: any, formatters: Formatter
       }
     }
   }))
+}
+
+const interpolate = (doc: GDoc, data: any, formatters: Formatters): Request[] => {
+  const placeholders = findPlaceholders(doc)
+  return computeUpdates(placeholders, data, formatters)
 }
 
 export default interpolate

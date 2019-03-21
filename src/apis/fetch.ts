@@ -1,7 +1,7 @@
 import crossFetch from 'cross-fetch'
 import Blob from '../polyfills/Blob'
 
-export const fetch = (token: Function) => (
+export const fetch = (token: Function): Function => (
   url: string,
   body: any = null,
   options: { method?: string; headers?: any; raw?: boolean } = {}

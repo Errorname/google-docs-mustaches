@@ -7,7 +7,12 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc",
-    "test": ""
+    "test": "",
+    "lint": "eslint src/**/*",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier src/**/*",
+    "prettier:write": "npm run prettier -- --write",
+    "prettier:check": "npm run prettier -- --check"
   },
   "files": [
     "lib"
@@ -36,6 +41,17 @@
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
+    "@typescript-eslint/parser": "^1.4.2",
+    "eslint": "^5.15.3",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4",
     "typescript": "^3.3.3"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true
   }
 }
