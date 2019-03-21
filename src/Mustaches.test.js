@@ -54,7 +54,7 @@ const buildFetchImpl = crossFetch => {
   })
 }
 
-describe('fetch', () => {
+describe('mustaches', () => {
   const token = () => 'my-token'
 
   let mustaches

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fetch export 1`] = `
+exports[`mustaches export 1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
@@ -61,7 +61,7 @@ Array [
 ]
 `;
 
-exports[`fetch no destination given 1`] = `
+exports[`mustaches no destination given 1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123?fields=parents",
@@ -110,7 +110,7 @@ Array [
 ]
 `;
 
-exports[`fetch nominal use case 1`] = `
+exports[`mustaches nominal use case 1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
@@ -148,7 +148,7 @@ Array [
 ]
 `;
 
-exports[`fetch with custom formatters  1`] = `
+exports[`mustaches with custom formatters  1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
@@ -186,7 +186,7 @@ Array [
 ]
 `;
 
-exports[`fetch with name 1`] = `
+exports[`mustaches with name 1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
