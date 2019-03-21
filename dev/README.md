@@ -114,39 +114,20 @@ If you now have a working playground, check out the list of [available commands]
 
 ### Available commands
 
-#### npm run build
+<!-- prettier-ignore-start -->
 
-This project uses **Typescript**, so you need to transpile into Javascript to run it.
+| Command | Notes |
+|---|---|
+| **npm run build** | This project uses **Typescript**, so you need to transpile into Javascript to run it. (Auto retranspile: `npm run build -- -w`) |
+| **npm run test** | Run **Jest** for the tests. This command will also give you the code coverage of your tests. |
+| **npm run lint** | Run **eslint** to check for lint issues. |
+| **npm run lint:fix** | Run **eslint** to fix lint issues. |
+| **npm run prettier:write** | Run **Prettier** to prettify the files. |
+| **npm run prettier:check** | Run **Prettier** to check against prettier rules. |
+| **npm run token** | Generate a new token and write it in `dev/token.json` |
+| **npm run playground** | Run the `dev/playground.js` file |
 
-If you don't want to re-run the command at every changes, use the `watch` argument: `npm run build -- -w`
-
-#### npm run test
-
-Run **Jest** for the tests. This command will also give you the code coverage of your tests.
-
-#### npm run lint
-
-Run **eslint** to check for lint issues.
-
-#### npm run lint:fix
-
-Run **eslint** to fix lint issues.
-
-#### npm run prettier:write
-
-Run **Prettier** to prettify the files.
-
-#### npm run prettier:check
-
-Run **Prettier** to check against prettier rules.
-
-#### npm run token
-
-Generate a new token and write it in `dev/token.json`
-
-#### npm run playground
-
-Run the `dev/playground.js` file
+<!-- prettier-ignore-end -->
 
 ### Resources
 
