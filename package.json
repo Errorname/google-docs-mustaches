@@ -8,9 +8,9 @@
     "prepare": "npm run build",
     "build": "tsc",
     "test": "jest --coverage --coverage-reporters=text",
-    "lint": "eslint src/**/*",
+    "lint": "eslint src/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
-    "prettier": "prettier src/**/*",
+    "prettier": "prettier src/**/*.ts",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --check"
   },
