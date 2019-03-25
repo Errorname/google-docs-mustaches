@@ -45,6 +45,18 @@ test('Default formatter - uppercase', () => {
   expect(interpolated).toBe('THIBAUD')
 })
 
+test('Default formatter - capitalize one word', () => {
+  const interpolated = dot({ name: 'anTOIne' }, 'name | capitalize')
+
+  expect(interpolated).toBe('Antoine')
+})
+
+test('Default formatter - capitalize two words', () => {
+  const interpolated = dot({ name: 'anTOIne caRAT' }, 'name | capitalize')
+
+  expect(interpolated).toBe('Antoine Carat')
+})
+
 test('Unknown formatter', () => {
   const interpolated = dot({ name: 'Thibaud' }, 'name | smurf')
 
