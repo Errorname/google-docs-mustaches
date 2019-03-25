@@ -6,7 +6,7 @@ const defaultFormatters: Formatters = {
   capitalize: (s: string) =>
     s
       .split(' ')
-      .map(e => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase())
+      .map(([head, ...tail]) => head.toUpperCase() + tail.join('').toLowerCase())
       .join(' ')
 }
 
