@@ -3,7 +3,11 @@ import { Formatters } from '../types'
 const defaultFormatters: Formatters = {
   lowercase: (s: string) => s.toLowerCase(),
   uppercase: (s: string) => s.toUpperCase(),
-  capitalize: (s: string) => s.split(' ').map( e => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase() ).join(' ')
+  capitalize: (s: string) =>
+    s
+      .split(' ')
+      .map(e => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase())
+      .join(' ')
 }
 
 export default (
