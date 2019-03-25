@@ -45,14 +45,25 @@ class Mustaches {
     return copiedFile
   }
 
+  private getParent(fileId: ID): Promise<ID> {
+    return this.apis.drive.get(fileId).then(({ parents }: any) => parents[0])
+  }
+
   private copyFile(source: ID, destination: ID, options?: Object): Promise<ID> {
     return this.apis.drive
       .copy(source, { parents: [destination], ...options })
       .then(({ id }: any) => id)
   }
 
-  private getParent(fileId: ID): Promise<ID> {
-    return this.apis.drive.get(fileId).then(({ parents }: any) => parents[0])
+  private readDoc(file: ID): Promise<GDoc> {
+    return this.apis.docs.get(file)
+  }
+
+  private updateDoc(file: ID, updates: Request[]): Promise<any> {
+    return this.apis.docs.update(file, {
+      documentId: file,
+      requests: updates
+    })
   }
 
   private export(source: ID, mimeType: MimeType): Promise<Blob> {
@@ -82,17 +93,6 @@ class Mustaches {
         }
       )
       .then(({ id }: any) => id)
-  }
-
-  private readDoc(file: ID): Promise<GDoc> {
-    return this.apis.docs.get(file)
-  }
-
-  private updateDoc(file: ID, updates: Request[]): Promise<any> {
-    return this.apis.docs.update(file, {
-      documentId: file,
-      requests: updates
-    })
   }
 }
 

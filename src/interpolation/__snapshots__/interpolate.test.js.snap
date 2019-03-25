@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`computeUpdates multiple placeholders 1`] = `
+Array [
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": false,
+        "text": "{{ user.name }}",
+      },
+      "replaceText": "Thibaud",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": false,
+        "text": "{{movie.title | uppercase}}",
+      },
+      "replaceText": "LOST IN TRANSLATION",
+    },
+  },
+]
+`;
+
+exports[`interpolate full document 1`] = `
+Array [
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": false,
+        "text": "{{ user.name }}",
+      },
+      "replaceText": "Thibaud",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": false,
+        "text": "{{movie.title | uppercase}}",
+      },
+      "replaceText": "LOST IN TRANSLATION",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": false,
+        "text": "{{ movie.rating }}",
+      },
+      "replaceText": "5",
+    },
+  },
+]
+`;

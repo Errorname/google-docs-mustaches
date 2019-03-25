@@ -1,0 +1,225 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mustaches export 1`] = `
+Array [
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
+    Object {
+      "body": "{\\"parents\\":[\\"destination-id-123\\"]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
+    Object {
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://www.googleapis.com/drive/v3/files/new-file-id-123/export?mimeType=application/pdf",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&alt=json",
+    Object {
+      "body": "{\\"args\\":\\"----BOUNDARY\\\\nContent-Type: application/json; charset=UTF-8\\\\n\\\\n{\\\\\\"name\\\\\\":\\\\\\"Export\\\\\\",\\\\\\"parents\\\\\\":[\\\\\\"destination-id-123\\\\\\"]}\\\\n\\\\n----BOUNDARY\\\\nContent-Type: application/pdf\\\\nContent-Encoding: base64\\\\n\\\\nBLOB123\\\\n\\\\n----BOUNDARY--\\"}",
+      "headers": Object {
+        "Accept": "application/json",
+        "Content-Type": "multipart/related; boundary=--BOUNDARY",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`mustaches no destination given 1`] = `
+Array [
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123?fields=parents",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
+    Object {
+      "body": "{\\"parents\\":[\\"parent-id-123\\"]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
+    Object {
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`mustaches nominal use case 1`] = `
+Array [
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
+    Object {
+      "body": "{\\"parents\\":[\\"destination-id-123\\"]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
+    Object {
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`mustaches with custom formatters  1`] = `
+Array [
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
+    Object {
+      "body": "{\\"parents\\":[\\"destination-id-123\\"]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
+    Object {
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Smurf\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`mustaches with name 1`] = `
+Array [
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
+    Object {
+      "body": "{\\"parents\\":[\\"destination-id-123\\"],\\"name\\":\\"New interpolated file\\"}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
+    Object {
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
