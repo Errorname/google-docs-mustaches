@@ -41,7 +41,7 @@ Go to the [Oauth consent screen](https://console.developers.google.com/apis/cred
 
 Go to the [Credentials](https://console.developers.google.com/apis/credentials) page. Click on **"Create Credentials"**, choose **"OAuth Client ID"**, select **"Other"** and validate with a name for your new key.
 
-Finally, by clicking on the arrow icon on the left of the table, download the credentials and put the JSON file at `dev/credentials.json`
+Finally, by clicking on the arrow icon on the right of the table, download the credentials and put the JSON file at `dev/credentials.json`
 
 ### Enable the APIs
 
@@ -110,7 +110,7 @@ _Have fun!_ :rocket:
 
 ## Ready to code
 
-If you now have a working playground, check out the list of [available commands](#available-commands) and [resources](#resources) to help you code on this project!
+Since you now have a working playground, check out the list of [available commands](#available-commands) and [resources](#resources) to help you code on this project!
 
 ### Available commands
 
