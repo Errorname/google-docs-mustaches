@@ -8,7 +8,7 @@ export const fetch = (token: Function): Function => (
 ): Promise<Response> => {
   const { method, headers, raw, ...rest } = options
 
-  if (body && !(body instanceof Blob)) {
+  if (body && !(Blob && body instanceof Blob)) {
     body = JSON.stringify(body)
   }
 
@@ -21,7 +21,12 @@ export const fetch = (token: Function): Function => (
       ...headers
     },
     ...rest
-  }).then(r => (raw ? r : r.json()))
+  }).then(async result => {
+    if (result.status !== 200) {
+      throw new Error(`Fetch Error: status ${result.status}`)
+    }
+    return raw ? result : result.json()
+  })
 }
 
 export const multipart = (

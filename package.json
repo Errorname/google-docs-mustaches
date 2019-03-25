@@ -12,7 +12,9 @@
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier src/**/*.ts",
     "prettier:write": "npm run prettier -- --write",
-    "prettier:check": "npm run prettier -- --check"
+    "prettier:check": "npm run prettier -- --check",
+    "token": "node dev/token.js",
+    "playground": "node dev/playground.js"
   },
   "files": [
     "lib"
@@ -51,6 +53,7 @@
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
     "jest": "^24.5.0",
+    "googleapis": "^38.0.0",
     "prettier": "^1.16.4",
     "typescript": "^3.3.4000"
   },

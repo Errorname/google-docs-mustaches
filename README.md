@@ -210,6 +210,10 @@ If you are using `google-docs-mustaches` in Node.js, you can follow [this one](h
 > - https://www.googleapis.com/auth/drive
 > - https://www.googleapis.com/auth/documents
 
+## Want to help?
+
+Great! If you want to contribute to **google-docs-mustaches**, go check out the [Contributor documentation](/dev) to get started!
+
 ## Supported environments
 
 We use `cross-fetch` for compatibility with most environment.

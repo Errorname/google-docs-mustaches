@@ -10,7 +10,7 @@ describe('fetch', () => {
 
   beforeEach(() => {
     crossFetch.mockReset()
-    crossFetch.mockResolvedValue({ json: () => ({ status: 200 }) })
+    crossFetch.mockResolvedValue({ status: 200, json: () => ({ some: 'data' }) })
   })
 
   test('mimimum', async () => {
@@ -48,6 +48,13 @@ describe('fetch', () => {
     expect(crossFetch).toHaveBeenCalled()
     expect(crossFetch.mock.calls).toMatchSnapshot()
     expect(result).toMatchSnapshot()
+  })
+
+  test('http error', async () => {
+    crossFetch.mockReset()
+    crossFetch.mockResolvedValue({ status: 500, json: () => ({ some: 'data' }) })
+
+    expect(fetch(token)('the-url')).rejects.toThrowErrorMatchingSnapshot()
   })
 })
 

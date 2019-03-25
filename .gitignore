@@ -1,4 +1,5 @@
 node_modules
-credentials.json
-token.json
+dev/credentials.json
+dev/token.json
+dev/playground.js
 lib/

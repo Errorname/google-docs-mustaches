@@ -1,0 +1,22 @@
+const Mustaches = require('../lib/Mustaches').default
+const token = require('./token.json')
+
+const mustaches = new Mustaches({
+  token: () => token.access_token
+})
+
+// ID of the template
+const source = '11rGORd6FRxOGERe7fh6LNQfyB48ZvOgQNH6GScK_FfA'
+
+// ID of the destination folder
+const destination = '18mcqwbaXS8NOqZjztB3OUQAc5_P8M6-l'
+
+mustaches.interpolate({
+  source,
+  destination,
+  data: {
+    firstname: 'Thibaud',
+    lastname: 'Courtoison',
+    accounts: [{ money: 1500 }]
+  }
+})

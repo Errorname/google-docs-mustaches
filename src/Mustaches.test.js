@@ -7,7 +7,7 @@ jest.mock('./polyfills/Blob')
 Blob.mockImplementation(args => ({ args: args.join('') }))
 
 const buildFetchImpl = crossFetch => {
-  const json = val => Promise.resolve({ json: () => val })
+  const json = val => Promise.resolve({ status: 200, json: () => val })
 
   crossFetch.mockImplementation(url => {
     // drive.get
@@ -20,7 +20,7 @@ const buildFetchImpl = crossFetch => {
     }
     // drive.export
     else if (url.includes('export?mimeType=')) {
-      return Promise.resolve({ blob: () => 'BLOB123' })
+      return Promise.resolve({ status: 200, blob: () => 'BLOB123' })
     }
     // drive.create
     else if (url.includes('?uploadType=')) {
