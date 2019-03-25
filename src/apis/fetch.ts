@@ -23,7 +23,6 @@ export const fetch = (token: Function): Function => (
     ...rest
   }).then(async result => {
     if (result.status !== 200) {
-      console.error(await result.json())
       throw new Error(`Fetch Error: status ${result.status}`)
     }
     return raw ? result : result.json()
