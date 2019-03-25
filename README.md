@@ -197,6 +197,7 @@ Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 
 - **lowercase**: `HeLLo` => `hello`
 - **uppercase**: `wOrLd` => `WORLD`
+- **capitalize**: `heLLO wOrlD` => `Hello World`
 - _More to come..._
 
 ## How to retrieve the Google token?
