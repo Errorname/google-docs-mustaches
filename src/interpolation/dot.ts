@@ -2,7 +2,12 @@ import { Formatters } from '../types'
 
 const defaultFormatters: Formatters = {
   lowercase: (s: string) => s.toLowerCase(),
-  uppercase: (s: string) => s.toUpperCase()
+  uppercase: (s: string) => s.toUpperCase(),
+  capitalize: (s: string) =>
+    s
+      .split(' ')
+      .map(([head, ...tail]) => head.toUpperCase() + tail.join('').toLowerCase())
+      .join(' ')
 }
 
 export default (
