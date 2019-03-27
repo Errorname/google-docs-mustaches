@@ -162,11 +162,14 @@ Will become:
 Pikachu, I choose you!
 ```
 
+_Warning: If you use an undefined variable as input, it will be resolved as an empty string._
+
 ### Formatters
 
 You can use **formatters** to print your data and **more complex objects** any way you want.
+In addition of the input variable, they can accept parameters which can be of the following primitive types: Number, Boolean, String or can be a variable which will be evaluated from `options.data`.
 
-There is a number of available formatters, but you can also **write your owns**
+There is a number of available formatters, but you can also **write your owns** in `options.formatters`.
 
 ```
 Hi {{ name | uppercase }}. Today is {{ today | printDay }}, tomorrow is {{ tomorrow | printDay }}.
@@ -198,7 +201,10 @@ Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 - **lowercase**: `HeLLo` => `hello`
 - **uppercase**: `wOrLd` => `WORLD`
 - **capitalize**: `heLLO wOrlD` => `Hello World`
+- **money(locale, currencyISO, fractionDigits = 0)**: `1500 | money("us", "USD", 2)` => `$1500.00`. (Currency ISO Codes)[https://en.wikipedia.org/wiki/ISO_4217#Active_codes]
 - _More to come..._
+
+_Warning: If you use an undefined formatter it will be simply ignored, which could lead to unexpected results if you're chaining them._
 
 ## How to retrieve the Google token?
 
