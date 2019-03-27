@@ -1,7 +1,7 @@
 import { GDoc, Request } from './types'
 import { Formatters } from '../types'
 
-import dot from './dot'
+import compute from './compute'
 
 const findPlaceholders = (doc: GDoc): string[] => {
   const placeholders: string[] = []
@@ -23,7 +23,7 @@ const findPlaceholders = (doc: GDoc): string[] => {
 const computeUpdates = (placeholders: string[], data: any, formatters: Formatters): Request[] => {
   const replacements = placeholders.map(
     (placeholder): [string, string] => {
-      const computed: string = `${dot(data, placeholder, { formatters })}`
+      const computed: string = `${compute(data, placeholder, { formatters })}`
       return [placeholder, computed]
     }
   )

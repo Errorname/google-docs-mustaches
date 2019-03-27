@@ -18,7 +18,7 @@ export interface Formatters {
   [name: string]: Formatter
 }
 
-export type Formatter = (value: any) => string
+export type Formatter = (value: any, ...params: any[]) => string
 
 export enum MimeType {
   pdf = 'application/pdf',
