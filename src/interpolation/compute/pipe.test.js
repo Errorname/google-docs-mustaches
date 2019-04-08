@@ -70,7 +70,7 @@ test('Unknown transformation', () => {
   expect(value).toBe('antoinecarat')
 })
 
-test('Unvalid transformation', () => {
+test('Invalid transformation', () => {
   const value = pipe(
     'antoinecarat',
     ['("hello")'],

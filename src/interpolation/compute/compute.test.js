@@ -54,13 +54,13 @@ test('Default formatter - capitalize two words', () => {
 test('Unknown variable', () => {
   const interpolated = compute({}, 'user.name')
 
-  expect(interpolated).toBe('[[undefined]]')
+  expect(interpolated).toBe('')
 })
 
 test('Unknown variable - with formatter', () => {
   const interpolated = compute({}, 'user.name | capitalize')
 
-  expect(interpolated).toBe('[[undefined]]')
+  expect(interpolated).toBe('')
 })
 
 test('Unknown variable - with option fallback', () => {
@@ -72,7 +72,7 @@ test('Unknown variable - with option fallback', () => {
 test('Unknown variable - as arg of formatter', () => {
   const interpolated = compute({ amount: 300 }, 'amount | money(2, euro)')
 
-  expect(interpolated).toBe('300')
+  expect(interpolated).toBe(300)
 })
 
 test('Unknown variable - as arg of formatter, with fallback', () => {

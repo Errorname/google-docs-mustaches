@@ -12,12 +12,13 @@ export default (
 
   transformations.forEach(transformation => {
     const matches = transformation.match(/^(?<formatter>[^\(]+)(\((?<params>.+)?\))?/)
-    console.log(matches)
+
     if (matches && matches.groups && matches.groups.formatter) {
       const formatter = formatters[matches.groups.formatter.toLowerCase()]
       if (formatter) {
+        let typedParams = []
         if (matches.groups.params) {
-          const typedParams = matches.groups.params
+          typedParams = matches.groups.params
             .split(',')
             .map(e => e.trim())
             .map(e => {
@@ -26,14 +27,18 @@ export default (
               } else if (/^[-+]?([0-9]+|[0-9]+\.[0-9]*|[0-9]*\.[0-9]+)$/.test(e)) { // Number
                 return +e
               } else { // Variable
-                // TODO: manage potential null return
-                return dot(e, data, options)
+                if ((options && options.fallback) === undefined) {
+                  return dot(e, data)
+                } else {
+                  return dot(e, data) || (options && options.fallback)
+                }
               }
             })
-          value = formatter(value, ...typedParams)
-        } else {
-          value = formatter(value)
+          if (typedParams.includes(null)) { // Ignore if unknown variable in params
+            return value
+          }
         }
+        value = formatter(value, ...typedParams)
       }
     }
   })

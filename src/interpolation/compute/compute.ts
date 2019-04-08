@@ -9,14 +9,7 @@ export default (
 ): any => {
   const [path, ...transformations] = interpolation.split('|').map(s => s.trim())
 
-  let value = dot(path, data, options) || (options && options.fallback) || ''
-  let transformedValue = pipe(
-    value,
-    transformations,
-    data,
-    options
-  )
-
-  console.log(transformedValue)
+  let value = dot(path, data) || (options && options.fallback)
+  let transformedValue = value ? pipe(value, transformations, data, options): ''
   return transformedValue
 }

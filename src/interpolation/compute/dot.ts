@@ -1,9 +1,6 @@
-import { Formatters } from '../../types'
-
 export default (
   path: string,
-  data: any,
-  options?: { formatters?: Formatters; fallback?: string }
+  data: any
 ): any => {
 
   const iterative: string[] = []
