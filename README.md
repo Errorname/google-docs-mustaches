@@ -162,6 +162,8 @@ Will become:
 Pikachu, I choose you!
 ```
 
+_Warning: If you use an undefined variable, it will be resolved as an empty string._
+
 ### Formatters
 
 You can use **formatters** to print your data and **more complex objects** any way you want.
@@ -199,6 +201,8 @@ Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 - **uppercase**: `wOrLd` => `WORLD`
 - **capitalize**: `heLLO wOrlD` => `Hello World`
 - _More to come..._
+
+_Warning: If you use an undefined formatter, or if you pass an undefined variable as a parameter, the formatter will be ignored._
 
 ## How to retrieve the Google token?
 
