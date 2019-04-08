@@ -50,6 +50,16 @@ test('One transformation - with variable args', () => {
   expect(value).toBe('1500.00$')
 })
 
+test('One transformation - with unknown variable args', () => {
+  const value = pipe(
+    '1500',
+    ['money(2, dollard)'],
+    { euro: '€' }
+  )
+
+  expect(value).toBe('1500')
+})
+
 test('Unknown transformation', () => {
   const value = pipe(
     'antoinecarat',
