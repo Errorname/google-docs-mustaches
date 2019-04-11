@@ -1,17 +1,5 @@
-export class UnknownFormatterError extends Error {
-  constructor(m: string) {
-      super(m);
-  }
-}
+export class UnknownFormatterError extends Error {}
 
-export class UnvalidFormatterError extends Error {
-  constructor(m: string) {
-      super(m);
-  }
-}
+export class UnvalidFormatterError extends Error {}
 
-export class UndefinedVariableError extends Error {
-  constructor(m: string) {
-      super(m);
-  }
-}
+export class UndefinedVariableError extends Error {}
