@@ -1,3 +1,5 @@
+import { UndefinedVariableError } from "./errors";
+
 export default (
   path: string,
   data: any
@@ -20,7 +22,7 @@ export default (
   let prop = data
   for (let accessor of iterative) {
     if (prop[accessor] === undefined) {
-      return null
+      throw new UndefinedVariableError(`${accessor} is undefined.`)
     }
     prop = prop[accessor]
   }

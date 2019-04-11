@@ -1,20 +1,20 @@
 import { Formatters } from '../../types'
 import defaultFormatters from './formatters'
 import dot from './dot'
+import { UnvalidFormatterError, UnknownFormatterError } from './errors';
 
 export default (
   value: any,
-  transformations: string[],
+  transformation: string,
   data: any,
   options?: { formatters?: Formatters; fallback?: string }
 ): any => {
   const formatters: Formatters = { ...defaultFormatters, ...(options && options.formatters) }
-
-  transformations.forEach(transformation => {
     const matches = transformation.match(/^(?<formatter>[^\(]+)(\((?<params>.+)?\))?/)
 
     if (matches && matches.groups && matches.groups.formatter) {
-      const formatter = formatters[matches.groups.formatter.toLowerCase()]
+      const formatterName = matches.groups.formatter.toLowerCase()
+      const formatter = formatters[formatterName]
       if (formatter) {
         let typedParams = []
         if (matches.groups.params) {
@@ -27,21 +27,27 @@ export default (
               } else if (/^[-+]?([0-9]+|[0-9]+\.[0-9]*|[0-9]*\.[0-9]+)$/.test(e)) { // Number
                 return +e
               } else { // Variable
-                if ((options && options.fallback) === undefined) {
+                try {
                   return dot(e, data)
-                } else {
-                  return dot(e, data) || (options && options.fallback)
+                } catch (UndefinedVariableError) {
+                  if ((options && options.fallback) === undefined) {
+                    return null
+                  } else {
+                    return options && options.fallback
+                  }
                 }
               }
             })
-          if (typedParams.includes(null)) { // Ignore if unknown variable in params
+          if (typedParams.includes(null)) { // Ignore if unknown variable (wo fallback) in params
             return value
           }
         }
         value = formatter(value, ...typedParams)
+      } else {
+        throw new UnknownFormatterError(`${formatterName} is not defined.`)
       }
+    } else {
+      throw new UnvalidFormatterError(`${transformation} is not a valid formatter.`)
     }
-  })
-
   return value
 }

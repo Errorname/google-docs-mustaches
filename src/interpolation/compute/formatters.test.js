@@ -3,7 +3,7 @@ import pipe from './pipe'
 test('Default formatter - lowercase', () => {
   const value = pipe(
     'Thibaud',
-    ['lowercase'],
+    'lowercase',
     {}
   )
 
@@ -13,7 +13,7 @@ test('Default formatter - lowercase', () => {
 test('Default formatter - uppercase', () => {
   const value = pipe(
     'Thibaud',
-    ['uppercase'],
+    'uppercase',
     {}
   )
 
@@ -23,7 +23,7 @@ test('Default formatter - uppercase', () => {
 test('Default formatter - capitalize one word', () => {
   const value = pipe(
     'anTOIne',
-    ['capitalize'],
+    'capitalize',
     {}
   )
 
@@ -33,7 +33,7 @@ test('Default formatter - capitalize one word', () => {
 test('Default formatter - capitalize multiple words', () => {
   const value = pipe(
     'anTOIne caRAT',
-    ['capitalize'],
+    'capitalize',
     {}
   )
 
@@ -43,7 +43,7 @@ test('Default formatter - capitalize multiple words', () => {
 test('Default formatter - money', () => {
   const value = pipe(
     '1500',
-    ['money(2, "$")'],
+    'money(2, "$")',
     {}
   )
 

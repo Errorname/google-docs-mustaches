@@ -1,39 +1,30 @@
 import pipe from './pipe'
-
-test('No transformation', () => {
-  const value = pipe(
-    'antoinecarat',
-    [],
-    {}
-  )
-
-  expect(value).toBe('antoinecarat')
-})
+import { UnknownFormatterError, UnvalidFormatterError } from './errors'
 
 test('One transformation - without parenthesis', () => {
   const value = pipe(
     'Thibaud',
-    ['lowercase'],
+    'lowercase',
     {}
   )
 
   expect(value).toBe('thibaud')
 })
 
-test('One transformation - with parenthesis, without args', () => {
+test('One transformation - with parenthesis, no args', () => {
   const value = pipe(
     'Thibaud',
-    ['lowercase()'],
+    'lowercase()',
     {}
   )
 
   expect(value).toBe('thibaud')
 })
 
-test('One transformation - with multiple args', () => {
+test('One transformation - multiple args', () => {
   const value = pipe(
     '1500',
-    ['money(2, "$")'],
+    'money(2, "$")',
     {}
   )
 
@@ -43,7 +34,7 @@ test('One transformation - with multiple args', () => {
 test('One transformation - with variable args', () => {
   const value = pipe(
     '1500',
-    ['money(2, dollard)'],
+    'money(2, dollard)',
     { dollard: '$' }
   )
 
@@ -53,7 +44,7 @@ test('One transformation - with variable args', () => {
 test('One transformation - with unknown variable args', () => {
   const value = pipe(
     '1500',
-    ['money(2, dollard)'],
+    'money(2, dollard)',
     { euro: '€' }
   )
 
@@ -61,21 +52,21 @@ test('One transformation - with unknown variable args', () => {
 })
 
 test('Unknown transformation', () => {
-  const value = pipe(
-    'antoinecarat',
-    ['wtfisthat'],
-    {}
-  )
-
-  expect(value).toBe('antoinecarat')
+  expect(() => {
+    pipe(
+      'antoinecarat',
+      'wtfisthat',
+      {}
+    )
+  }).toThrow(UnknownFormatterError)
 })
 
 test('Invalid transformation', () => {
-  const value = pipe(
-    'antoinecarat',
-    ['("hello")'],
-    {}
-  )
-
-  expect(value).toBe('antoinecarat')
+  expect(() => {
+    pipe(
+      'antoinecarat',
+      '("hello")',
+      {}
+    )
+  }).toThrow(UnvalidFormatterError)
 })

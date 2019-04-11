@@ -1,4 +1,5 @@
 import dot from './dot'
+import { UndefinedVariableError } from './errors'
 
 test('One level variable', () => {
   const value = dot('name', { name: 'Thibaud' })
@@ -24,8 +25,18 @@ test('Array index access - on root', () => {
   expect(value).toBe('Pikachu')
 })
 
-test('Unknown variable', () => {
-  const value = dot('user.name', {})
+test('Unknown variable at root level', () => {
+  expect(() => {
+    dot('user', {})
+  }).toThrow(UndefinedVariableError)
+})
 
-  expect(value).toBe(null)
+test('Unknown variable on deeper level', () => {
+  expect(() => {
+    dot('user.name.first', {
+      user: {
+        name: 'Antoine Carat'
+      }
+    })
+  }).toThrow(UndefinedVariableError)
 })
