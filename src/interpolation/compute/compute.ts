@@ -1,7 +1,6 @@
 import dot from './dot'
 import pipe from './pipe'
 import { Formatters } from '../../types'
-import { UnknownFormatterError, UnvalidFormatterError, UndefinedVariableError } from './errors'
 
 export default (
   data: any,
@@ -12,7 +11,7 @@ export default (
   let value: string | undefined = '' // Added this undefined type for compilation reasons
   try {
     value = dot(path, data)
-  } catch (UndefinedVariableError) {
+  } catch (err) {
     if ((options && options.fallback) === undefined) {
       return value
     } else {
@@ -23,7 +22,7 @@ export default (
   transformations.forEach( transformation => {
     try {
       transformedValue = pipe(value, transformation, data, options)
-    } catch (FormatterError) {}
+    } catch (err) {} // Ignore unknown/invalid formatters
   })
   
   return transformedValue

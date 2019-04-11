@@ -93,6 +93,12 @@ test('Unknown formatter', () => {
   expect(interpolated).toBe('Thibaud')
 })
 
+test('Unknown formatter in middle is ignored', () => {
+  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf | lowercase')
+
+  expect(interpolated).toBe('thibaud')
+})
+
 test('Option formatters', () => {
   const interpolated = compute({ name: 'Thibaud' }, 'name | smurf', {
     formatters: { smurf: txt => 'Smurf!' }

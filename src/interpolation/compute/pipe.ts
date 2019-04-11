@@ -18,27 +18,30 @@ export default (
       if (formatter) {
         let typedParams = []
         if (matches.groups.params) {
-          typedParams = matches.groups.params
-            .split(',')
-            .map(e => e.trim())
-            .map(e => {
-              if (/^(\“.*\”|\".*\"|\‘.*\’|\'.*\')$/.test(e)) { // String
-                return e.slice(1, -1)
-              } else if (/^[-+]?([0-9]+|[0-9]+\.[0-9]*|[0-9]*\.[0-9]+)$/.test(e)) { // Number
-                return +e
-              } else { // Variable
-                try {
-                  return dot(e, data)
-                } catch (UndefinedVariableError) {
-                  if ((options && options.fallback) === undefined) {
-                    return null
-                  } else {
-                    return options && options.fallback
+          try {
+            typedParams = matches.groups.params
+              .split(',')
+              .map(e => e.trim())
+              .map(e => {
+                if (/^(\“.*\”|\".*\"|\‘.*\’|\'.*\')$/.test(e)) { // String
+                  return e.slice(1, -1)
+                } else if (/^[-+]?([0-9]+|[0-9]+\.[0-9]*|[0-9]*\.[0-9]+)$/.test(e)) { // Number
+                  return +e
+                } else { // Variable
+                  try {
+                    return dot(e, data)
+                  } catch (err) {
+                    if ((options && options.fallback) === undefined) {
+                      throw err
+                    } else {
+                      return options && options.fallback
+                    }
                   }
                 }
               }
-            })
-          if (typedParams.includes(null)) { // Ignore if unknown variable (wo fallback) in params
+            )
+          } catch (err) {
+            // Ignore the formatter if unknown variable (wo fallback) in params
             return value
           }
         }
