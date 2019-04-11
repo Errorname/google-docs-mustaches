@@ -34,8 +34,8 @@ test('One transformation - multiple args', () => {
 test('One transformation - with variable args', () => {
   const value = pipe(
     '1500',
-    'money(2, dollard)',
-    { dollard: '$' }
+    'money(2, dollar)',
+    { dollar: '$' }
   )
 
   expect(value).toBe('1500.00$')
@@ -44,7 +44,7 @@ test('One transformation - with variable args', () => {
 test('One transformation - with unknown variable args', () => {
   const value = pipe(
     '1500',
-    'money(2, dollard)',
+    'money(2, dollar)',
     { euro: '€' }
   )
 
