@@ -8,7 +8,9 @@ const defaultFormatters: Formatters = {
       .split(' ')
       .map(([head, ...tail]) => head.toUpperCase() + tail.join('').toLowerCase())
       .join(' '),
-  money: (s: string, round: number, currency: string) => parseInt(s).toFixed(round) + currency
+  money: (s: string, locale: string, currencyISO: string, fractionDigits = 0) =>
+    Number(s)
+      .toLocaleString(locale, { style: "currency", currency: currencyISO, minimumFractionDigits: fractionDigits })
 }
 
 export default defaultFormatters

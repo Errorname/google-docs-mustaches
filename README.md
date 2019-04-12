@@ -200,7 +200,10 @@ Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 - **lowercase**: `HeLLo` => `hello`
 - **uppercase**: `wOrLd` => `WORLD`
 - **capitalize**: `heLLO wOrlD` => `Hello World`
+- **money(locale, currencyISO, fractionDigits = 0)**: `1500 | money("us", "USD", 2)` => `$1500.00`
 - _More to come..._
+
+(Currency ISO Codes)[https://en.wikipedia.org/wiki/ISO_4217#Active_codes]
 
 _Warning: If you use an undefined formatter, or if you pass an undefined variable as a parameter, the formatter will be ignored._
 

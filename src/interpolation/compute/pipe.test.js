@@ -24,28 +24,28 @@ test('One transformation - with parenthesis, no args', () => {
 test('One transformation - multiple args', () => {
   const value = pipe(
     '1500',
-    'money(2, "$")',
+    'money("en", "USD", 2)',
     {}
   )
 
-  expect(value).toBe('1500.00$')
+  expect(value).toBe('$1,500.00')
 })
 
 test('One transformation - with variable args', () => {
   const value = pipe(
     '1500',
-    'money(2, dollar)',
-    { dollar: '$' }
+    'money("en", dollar)',
+    { dollar: 'USD' }
   )
 
-  expect(value).toBe('1500.00$')
+  expect(value).toBe('$1,500')
 })
 
 test('One transformation - with unknown variable args', () => {
   const value = pipe(
     '1500',
     'money(2, dollar)',
-    { euro: '€' }
+    { euro: 'EUR' }
   )
 
   expect(value).toBe('1500')

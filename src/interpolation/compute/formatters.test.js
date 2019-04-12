@@ -43,9 +43,9 @@ test('Default formatter - capitalize multiple words', () => {
 test('Default formatter - money', () => {
   const value = pipe(
     '1500',
-    'money(2, "$")',
+    'money("en", "USD", 2)',
     {}
   )
 
-  expect(value).toBe('1500.00$')
+  expect(value).toBe('$1,500.00')
 })

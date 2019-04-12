@@ -82,9 +82,9 @@ test('Unknown variable - as arg of formatter', () => {
 })
 
 test('Unknown variable - as arg of formatter, with fallback', () => {
-  const interpolated = compute({ amount: 300 }, 'amount | money(2, euro)', { fallback: '' })
+  const interpolated = compute({ amount: 300 }, 'amount | money("en", dollar)', { fallback: 'USD' })
 
-  expect(interpolated).toBe('300.00')
+  expect(interpolated).toBe('$300')
 })
 
 test('Unknown formatter', () => {
