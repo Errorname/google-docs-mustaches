@@ -26,7 +26,9 @@ export default (
                 if (/^(\“.*\”|\".*\"|\‘.*\’|\'.*\')$/.test(e)) { // String
                   return e.slice(1, -1)
                 } else if (/^[-+]?([0-9]+|[0-9]+\.[0-9]*|[0-9]*\.[0-9]+)$/.test(e)) { // Number
-                  return +e
+                  return Number(e)
+                } else if (/^true|false$/.test(e)) { //Boolean
+                  return Boolean(e)
                 } else { // Variable
                   try {
                     return dot(e, data)
@@ -40,8 +42,7 @@ export default (
                 }
               }
             )
-          } catch (err) {
-            // Ignore the formatter if unknown variable (wo fallback) in params
+          } catch (err) { // Ignore the formatter if unknown variable (w/o fallback) in params
             return value
           }
         }

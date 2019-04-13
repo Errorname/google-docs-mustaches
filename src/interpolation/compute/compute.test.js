@@ -106,3 +106,11 @@ test('Option formatters', () => {
 
   expect(interpolated).toBe('Smurf!')
 })
+
+test('Option formatters awaiting for param', () => {
+  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf(true)', {
+    formatters: { smurf: (txt, smurf) => (smurf ? 'Smurf!' : txt) }
+  })
+
+  expect(interpolated).toBe('Smurf!')
+})
