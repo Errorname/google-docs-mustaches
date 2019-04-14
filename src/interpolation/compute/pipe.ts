@@ -25,11 +25,7 @@ export default (
 
   let typedParams = []
   if (matches.groups.params) {
-    try {
-      typedParams = normalizeParams(matches.groups.params.split(','), data, options)
-    } catch (err) { // Ignore the formatter if unknown variable (w/o fallback) in params
-      return value
-    }
+    typedParams = normalizeParams(matches.groups.params.split(','), data, options)
   }
 
   return formatter(value, ...typedParams)
@@ -48,11 +44,7 @@ const normalizeParams = function(untypedParams: string[], data: any, options?: {
         try {
           return dot(e, data)
         } catch (err) {
-          if ((options && options.fallback) === undefined) {
-            throw err
-          } else {
-            return options && options.fallback
-          }
+          return undefined
         }
       }
     }

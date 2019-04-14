@@ -48,7 +48,7 @@ test('One transformation - with unknown variable args', () => {
     { euro: 'EUR' }
   )
 
-  expect(value).toBe('1500')
+  expect(value).toBe('1,500')
 })
 
 test('Unknown transformation', () => {

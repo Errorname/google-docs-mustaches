@@ -75,18 +75,6 @@ test('Unknown variable - with empty string as fallback', () => {
   expect(interpolated).toBe('')
 })
 
-test('Unknown variable - as arg of formatter', () => {
-  const interpolated = compute({ amount: 300 }, 'amount | money(2, euro)')
-
-  expect(interpolated).toBe(300)
-})
-
-test('Unknown variable - as arg of formatter, with fallback', () => {
-  const interpolated = compute({ amount: 300 }, 'amount | money("en", dollar)', { fallback: 'USD' })
-
-  expect(interpolated).toBe('$300')
-})
-
 test('Unknown formatter', () => {
   const interpolated = compute({ name: 'Thibaud' }, 'name | smurf')
 
