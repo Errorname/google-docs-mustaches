@@ -19,11 +19,16 @@ export default (
     }
   }
   let transformedValue = value
-  transformations.forEach( transformation => {
+  transformations.forEach(transformation => {
     try {
-      transformedValue = pipe(value, transformation, data, options)
+      transformedValue = pipe(
+        value,
+        transformation,
+        data,
+        options
+      )
     } catch (err) {} // Ignore unknown/invalid formatters
   })
-  
+
   return transformedValue
 }

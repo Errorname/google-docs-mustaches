@@ -1,10 +1,6 @@
-import { UndefinedVariableError } from "./errors";
+import { UndefinedVariableError } from './errors'
 
-export default (
-  path: string,
-  data: any
-): any => {
-
+export default (path: string, data: any): any => {
   const iterative: string[] = []
   path.split('.').map(subPath => {
     const selector = subPath.match(/\[.*\]/)
