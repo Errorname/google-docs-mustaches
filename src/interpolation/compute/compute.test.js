@@ -1,4 +1,5 @@
 import compute from './compute'
+import { UndefinedVariableError, UnknownFormatterError } from './errors'
 
 test('One level variable', () => {
   const interpolated = compute({ name: 'Thibaud' }, 'name')
@@ -51,6 +52,23 @@ test('Default formatter - capitalize two words', () => {
   expect(interpolated).toBe('Antoine Carat')
 })
 
+test('Option formatters', () => {
+  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf', {
+    formatters: { smurf: txt => 'Smurf!' }
+  })
+
+  expect(interpolated).toBe('Smurf!')
+})
+
+test('Option formatters awaiting for param', () => {
+  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf(true)', {
+    formatters: { smurf: (txt, smurf) => (smurf ? 'Smurf!' : txt) }
+  })
+
+  expect(interpolated).toBe('Smurf!')
+})
+
+// scrict: false
 test('Unknown variable', () => {
   const interpolated = compute({}, 'user.name')
 
@@ -81,24 +99,39 @@ test('Unknown formatter', () => {
   expect(interpolated).toBe('Thibaud')
 })
 
-test('Unknown formatter in middle is ignored', () => {
+test('Unknown formatter in middle', () => {
   const interpolated = compute({ name: 'Thibaud' }, 'name | smurf | lowercase')
 
   expect(interpolated).toBe('thibaud')
 })
 
-test('Option formatters', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf', {
-    formatters: { smurf: txt => 'Smurf!' }
-  })
-
-  expect(interpolated).toBe('Smurf!')
+// scrict: true
+test('Unknown variable // Strict: true', () => {
+  expect(() => {
+    compute({}, 'user.name', { strict: true })
+  }).toThrow(UndefinedVariableError)
 })
 
-test('Option formatters awaiting for param', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf(true)', {
-    formatters: { smurf: (txt, smurf) => (smurf ? 'Smurf!' : txt) }
-  })
+test('Unknown variable - with formatter // Strict: true', () => {
+  expect(() => {
+    compute({}, 'user.name | capitalize', { strict: true })
+  }).toThrow(UndefinedVariableError)
+})
 
-  expect(interpolated).toBe('Smurf!')
+test('Unknown variable - with option fallback // Strict: true', () => {
+  expect(() => {
+    compute({}, 'user.name | capitalize', { strict: true, fallback: 'Unknown' })
+  }).toThrow(UndefinedVariableError)
+})
+
+test('Unknown formatter // Strict: true', () => {
+  expect(() => {
+    compute({ name: 'Thibaud' }, 'name | smurf', { strict: true })
+  }).toThrow(UnknownFormatterError)
+})
+
+test('Unknown formatter in middle // Strict: true', () => {
+  expect(() => {
+    compute({ name: 'Thibaud' }, 'name | smurf | lowercase', { strict: true })
+  }).toThrow(UnknownFormatterError)
 })
