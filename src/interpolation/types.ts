@@ -4,8 +4,8 @@ export interface Placeholder {
   type?: string
   raw: string
   position: {
-    start: Number
-    end: Number
+    start: number
+    end: number
   }
 }
 

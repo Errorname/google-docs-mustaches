@@ -32,7 +32,7 @@ const findPlaceholders = (doc: GDoc): Placeholder[] => {
 
 const analyzePlaceholders = (
   placeholders: Placeholder[],
-  data: Object,
+  data: Record<string, any>,
   options?: {
     formatters?: Formatters
   }
@@ -65,7 +65,7 @@ const buildUpdates = (placeholders: Placeholder[]): Request[] => {
   for (let placeholder of placeholders) {
     // ContentPlaceholder
     if (placeholder.type == 'content') {
-      const contentPlaceholder = <ContentPlaceholder>placeholder
+      const contentPlaceholder = placeholder as ContentPlaceholder
       // Text
       if (contentPlaceholder.output === `${contentPlaceholder.output}`) {
         updates.push({
