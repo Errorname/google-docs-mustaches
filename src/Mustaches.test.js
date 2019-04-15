@@ -134,4 +134,42 @@ describe('mustaches', () => {
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
   })
+
+  test('discovery', async () => {
+    const updates = await mustaches.discovery({
+      source: 'source-id-123',
+      data: {
+        name: 'Thibaud',
+        movies: [{ title: 'Lost in Translation' }]
+      }
+    })
+
+    expect(crossFetch.mock.calls).toMatchSnapshot()
+    expect(updates).toMatchSnapshot()
+  })
+
+  test('discovery with no data', async () => {
+    const updates = await mustaches.discovery({
+      source: 'source-id-123'
+    })
+
+    expect(crossFetch.mock.calls).toMatchSnapshot()
+    expect(updates).toMatchSnapshot()
+  })
+
+  test('discovery with formatters', async () => {
+    const updates = await mustaches.discovery({
+      source: 'source-id-123',
+      data: {
+        name: 'Thibaud',
+        movies: [{ title: 'Lost in Translation' }]
+      },
+      formatters: {
+        smurf: () => 'Smurf'
+      }
+    })
+
+    expect(crossFetch.mock.calls).toMatchSnapshot()
+    expect(updates).toMatchSnapshot()
+  })
 })

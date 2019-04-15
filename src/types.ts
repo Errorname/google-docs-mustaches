@@ -1,3 +1,5 @@
+import { Formatters } from './interpolation/types'
+
 export type ID = string
 export type AccessToken = string
 
@@ -14,11 +16,11 @@ export interface InterpolationOptions {
   export?: MimeType
 }
 
-export interface Formatters {
-  [name: string]: Formatter
+export interface DiscoveryOptions {
+  source: ID
+  data?: Object
+  formatters?: Formatters
 }
-
-export type Formatter = (value: any, ...params: any[]) => string
 
 export enum MimeType {
   pdf = 'application/pdf',

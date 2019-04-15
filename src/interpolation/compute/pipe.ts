@@ -1,4 +1,4 @@
-import { Formatters } from '../../types'
+import { Formatters } from '../types'
 import defaultFormatters from './formatters'
 import dot from './dot'
 import { UnvalidFormatterError, UnknownFormatterError } from './errors'

@@ -1,104 +1,137 @@
 import compute from './compute'
 
-test('One level variable', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name')
+const buildPlaceholder = txt => ({
+  raw: `{{ ${txt} }}`,
+  position: {
+    start: 0,
+    end: txt.length + 6
+  }
+})
 
-  expect(interpolated).toBe('Thibaud')
+test('One level variable', () => {
+  const interpolated = compute(buildPlaceholder('name'), { name: 'Thibaud' })
+
+  expect(interpolated.output).toBe('Thibaud')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Multiple level variable', () => {
-  const interpolated = compute({ user: { name: { first: 'Thibaud' } } }, 'user.name.first')
+  const interpolated = compute(buildPlaceholder('user.name.first'), {
+    user: { name: { first: 'Thibaud' } }
+  })
 
-  expect(interpolated).toBe('Thibaud')
+  expect(interpolated.output).toBe('Thibaud')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Array variable', () => {
-  const interpolated = compute(
-    { pokemons: [{ name: 'Pikachu' }, { name: 'Eevee' }] },
-    'pokemons[1].name'
-  )
+  const interpolated = compute(buildPlaceholder('pokemons[1].name'), {
+    pokemons: [{ name: 'Pikachu' }, { name: 'Eevee' }]
+  })
 
-  expect(interpolated).toBe('Eevee')
+  expect(interpolated.output).toBe('Eevee')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Array interpolation on root', () => {
-  const interpolated = compute(['Pikachu', 'Eevee'], '[0]')
+  const interpolated = compute(buildPlaceholder('[0]'), ['Pikachu', 'Eevee'])
 
-  expect(interpolated).toBe('Pikachu')
+  expect(interpolated.output).toBe('Pikachu')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Default formatter - lowercase', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name | lowercase')
+  const interpolated = compute(buildPlaceholder('name | lowercase'), { name: 'Thibaud' })
 
-  expect(interpolated).toBe('thibaud')
+  expect(interpolated.output).toBe('thibaud')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Default formatter - uppercase', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name|uppercase')
+  const interpolated = compute(buildPlaceholder('name|uppercase'), { name: 'Thibaud' })
 
-  expect(interpolated).toBe('THIBAUD')
+  expect(interpolated.output).toBe('THIBAUD')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Default formatter - capitalize one word', () => {
-  const interpolated = compute({ name: 'anTOIne' }, 'name | capitalize')
+  const interpolated = compute(buildPlaceholder('name | capitalize'), { name: 'anTOIne' })
 
-  expect(interpolated).toBe('Antoine')
+  expect(interpolated.output).toBe('Antoine')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Default formatter - capitalize two words', () => {
-  const interpolated = compute({ name: 'anTOIne caRAT' }, 'name | capitalize')
+  const interpolated = compute(buildPlaceholder('name | capitalize'), { name: 'anTOIne caRAT' })
 
-  expect(interpolated).toBe('Antoine Carat')
+  expect(interpolated.output).toBe('Antoine Carat')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Unknown variable', () => {
-  const interpolated = compute({}, 'user.name')
+  const interpolated = compute(buildPlaceholder('user.name'), {})
 
-  expect(interpolated).toBe('')
+  expect(interpolated.output).toBe('')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Unknown variable - with formatter', () => {
-  const interpolated = compute({}, 'user.name | capitalize')
+  const interpolated = compute(buildPlaceholder('user.name | capitalize'), {})
 
-  expect(interpolated).toBe('')
+  expect(interpolated.output).toBe('')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Unknown variable - with option fallback', () => {
-  const interpolated = compute({}, 'user.name', { fallback: 'Unknown' })
+  const interpolated = compute(buildPlaceholder('user.name'), {}, { fallback: 'Unknown' })
 
-  expect(interpolated).toBe('Unknown')
+  expect(interpolated.output).toBe('Unknown')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Unknown variable - with empty string as fallback', () => {
-  const interpolated = compute({}, 'user.name', { fallback: '' })
+  const interpolated = compute(buildPlaceholder('user.name'), {}, { fallback: '' })
 
-  expect(interpolated).toBe('')
+  expect(interpolated.output).toBe('')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Unknown formatter', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf')
+  const interpolated = compute(buildPlaceholder('name | smurf'), { name: 'Thibaud' })
 
-  expect(interpolated).toBe('Thibaud')
+  expect(interpolated.output).toBe('Thibaud')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Unknown formatter in middle is ignored', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf | lowercase')
+  const interpolated = compute(buildPlaceholder('name | smurf | lowercase'), { name: 'Thibaud' })
 
-  expect(interpolated).toBe('thibaud')
+  expect(interpolated.output).toBe('thibaud')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Option formatters', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf', {
-    formatters: { smurf: txt => 'Smurf!' }
-  })
+  const interpolated = compute(
+    buildPlaceholder('name | smurf'),
+    { name: 'Thibaud' },
+    {
+      formatters: { smurf: txt => 'Smurf!' }
+    }
+  )
 
-  expect(interpolated).toBe('Smurf!')
+  expect(interpolated.output).toBe('Smurf!')
+  expect(interpolated).toMatchSnapshot()
 })
 
 test('Option formatters awaiting for param', () => {
-  const interpolated = compute({ name: 'Thibaud' }, 'name | smurf(true)', {
-    formatters: { smurf: (txt, smurf) => (smurf ? 'Smurf!' : txt) }
-  })
+  const interpolated = compute(
+    buildPlaceholder('name | smurf(true)'),
+    { name: 'Thibaud' },
+    {
+      formatters: { smurf: (txt, smurf) => (smurf ? 'Smurf!' : txt) }
+    }
+  )
 
-  expect(interpolated).toBe('Smurf!')
+  expect(interpolated.output).toBe('Smurf!')
+  expect(interpolated).toMatchSnapshot()
 })

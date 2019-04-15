@@ -1,4 +1,4 @@
-import { ID, ConstructorOptions, InterpolationOptions, MimeType } from './types'
+import { ID, ConstructorOptions, InterpolationOptions, MimeType, DiscoveryOptions } from './types'
 import interpolate from './interpolation'
 import { GDoc, Request } from './interpolation/types'
 import apis, { multipart } from './apis'
@@ -43,6 +43,11 @@ class Mustaches {
     }
 
     return copiedFile
+  }
+
+  async discovery({ source, data = {}, formatters = {} }: DiscoveryOptions) {
+    const doc = await this.readDoc(source)
+    return interpolate(doc, data, formatters)
   }
 
   private getParent(fileId: ID): Promise<ID> {

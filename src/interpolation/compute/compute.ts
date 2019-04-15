@@ -1,34 +1,70 @@
 import dot from './dot'
 import pipe from './pipe'
-import { Formatters } from '../../types'
+import { Placeholder, ContentPlaceholder, Formatters } from '../types'
 
 export default (
-  data: any,
-  interpolation: string,
+  placeholder: Placeholder,
+  data: Object,
   options?: { formatters?: Formatters; fallback?: string }
-): any => {
-  const [path, ...transformations] = interpolation.split('|').map(s => s.trim())
-  let value: string | undefined = '' // Added this undefined type for compilation reasons
+): ContentPlaceholder => {
+  const rawWithoutBrackets = placeholder.raw.slice(2, -2).trim()
+
+  const [inputRaw, ...transformations] = rawWithoutBrackets.split('|').map(s => s.trim())
+
+  const input = getValue(inputRaw, data, options)
+
+  const pipes = []
+  let transformedValue = input.value
+  for (let transformation of transformations) {
+    const pipe = getNextValue(transformedValue, transformation, data, options)
+    pipes.push(pipe)
+    transformedValue = pipe.output
+  }
+
+  const output = pipes.length == 0 ? input.value : pipes[pipes.length - 1].output
+
+  return {
+    ...placeholder,
+    type: 'content',
+    input,
+    pipes,
+    output
+  }
+}
+
+const getValue = (
+  raw: string,
+  data: Object,
+  options?: { fallback?: string }
+): { raw: string; error?: Error; value: any } => {
   try {
-    value = dot(path, data)
-  } catch (err) {
+    return { raw, value: dot(raw, data) }
+  } catch (error) {
     if ((options && options.fallback) === undefined) {
-      return value
+      return { raw, error, value: '' }
     } else {
-      value = options && options.fallback
+      return { raw, error, value: options && options.fallback }
     }
   }
-  let transformedValue = value
-  transformations.forEach(transformation => {
-    try {
-      transformedValue = pipe(
+}
+
+const getNextValue = (
+  value: any,
+  transformation: string,
+  data: Object,
+  options?: { formatters?: Formatters; fallback?: string }
+) => {
+  try {
+    return {
+      raw: transformation,
+      output: pipe(
         value,
         transformation,
         data,
         options
       )
-    } catch (err) {} // Ignore unknown/invalid formatters
-  })
-
-  return transformedValue
+    }
+  } catch (error) {
+    return { raw: transformation, error, output: value }
+  } // Ignore unknown/invalid formatters
 }

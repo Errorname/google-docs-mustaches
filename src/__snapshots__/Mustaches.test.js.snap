@@ -1,5 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mustaches discovery 1`] = `
+Array [
+  Array [
+    "https://docs.googleapis.com/v1/documents/source-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+]
+`;
+
+exports[`mustaches discovery 2`] = `
+Array [
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ name | smurf }}",
+      },
+      "replaceText": "Thibaud",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movies[0].title | lowercase }}",
+      },
+      "replaceText": "lost in translation",
+    },
+  },
+]
+`;
+
+exports[`mustaches discovery with formatters 1`] = `
+Array [
+  Array [
+    "https://docs.googleapis.com/v1/documents/source-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+]
+`;
+
+exports[`mustaches discovery with formatters 2`] = `
+Array [
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ name | smurf }}",
+      },
+      "replaceText": "Smurf",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movies[0].title | lowercase }}",
+      },
+      "replaceText": "lost in translation",
+    },
+  },
+]
+`;
+
+exports[`mustaches discovery with no data 1`] = `
+Array [
+  Array [
+    "https://docs.googleapis.com/v1/documents/source-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+]
+`;
+
+exports[`mustaches discovery with no data 2`] = `
+Array [
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ name | smurf }}",
+      },
+      "replaceText": "",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movies[0].title | lowercase }}",
+      },
+      "replaceText": "",
+    },
+  },
+]
+`;
+
 exports[`mustaches export 1`] = `
 Array [
   Array [
@@ -27,7 +144,7 @@ Array [
   Array [
     "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
     Object {
-      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
       "headers": Object {
         "Content-Type": "application/json",
         "authorization": "Bearer my-token",
@@ -99,7 +216,7 @@ Array [
   Array [
     "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
     Object {
-      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
       "headers": Object {
         "Content-Type": "application/json",
         "authorization": "Bearer my-token",
@@ -137,7 +254,7 @@ Array [
   Array [
     "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
     Object {
-      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
       "headers": Object {
         "Content-Type": "application/json",
         "authorization": "Bearer my-token",
@@ -175,7 +292,7 @@ Array [
   Array [
     "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
     Object {
-      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Smurf\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Smurf\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
       "headers": Object {
         "Content-Type": "application/json",
         "authorization": "Bearer my-token",
@@ -213,7 +330,7 @@ Array [
   Array [
     "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
     Object {
-      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":false}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":false}}}]}",
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
       "headers": Object {
         "Content-Type": "application/json",
         "authorization": "Bearer my-token",

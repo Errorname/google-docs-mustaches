@@ -1,24 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`computeUpdates multiple placeholders 1`] = `
+exports[`analyzePlaceholders commentPlaceholder 1`] = `
+Array [
+  Object {
+    "position": Object {
+      "end": 158,
+      "start": 134,
+    },
+    "raw": "{{ # This is a comment }}",
+    "type": "comment",
+    "value": "This is a comment",
+  },
+]
+`;
+
+exports[`analyzePlaceholders contentPlaceholder - text 1`] = `
+Array [
+  Object {
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ user.name.first | lowercase }}",
+  },
+]
+`;
+
+exports[`analyzePlaceholders unknownPlaceholder - reserved symbol 1`] = `
+Array [
+  Object {
+    "position": Object {
+      "end": 158,
+      "start": 134,
+    },
+    "raw": "{{ % reserved symbol }}",
+  },
+]
+`;
+
+exports[`buildUpdates commentPlaceholder 1`] = `
 Array [
   Object {
     "replaceAllText": Object {
       "containsText": Object {
-        "matchCase": false,
-        "text": "{{ user.name }}",
+        "matchCase": true,
+        "text": "{{ # This is a comment }}",
+      },
+      "replaceText": "",
+    },
+  },
+]
+`;
+
+exports[`buildUpdates contentPlaceholder - text 1`] = `
+Array [
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ user.name.first }}",
       },
       "replaceText": "Thibaud",
     },
   },
+]
+`;
+
+exports[`buildUpdates contentPlaceholder - unknown 1`] = `Array []`;
+
+exports[`buildUpdates unknownPlaceholder 1`] = `Array []`;
+
+exports[`findPlaceholders multiple paragraphs with multiple placeholders 1`] = `
+Array [
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": false,
-        "text": "{{movie.title | uppercase}}",
-      },
-      "replaceText": "LOST IN TRANSLATION",
+    "position": Object {
+      "end": 21,
+      "start": 6,
     },
+    "raw": "{{ user.name }}",
+  },
+  Object {
+    "position": Object {
+      "end": 64,
+      "start": 37,
+    },
+    "raw": "{{movie.title | uppercase}}",
+  },
+  Object {
+    "position": Object {
+      "end": NaN,
+      "start": NaN,
+    },
+    "raw": "{{ movie.rating }}",
   },
 ]
 `;
@@ -28,7 +101,7 @@ Array [
   Object {
     "replaceAllText": Object {
       "containsText": Object {
-        "matchCase": false,
+        "matchCase": true,
         "text": "{{ user.name }}",
       },
       "replaceText": "Thibaud",
@@ -37,19 +110,10 @@ Array [
   Object {
     "replaceAllText": Object {
       "containsText": Object {
-        "matchCase": false,
+        "matchCase": true,
         "text": "{{movie.title | uppercase}}",
       },
       "replaceText": "LOST IN TRANSLATION",
-    },
-  },
-  Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": false,
-        "text": "{{ movie.rating }}",
-      },
-      "replaceText": "5",
     },
   },
 ]
