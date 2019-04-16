@@ -11,12 +11,12 @@ export default (
 
   const [inputRaw, ...transformations] = rawWithoutBrackets.split('|').map(s => s.trim())
 
-  const input = getValue(inputRaw, data, options)
+  const input = evaluateInput(inputRaw, data, options)
 
   const pipes = []
   let transformedValue = input.value
   for (let transformation of transformations) {
-    const pipe = getNextValue(transformedValue, transformation, data, options)
+    const pipe = transformValue(transformedValue, transformation, data, options)
     pipes.push(pipe)
     transformedValue = pipe.output
   }
@@ -29,10 +29,10 @@ export default (
     input,
     pipes,
     output
-  }
+  } as ContentPlaceholder
 }
 
-const getValue = (
+const evaluateInput = (
   raw: string,
   data: Object,
   options?: { fallback?: string }
@@ -48,7 +48,7 @@ const getValue = (
   }
 }
 
-const getNextValue = (
+const transformValue = (
   value: any,
   transformation: string,
   data: Object,
@@ -65,6 +65,7 @@ const getNextValue = (
       )
     }
   } catch (error) {
+    // Ignore unknown/invalid formatters
     return { raw: transformation, error, output: value }
-  } // Ignore unknown/invalid formatters
+  }
 }
