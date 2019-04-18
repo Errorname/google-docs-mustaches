@@ -1,9 +1,4 @@
-import interpolate, {
-  findPlaceholders,
-  computeUpdates,
-  buildUpdates,
-  analyzePlaceholders
-} from './interpolate'
+import interpolate, { findPlaceholders, analyzePlaceholders, buildUpdates } from './interpolate'
 
 describe('interpolate', () => {
   test('full document', () => {
@@ -147,7 +142,7 @@ describe('analyzePlaceholders', () => {
       user: { name: { first: 'Thibaud' } }
     })
 
-    expect(placeholders).toMatchSnapshot()
+    expect(contentPlaceholders).toMatchSnapshot()
   })
 
   test('commentPlaceholder', () => {
@@ -179,7 +174,7 @@ describe('analyzePlaceholders', () => {
 
     const contentPlaceholders = analyzePlaceholders(placeholders, {})
 
-    expect(placeholders).toMatchSnapshot()
+    expect(contentPlaceholders).toMatchSnapshot()
   })
 })
 

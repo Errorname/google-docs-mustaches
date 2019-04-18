@@ -74,7 +74,7 @@ interface ConstructorOptions {
 
 See also: [How to retrieve the Google token?](#how-to-retrieve-the-google-token)
 
-### `mustaches.interpolate(options: ToPdfOptions): ID`
+### `mustaches.interpolate(options: InterpolationOptions): ID`
 
 This method will interpolate from the `source` file and put the generated file into the `destination` folder.
 
@@ -94,7 +94,7 @@ interface Formatters {
   [name: string]: Formatter
 }
 
-type Formatter = (value: any) => string
+type Formatter = (value: any, ...params: any[]) => string
 
 export enum MimeType {
   pdf = 'application/pdf',
@@ -108,6 +108,22 @@ export enum MimeType {
 - `data` is the data given for the [interpolation](#interpolation)
 - `formatters` will be used for [interpolation](#interpolation)
 - `export` can be specified to export the file after the [interpolation](#interpolation)
+
+### `mustaches.discovery(options: DiscoveryOptions): Placeholder[]`
+
+This methods returns all the placeholders found in the `source` file. The placeholders will be interpolated to see what would have been the results if `interpolate` was called. This method will **not** mutate your source file, nor create a new one.
+
+```ts
+export interface DiscoveryOptions {
+  source: ID
+  data?: Object
+  formatters?: Formatters
+}
+```
+
+- `source` is the ID of the file which will be interpolated.
+- `data` is the data given for the [interpolation](#interpolation)
+- `formatters` will be used for [interpolation](#interpolation)
 
 ## Interpolation
 
@@ -172,7 +188,7 @@ In addition of the input variable, they can accept parameters which can be of th
 There is a number of available formatters, but you can also **write your owns** in `options.formatters`.
 
 ```
-Hi {{ name | uppercase }}. Today is {{ today | printDay }}, tomorrow is {{ tomorrow | printDay }}.
+Hi {{ name | uppercase }}. Today is {{ today | printDay('en-US') }}, tomorrow is {{ tomorrow | printDay('en-US') }}.
 ```
 
 With the following `options`:
@@ -185,7 +201,7 @@ With the following `options`:
     tomorrow: new Date(new Date().setDate(new Date().getDate()+1))
   },
   formatters: {
-    printDay: date => date.toLocaleDateString('en-US',{weekday: 'long'})
+    printDay: (date, locale) => date.toLocaleDateString(locale,{weekday: 'long'})
   }
 }
 ```

@@ -17,11 +17,23 @@ Array [
 exports[`analyzePlaceholders contentPlaceholder - text 1`] = `
 Array [
   Object {
+    "input": Object {
+      "raw": "user.name.first",
+      "value": "Thibaud",
+    },
+    "output": "thibaud",
+    "pipes": Array [
+      Object {
+        "output": "thibaud",
+        "raw": "lowercase",
+      },
+    ],
     "position": Object {
       "end": 166,
       "start": 134,
     },
     "raw": "{{ user.name.first | lowercase }}",
+    "type": "content",
   },
 ]
 `;
