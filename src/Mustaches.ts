@@ -27,9 +27,8 @@ class Mustaches {
     // Copy template to destination
     const copiedFile: ID = await this.copyFile(source, destination, copyOptions)
 
-    // Compute interpolations
-    const doc = await this.readDoc(copiedFile)
-    const placeholders = interpolate(doc, data, formatters)
+    // Compute updates
+    const placeholders = await this.discovery({ source: copiedFile, data, formatters })
     const updates = buildUpdates(placeholders)
 
     // Update copy with interpolations
