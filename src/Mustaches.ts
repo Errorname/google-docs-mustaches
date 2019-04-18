@@ -1,6 +1,6 @@
 import { ID, ConstructorOptions, InterpolationOptions, MimeType, DiscoveryOptions } from './types'
-import interpolate from './interpolation'
-import { GDoc, Request } from './interpolation/types'
+import interpolate, { buildUpdates } from './interpolation'
+import { GDoc, Request, Placeholder } from './interpolation/types'
 import apis, { multipart } from './apis'
 import Blob from './polyfills/Blob'
 
@@ -29,7 +29,8 @@ class Mustaches {
 
     // Compute interpolations
     const doc = await this.readDoc(copiedFile)
-    const updates = interpolate(doc, data, formatters)
+    const placeholders = interpolate(doc, data, formatters)
+    const updates = buildUpdates(placeholders)
 
     // Update copy with interpolations
     await this.updateDoc(copiedFile, updates)
@@ -45,7 +46,11 @@ class Mustaches {
     return copiedFile
   }
 
-  async discovery({ source, data = {}, formatters = {} }: DiscoveryOptions) {
+  async discovery({
+    source,
+    data = {},
+    formatters = {}
+  }: DiscoveryOptions): Promise<Placeholder[]> {
     const doc = await this.readDoc(source)
     return interpolate(doc, data, formatters)
   }

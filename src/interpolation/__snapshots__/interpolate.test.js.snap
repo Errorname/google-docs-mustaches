@@ -111,22 +111,51 @@ Array [
 exports[`interpolate full document 1`] = `
 Array [
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{ user.name }}",
-      },
-      "replaceText": "Thibaud",
+    "input": Object {
+      "raw": "user.name",
+      "value": "Thibaud",
     },
+    "output": "Thibaud",
+    "pipes": Array [],
+    "position": Object {
+      "end": 21,
+      "start": 6,
+    },
+    "raw": "{{ user.name }}",
+    "type": "content",
   },
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{movie.title | uppercase}}",
-      },
-      "replaceText": "LOST IN TRANSLATION",
+    "input": Object {
+      "raw": "movie.title",
+      "value": "Lost in Translation",
     },
+    "output": "LOST IN TRANSLATION",
+    "pipes": Array [
+      Object {
+        "output": "LOST IN TRANSLATION",
+        "raw": "uppercase",
+      },
+    ],
+    "position": Object {
+      "end": 64,
+      "start": 37,
+    },
+    "raw": "{{movie.title | uppercase}}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.rating",
+      "value": 5,
+    },
+    "output": 5,
+    "pipes": Array [],
+    "position": Object {
+      "end": NaN,
+      "start": NaN,
+    },
+    "raw": "{{ movie.rating }}",
+    "type": "content",
   },
 ]
 `;

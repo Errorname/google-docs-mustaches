@@ -19,22 +19,43 @@ Array [
 exports[`mustaches discovery 2`] = `
 Array [
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{ name | smurf }}",
-      },
-      "replaceText": "Thibaud",
+    "input": Object {
+      "raw": "name",
+      "value": "Thibaud",
     },
+    "output": "Thibaud",
+    "pipes": Array [
+      Object {
+        "error": [Error: smurf is not defined.],
+        "output": "Thibaud",
+        "raw": "smurf",
+      },
+    ],
+    "position": Object {
+      "end": 24,
+      "start": 6,
+    },
+    "raw": "{{ name | smurf }}",
+    "type": "content",
   },
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{ movies[0].title | lowercase }}",
-      },
-      "replaceText": "lost in translation",
+    "input": Object {
+      "raw": "movies[0].title",
+      "value": "Lost in Translation",
     },
+    "output": "lost in translation",
+    "pipes": Array [
+      Object {
+        "output": "lost in translation",
+        "raw": "lowercase",
+      },
+    ],
+    "position": Object {
+      "end": 71,
+      "start": 38,
+    },
+    "raw": "{{ movies[0].title | lowercase }}",
+    "type": "content",
   },
 ]
 `;
@@ -58,22 +79,42 @@ Array [
 exports[`mustaches discovery with formatters 2`] = `
 Array [
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{ name | smurf }}",
-      },
-      "replaceText": "Smurf",
+    "input": Object {
+      "raw": "name",
+      "value": "Thibaud",
     },
+    "output": "Smurf",
+    "pipes": Array [
+      Object {
+        "output": "Smurf",
+        "raw": "smurf",
+      },
+    ],
+    "position": Object {
+      "end": 24,
+      "start": 6,
+    },
+    "raw": "{{ name | smurf }}",
+    "type": "content",
   },
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{ movies[0].title | lowercase }}",
-      },
-      "replaceText": "lost in translation",
+    "input": Object {
+      "raw": "movies[0].title",
+      "value": "Lost in Translation",
     },
+    "output": "lost in translation",
+    "pipes": Array [
+      Object {
+        "output": "lost in translation",
+        "raw": "lowercase",
+      },
+    ],
+    "position": Object {
+      "end": 71,
+      "start": 38,
+    },
+    "raw": "{{ movies[0].title | lowercase }}",
+    "type": "content",
   },
 ]
 `;
@@ -97,22 +138,45 @@ Array [
 exports[`mustaches discovery with no data 2`] = `
 Array [
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{ name | smurf }}",
-      },
-      "replaceText": "",
+    "input": Object {
+      "error": [Error: name is undefined.],
+      "raw": "name",
+      "value": "",
     },
+    "output": "",
+    "pipes": Array [
+      Object {
+        "error": [Error: smurf is not defined.],
+        "output": "",
+        "raw": "smurf",
+      },
+    ],
+    "position": Object {
+      "end": 24,
+      "start": 6,
+    },
+    "raw": "{{ name | smurf }}",
+    "type": "content",
   },
   Object {
-    "replaceAllText": Object {
-      "containsText": Object {
-        "matchCase": true,
-        "text": "{{ movies[0].title | lowercase }}",
-      },
-      "replaceText": "",
+    "input": Object {
+      "error": [Error: movies is undefined.],
+      "raw": "movies[0].title",
+      "value": "",
     },
+    "output": "",
+    "pipes": Array [
+      Object {
+        "output": "",
+        "raw": "lowercase",
+      },
+    ],
+    "position": Object {
+      "end": 71,
+      "start": 38,
+    },
+    "raw": "{{ movies[0].title | lowercase }}",
+    "type": "content",
   },
 ]
 `;

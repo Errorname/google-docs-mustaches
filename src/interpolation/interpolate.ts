@@ -97,10 +97,9 @@ const buildUpdates = (placeholders: Placeholder[]): Request[] => {
   return updates
 }
 
-const interpolate = (doc: GDoc, data: any, formatters: Formatters): Request[] => {
+const interpolate = (doc: GDoc, data: any, formatters: Formatters): Placeholder[] => {
   let placeholders = findPlaceholders(doc)
-  placeholders = analyzePlaceholders(placeholders, data, { formatters })
-  return buildUpdates(placeholders)
+  return analyzePlaceholders(placeholders, data, { formatters })
 }
 
 export default interpolate

@@ -42,7 +42,9 @@ const buildFetchImpl = crossFetch => {
                     textRun: {
                       content:
                         'Hello {{ name | smurf }}! Do you like {{ movies[0].title | lowercase }}?'
-                    }
+                    },
+                    startIndex: 0,
+                    endIndex: 71
                   }
                 ]
               }
@@ -136,7 +138,7 @@ describe('mustaches', () => {
   })
 
   test('discovery', async () => {
-    const updates = await mustaches.discovery({
+    const placeholders = await mustaches.discovery({
       source: 'source-id-123',
       data: {
         name: 'Thibaud',
@@ -145,20 +147,20 @@ describe('mustaches', () => {
     })
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
-    expect(updates).toMatchSnapshot()
+    expect(placeholders).toMatchSnapshot()
   })
 
   test('discovery with no data', async () => {
-    const updates = await mustaches.discovery({
+    const placeholders = await mustaches.discovery({
       source: 'source-id-123'
     })
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
-    expect(updates).toMatchSnapshot()
+    expect(placeholders).toMatchSnapshot()
   })
 
   test('discovery with formatters', async () => {
-    const updates = await mustaches.discovery({
+    const placeholders = await mustaches.discovery({
       source: 'source-id-123',
       data: {
         name: 'Thibaud',
@@ -170,6 +172,6 @@ describe('mustaches', () => {
     })
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
-    expect(updates).toMatchSnapshot()
+    expect(placeholders).toMatchSnapshot()
   })
 })
