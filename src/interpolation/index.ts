@@ -1,1 +1,1 @@
-export { default } from './interpolate'
+export { default, buildUpdates } from './interpolate'

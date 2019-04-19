@@ -1,6 +1,6 @@
-import { ID, ConstructorOptions, InterpolationOptions, MimeType } from './types'
-import interpolate from './interpolation'
-import { GDoc, Request } from './interpolation/types'
+import { ID, ConstructorOptions, InterpolationOptions, MimeType, DiscoveryOptions } from './types'
+import interpolate, { buildUpdates } from './interpolation'
+import { GDoc, Request, Placeholder } from './interpolation/types'
 import apis, { multipart } from './apis'
 import Blob from './polyfills/Blob'
 
@@ -27,9 +27,9 @@ class Mustaches {
     // Copy template to destination
     const copiedFile: ID = await this.copyFile(source, destination, copyOptions)
 
-    // Compute interpolations
-    const doc = await this.readDoc(copiedFile)
-    const updates = interpolate(doc, data, formatters)
+    // Compute updates
+    const placeholders = await this.discovery({ source: copiedFile, data, formatters })
+    const updates = buildUpdates(placeholders)
 
     // Update copy with interpolations
     await this.updateDoc(copiedFile, updates)
@@ -43,6 +43,15 @@ class Mustaches {
     }
 
     return copiedFile
+  }
+
+  async discovery({
+    source,
+    data = {},
+    formatters = {}
+  }: DiscoveryOptions): Promise<Placeholder[]> {
+    const doc = await this.readDoc(source)
+    return interpolate(doc, data, formatters)
   }
 
   private getParent(fileId: ID): Promise<ID> {

@@ -1,17 +1,27 @@
-import { GDoc, Request } from './types'
-import { Formatters } from '../types'
+import { GDoc, Request, Formatters, Placeholder, ContentPlaceholder } from './types'
 
-import compute from './compute'
+import computeContent from './compute'
 
-const findPlaceholders = (doc: GDoc): string[] => {
-  const placeholders: string[] = []
+const findPlaceholders = (doc: GDoc): Placeholder[] => {
+  const placeholders: Placeholder[] = []
 
   doc.body.content.map(c => {
     if (c.paragraph) {
       c.paragraph.elements.map(e => {
         if (e.textRun) {
-          const matches = e.textRun.content.match(/{{([^}]*)}}/gi) || []
-          matches.map(m => placeholders.push(m.slice(2, -2)))
+          let textRun = e.textRun.content
+          const matches = textRun.match(/{{([^}]*)}}/gi) || []
+          for (let match of matches) {
+            const start = e.startIndex + textRun.indexOf(match)
+            textRun = textRun.replace(match, ''.padStart(match.length))
+            placeholders.push({
+              raw: match,
+              position: {
+                start,
+                end: start + match.length
+              }
+            })
+          }
         }
       })
     }
@@ -20,29 +30,77 @@ const findPlaceholders = (doc: GDoc): string[] => {
   return placeholders
 }
 
-const computeUpdates = (placeholders: string[], data: any, formatters: Formatters): Request[] => {
-  const replacements = placeholders.map(
-    (placeholder): [string, string] => {
-      const computed: string = `${compute(data, placeholder, { formatters })}`
-      return [placeholder, computed]
-    }
-  )
+const analyzePlaceholders = (
+  placeholders: Placeholder[],
+  data: Record<string, any>,
+  options?: {
+    formatters?: Formatters
+  }
+): Placeholder[] => {
+  return placeholders.map(placeholder => {
+    const rawWithoutBrackets = placeholder.raw.slice(2, -2).trim()
 
-  return replacements.map(([placeholder, computed]) => ({
-    replaceAllText: {
-      replaceText: computed,
-      containsText: {
-        text: `{{${placeholder}}}`,
-        matchCase: false
+    // CommentPlaceholder
+    if (rawWithoutBrackets.startsWith('#')) {
+      return {
+        ...placeholder,
+        type: 'comment',
+        value: rawWithoutBrackets.slice(1).trim()
       }
     }
-  }))
+
+    if (['%', '@'].includes(rawWithoutBrackets[0])) {
+      // Reserved for later usage
+      return placeholder
+    }
+
+    // ContentPlaceholder
+    return computeContent(placeholder, data, options)
+  })
 }
 
-const interpolate = (doc: GDoc, data: any, formatters: Formatters): Request[] => {
-  const placeholders = findPlaceholders(doc)
-  return computeUpdates(placeholders, data, formatters)
+const buildUpdates = (placeholders: Placeholder[]): Request[] => {
+  const updates: Request[] = []
+
+  for (let placeholder of placeholders) {
+    // ContentPlaceholder
+    if (placeholder.type == 'content') {
+      const contentPlaceholder = placeholder as ContentPlaceholder
+      // Text
+      if (contentPlaceholder.output === `${contentPlaceholder.output}`) {
+        updates.push({
+          replaceAllText: {
+            replaceText: `${contentPlaceholder.output}`,
+            containsText: {
+              text: placeholder.raw,
+              matchCase: true
+            }
+          }
+        })
+      }
+    }
+
+    // CommentPlaceholder
+    else if (placeholder.type == 'comment') {
+      updates.push({
+        replaceAllText: {
+          replaceText: '',
+          containsText: {
+            text: placeholder.raw,
+            matchCase: true
+          }
+        }
+      })
+    }
+  }
+
+  return updates
+}
+
+const interpolate = (doc: GDoc, data: any, formatters: Formatters): Placeholder[] => {
+  let placeholders = findPlaceholders(doc)
+  return analyzePlaceholders(placeholders, data, { formatters })
 }
 
 export default interpolate
-export { findPlaceholders, computeUpdates }
+export { findPlaceholders, analyzePlaceholders, buildUpdates }
