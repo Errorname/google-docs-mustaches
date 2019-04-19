@@ -1,4 +1,11 @@
-import { ID, ConstructorOptions, InterpolationOptions, MimeType, DiscoveryOptions } from './types'
+import {
+  ID,
+  ConstructorOptions,
+  InterpolationOptions,
+  DiscoveryOptions,
+  ExportOptions,
+  MimeType
+} from './types'
 import interpolate, { buildUpdates } from './interpolation'
 import { GDoc, Request, Placeholder } from './interpolation/types'
 import apis, { multipart } from './apis'
@@ -16,8 +23,7 @@ class Mustaches {
     destination,
     name,
     data,
-    formatters = {},
-    export: exportType
+    formatters = {}
   }: InterpolationOptions): Promise<ID> {
     // If no destination given, use same folder as source
     destination = destination || (await this.getParent(source))
@@ -34,14 +40,6 @@ class Mustaches {
     // Update copy with interpolations
     await this.updateDoc(copiedFile, updates)
 
-    if (exportType) {
-      // Export
-      const exported: Blob = await this.export(copiedFile, exportType)
-
-      // Upload to destination
-      return this.upload(name || 'Export', destination, exportType, exported)
-    }
-
     return copiedFile
   }
 
@@ -52,6 +50,19 @@ class Mustaches {
   }: DiscoveryOptions): Promise<Placeholder[]> {
     const doc = await this.readDoc(source)
     return interpolate(doc, data, formatters)
+  }
+
+  async export({ file, mimeType, name, destination }: ExportOptions): Promise<ID> {
+    // If no destination given, use same folder as source
+    destination = destination || (await this.getParent(file))
+
+    // There is a 10Mo limit to the Google Drive API
+    const exported: Blob = await this.apis.drive
+      .export(file, mimeType, null, { raw: true })
+      .then((r: Response) => r.blob())
+
+    // Upload to destination
+    return this.upload(name || 'Export', destination, mimeType, exported)
   }
 
   private getParent(fileId: ID): Promise<ID> {
@@ -73,13 +84,6 @@ class Mustaches {
       documentId: file,
       requests: updates
     })
-  }
-
-  private export(source: ID, mimeType: MimeType): Promise<Blob> {
-    // There is a 10Mo limit to the Google Drive API
-    return this.apis.drive
-      .export(source, mimeType, null, { raw: true })
-      .then((r: Response) => r.blob())
   }
 
   private upload(name: string, destination: ID, mimeType: MimeType, body: any): Promise<ID> {

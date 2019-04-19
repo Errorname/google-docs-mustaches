@@ -123,20 +123,6 @@ describe('mustaches', () => {
     expect(crossFetch.mock.calls).toMatchSnapshot()
   })
 
-  test('export', async () => {
-    await mustaches.interpolate({
-      source: 'source-id-123',
-      destination: 'destination-id-123',
-      data: {
-        name: 'Thibaud',
-        movies: [{ title: 'Lost in Translation' }]
-      },
-      export: 'application/pdf'
-    })
-
-    expect(crossFetch.mock.calls).toMatchSnapshot()
-  })
-
   test('discovery', async () => {
     const placeholders = await mustaches.discovery({
       source: 'source-id-123',
@@ -173,5 +159,34 @@ describe('mustaches', () => {
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
     expect(placeholders).toMatchSnapshot()
+  })
+
+  test('export', async () => {
+    await mustaches.export({
+      file: 'source-id-123',
+      mimeType: 'application/pdf'
+    })
+
+    expect(crossFetch.mock.calls).toMatchSnapshot()
+  })
+
+  test('export with name', async () => {
+    await mustaches.export({
+      file: 'source-id-123',
+      mimeType: 'application/pdf',
+      name: 'My great pdf'
+    })
+
+    expect(crossFetch.mock.calls).toMatchSnapshot()
+  })
+
+  test('export with destination', async () => {
+    await mustaches.export({
+      file: 'source-id-123',
+      mimeType: 'application/pdf',
+      destination: 'destination-id-123'
+    })
+
+    expect(crossFetch.mock.calls).toMatchSnapshot()
   })
 })

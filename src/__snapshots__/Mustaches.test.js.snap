@@ -184,18 +184,7 @@ Array [
 exports[`mustaches export 1`] = `
 Array [
   Array [
-    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
-    Object {
-      "body": "{\\"parents\\":[\\"destination-id-123\\"]}",
-      "headers": Object {
-        "Content-Type": "application/json",
-        "authorization": "Bearer my-token",
-      },
-      "method": "POST",
-    },
-  ],
-  Array [
-    "https://docs.googleapis.com/v1/documents/new-file-id-123",
+    "https://www.googleapis.com/drive/v3/files/source-id-123?fields=parents",
     Object {
       "body": null,
       "headers": Object {
@@ -206,18 +195,35 @@ Array [
     },
   ],
   Array [
-    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
+    "https://www.googleapis.com/drive/v3/files/source-id-123/export?mimeType=application/pdf",
     Object {
-      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
+      "body": null,
       "headers": Object {
         "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&alt=json",
+    Object {
+      "body": "{\\"args\\":\\"----BOUNDARY\\\\nContent-Type: application/json; charset=UTF-8\\\\n\\\\n{\\\\\\"name\\\\\\":\\\\\\"Export\\\\\\",\\\\\\"parents\\\\\\":[\\\\\\"parent-id-123\\\\\\"]}\\\\n\\\\n----BOUNDARY\\\\nContent-Type: application/pdf\\\\nContent-Encoding: base64\\\\n\\\\nBLOB123\\\\n\\\\n----BOUNDARY--\\"}",
+      "headers": Object {
+        "Accept": "application/json",
+        "Content-Type": "multipart/related; boundary=--BOUNDARY",
         "authorization": "Bearer my-token",
       },
       "method": "POST",
     },
   ],
+]
+`;
+
+exports[`mustaches export with destination 1`] = `
+Array [
   Array [
-    "https://www.googleapis.com/drive/v3/files/new-file-id-123/export?mimeType=application/pdf",
+    "https://www.googleapis.com/drive/v3/files/source-id-123/export?mimeType=application/pdf",
     Object {
       "body": null,
       "headers": Object {
@@ -231,6 +237,45 @@ Array [
     "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&alt=json",
     Object {
       "body": "{\\"args\\":\\"----BOUNDARY\\\\nContent-Type: application/json; charset=UTF-8\\\\n\\\\n{\\\\\\"name\\\\\\":\\\\\\"Export\\\\\\",\\\\\\"parents\\\\\\":[\\\\\\"destination-id-123\\\\\\"]}\\\\n\\\\n----BOUNDARY\\\\nContent-Type: application/pdf\\\\nContent-Encoding: base64\\\\n\\\\nBLOB123\\\\n\\\\n----BOUNDARY--\\"}",
+      "headers": Object {
+        "Accept": "application/json",
+        "Content-Type": "multipart/related; boundary=--BOUNDARY",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`mustaches export with name 1`] = `
+Array [
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123?fields=parents",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123/export?mimeType=application/pdf",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&alt=json",
+    Object {
+      "body": "{\\"args\\":\\"----BOUNDARY\\\\nContent-Type: application/json; charset=UTF-8\\\\n\\\\n{\\\\\\"name\\\\\\":\\\\\\"My great pdf\\\\\\",\\\\\\"parents\\\\\\":[\\\\\\"parent-id-123\\\\\\"]}\\\\n\\\\n----BOUNDARY\\\\nContent-Type: application/pdf\\\\nContent-Encoding: base64\\\\n\\\\nBLOB123\\\\n\\\\n----BOUNDARY--\\"}",
       "headers": Object {
         "Accept": "application/json",
         "Content-Type": "multipart/related; boundary=--BOUNDARY",
