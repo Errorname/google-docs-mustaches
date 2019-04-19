@@ -5,6 +5,9 @@ export default (path: string, data: any): any => {
   path.split('.').map(subPath => {
     const selector = subPath.match(/\[.*\]/)
     if (selector) {
+      if (!subPath.endsWith(selector[0])) {
+        throw new SyntaxError(`Couldn't parse ${path}`)
+      }
       subPath = subPath.replace(selector[0], '')
       if (subPath) {
         iterative.push(subPath)

@@ -25,6 +25,12 @@ test('Array index access - on root', () => {
   expect(value).toBe('Pikachu')
 })
 
+test('Array index access error', () => {
+  expect(() => {
+    dot('poke[1]mons.name', { pokemons: [{ name: 'Pikachu' }, { name: 'Eevee' }] })
+  }).toThrow(SyntaxError)
+})
+
 test('Unknown variable at root level', () => {
   expect(() => {
     dot('user', {})
