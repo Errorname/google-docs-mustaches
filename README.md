@@ -86,7 +86,7 @@ This method will interpolate from the `source` file and put the generated file i
 ```ts
 type ID = string
 
-export interface InterpolationOptions {
+interface InterpolationOptions {
   source: ID
   destination?: ID
   name?: string
@@ -112,7 +112,7 @@ type Formatter = (value: any, ...params: any[]) => string
 This methods returns all the placeholders found in the `source` file. The placeholders will be interpolated to see what would have been the results if `interpolate` was called. This method will **not** mutate your source file, nor create a new one.
 
 ```ts
-export interface DiscoveryOptions {
+interface DiscoveryOptions {
   source: ID
   data?: Object
   formatters?: Formatters
@@ -128,14 +128,14 @@ export interface DiscoveryOptions {
 This methods will copy a file into the mimeType given in argument. The method will return the id of the newly created file.
 
 ```ts
-export interface ExportOptions {
+interface ExportOptions {
   file: ID
   mimeType: MimeType
   name?: string
   destination?: ID
 }
 
-export enum MimeType {
+enum MimeType {
   pdf = 'application/pdf',
   text = 'plain/text'
 }
@@ -145,6 +145,8 @@ export enum MimeType {
 - `mimeType` is the type to export the file to.
 - `name` is the name of the newly exported file.
 - `destination` is the ID of the destination folder where the new file will be put. If no destination is given, the new file will be put next to the `file` to given in argument.
+
+> Note: This feature is not working in Node (See #9)
 
 ## Interpolation
 
