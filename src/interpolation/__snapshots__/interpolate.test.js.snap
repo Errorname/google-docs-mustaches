@@ -14,6 +14,102 @@ Array [
 ]
 `;
 
+exports[`analyzePlaceholders contentPlaceholder - image (width) 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "catUrl",
+      "value": "http://example.cat",
+    },
+    "output": Object {
+      "height": undefined,
+      "url": "http://example.cat",
+      "width": 150,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": undefined,
+          "url": "http://example.cat",
+          "width": 150,
+        },
+        "raw": "image(150)",
+      },
+    ],
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ catUrl | image(150) }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`analyzePlaceholders contentPlaceholder - image (with, height) 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "catUrl",
+      "value": "http://example.cat",
+    },
+    "output": Object {
+      "height": 80,
+      "url": "http://example.cat",
+      "width": 150,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": 80,
+          "url": "http://example.cat",
+          "width": 150,
+        },
+        "raw": "image(150, 80)",
+      },
+    ],
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ catUrl | image(150, 80) }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`analyzePlaceholders contentPlaceholder - image 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "catUrl",
+      "value": "http://example.cat",
+    },
+    "output": Object {
+      "height": undefined,
+      "url": "http://example.cat",
+      "width": undefined,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": undefined,
+          "url": "http://example.cat",
+          "width": undefined,
+        },
+        "raw": "image",
+      },
+    ],
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ catUrl | image }}",
+    "type": "content",
+  },
+]
+`;
+
 exports[`analyzePlaceholders contentPlaceholder - text 1`] = `
 Array [
   Object {
@@ -59,6 +155,110 @@ Array [
         "text": "{{ # This is a comment }}",
       },
       "replaceText": "",
+    },
+  },
+]
+`;
+
+exports[`buildUpdates contentPlaceholder - image (width) 1`] = `
+Array [
+  Object {
+    "insertInlineImage": Object {
+      "location": Object {
+        "index": 42,
+        "segmentId": "",
+      },
+      "objectSize": Object {
+        "height": undefined,
+        "width": Object {
+          "magnitude": 150,
+          "unit": "PT",
+        },
+      },
+      "uri": "http://example.cat",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ catUrl | image(150) }}",
+      },
+      "replaceText": "",
+    },
+  },
+]
+`;
+
+exports[`buildUpdates contentPlaceholder - image (width, height) 1`] = `
+Array [
+  Object {
+    "insertInlineImage": Object {
+      "location": Object {
+        "index": 42,
+        "segmentId": "",
+      },
+      "objectSize": Object {
+        "height": Object {
+          "magnitude": 180,
+          "unit": "PT",
+        },
+        "width": Object {
+          "magnitude": 150,
+          "unit": "PT",
+        },
+      },
+      "uri": "http://example.cat",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ catUrl | image(150, 80) }}",
+      },
+      "replaceText": "",
+    },
+  },
+]
+`;
+
+exports[`buildUpdates contentPlaceholder - image 1`] = `
+Array [
+  Object {
+    "insertInlineImage": Object {
+      "location": Object {
+        "index": 42,
+        "segmentId": "",
+      },
+      "objectSize": Object {
+        "height": undefined,
+        "width": undefined,
+      },
+      "uri": "http://example.cat",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ catUrl | image }}",
+      },
+      "replaceText": "",
+    },
+  },
+]
+`;
+
+exports[`buildUpdates contentPlaceholder - text (number) 1`] = `
+Array [
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ accounts[0].money }}",
+      },
+      "replaceText": "1500",
     },
   },
 ]
@@ -156,6 +356,87 @@ Array [
     },
     "raw": "{{ movie.rating }}",
     "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.poster",
+      "value": "http://example.img",
+    },
+    "output": Object {
+      "height": undefined,
+      "url": "http://example.img",
+      "width": undefined,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": undefined,
+          "url": "http://example.img",
+          "width": undefined,
+        },
+        "raw": "image",
+      },
+    ],
+    "position": Object {
+      "end": 150,
+      "start": 124,
+    },
+    "raw": "{{ movie.poster | image }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`interpolate full document 2`] = `
+Array [
+  Object {
+    "insertInlineImage": Object {
+      "location": Object {
+        "index": 124,
+        "segmentId": "",
+      },
+      "objectSize": Object {
+        "height": undefined,
+        "width": undefined,
+      },
+      "uri": "http://example.img",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ user.name }}",
+      },
+      "replaceText": "Thibaud",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{movie.title | uppercase}}",
+      },
+      "replaceText": "LOST IN TRANSLATION",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movie.rating }}",
+      },
+      "replaceText": "5",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movie.poster | image }}",
+      },
+      "replaceText": "",
+    },
   },
 ]
 `;

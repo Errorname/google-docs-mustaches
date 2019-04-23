@@ -16,7 +16,12 @@ const defaultFormatters: Formatters = {
       ...options,
       minimumFractionDigits: fractionDigits
     })
-  }
+  },
+  image: (url: string, width: number, height: number) => ({
+    url,
+    width,
+    height
+  })
 }
 
 export default defaultFormatters

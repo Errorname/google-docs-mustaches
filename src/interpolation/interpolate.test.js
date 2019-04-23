@@ -30,15 +30,28 @@ describe('interpolate', () => {
                 }
               ]
             }
+          },
+          {
+            paragraph: {
+              elements: [
+                {
+                  textRun: { content: '{{ movie.poster | image }}' },
+                  startIndex: 124,
+                  endIndex: 150
+                }
+              ]
+            }
           }
         ]
       }
     }
     const result = interpolate(document, {
       user: { name: 'Thibaud' },
-      movie: { title: 'Lost in Translation', rating: 5 }
+      movie: { title: 'Lost in Translation', rating: 5, poster: 'http://example.img' }
     })
+    const updates = buildUpdates(result)
     expect(result).toMatchSnapshot()
+    expect(updates).toMatchSnapshot()
   })
 })
 
@@ -145,6 +158,60 @@ describe('analyzePlaceholders', () => {
     expect(contentPlaceholders).toMatchSnapshot()
   })
 
+  test('contentPlaceholder - image', () => {
+    const placeholders = [
+      {
+        raw: '{{ catUrl | image }}',
+        position: {
+          start: 134,
+          end: 166
+        }
+      }
+    ]
+
+    const contentPlaceholders = analyzePlaceholders(placeholders, {
+      catUrl: 'http://example.cat'
+    })
+
+    expect(contentPlaceholders).toMatchSnapshot()
+  })
+
+  test('contentPlaceholder - image (width)', () => {
+    const placeholders = [
+      {
+        raw: '{{ catUrl | image(150) }}',
+        position: {
+          start: 134,
+          end: 166
+        }
+      }
+    ]
+
+    const contentPlaceholders = analyzePlaceholders(placeholders, {
+      catUrl: 'http://example.cat'
+    })
+
+    expect(contentPlaceholders).toMatchSnapshot()
+  })
+
+  test('contentPlaceholder - image (with, height)', () => {
+    const placeholders = [
+      {
+        raw: '{{ catUrl | image(150, 80) }}',
+        position: {
+          start: 134,
+          end: 166
+        }
+      }
+    ]
+
+    const contentPlaceholders = analyzePlaceholders(placeholders, {
+      catUrl: 'http://example.cat'
+    })
+
+    expect(contentPlaceholders).toMatchSnapshot()
+  })
+
   test('commentPlaceholder', () => {
     const placeholders = [
       {
@@ -180,7 +247,7 @@ describe('analyzePlaceholders', () => {
 
 describe('buildUpdates', () => {
   test('no placeholders', () => {
-    const updates = buildUpdates([], {}, {})
+    const updates = buildUpdates([])
 
     expect(updates).toEqual([])
   })
@@ -200,9 +267,99 @@ describe('buildUpdates', () => {
       pipes: [],
       output: 'Thibaud'
     }
-    const updates = buildUpdates([contentPlaceholder], {
-      user: { name: { first: 'Thibaud' } }
-    })
+    const updates = buildUpdates([contentPlaceholder])
+
+    expect(updates).toMatchSnapshot()
+  })
+
+  test('contentPlaceholder - text (number)', () => {
+    const contentPlaceholder = {
+      raw: '{{ accounts[0].money }}',
+      position: {
+        start: 0,
+        end: 0
+      },
+      type: 'content',
+      input: {
+        raw: 'accounts[0].money',
+        value: 1500
+      },
+      pipes: [],
+      output: '1500'
+    }
+    const updates = buildUpdates([contentPlaceholder])
+
+    expect(updates).toMatchSnapshot()
+  })
+
+  test('contentPlaceholder - image', () => {
+    const contentPlaceholder = {
+      raw: '{{ catUrl | image }}',
+      position: {
+        start: 42,
+        end: 47
+      },
+      type: 'content',
+      input: {
+        raw: 'catUrl',
+        value: 'http://example.cat'
+      },
+      pipes: [],
+      output: {
+        url: 'http://example.cat'
+      }
+    }
+
+    const updates = buildUpdates([contentPlaceholder])
+
+    expect(updates).toMatchSnapshot()
+  })
+
+  test('contentPlaceholder - image (width)', () => {
+    const contentPlaceholder = {
+      raw: '{{ catUrl | image(150) }}',
+      position: {
+        start: 42,
+        end: 47
+      },
+      type: 'content',
+      input: {
+        raw: 'catUrl',
+        value: 'http://example.cat'
+      },
+      pipes: [],
+      output: {
+        url: 'http://example.cat',
+        width: 150
+      }
+    }
+
+    const updates = buildUpdates([contentPlaceholder])
+
+    expect(updates).toMatchSnapshot()
+  })
+
+  test('contentPlaceholder - image (width, height)', () => {
+    const contentPlaceholder = {
+      raw: '{{ catUrl | image(150, 80) }}',
+      position: {
+        start: 42,
+        end: 47
+      },
+      type: 'content',
+      input: {
+        raw: 'catUrl',
+        value: 'http://example.cat'
+      },
+      pipes: [],
+      output: {
+        url: 'http://example.cat',
+        width: 150,
+        height: 180
+      }
+    }
+
+    const updates = buildUpdates([contentPlaceholder])
 
     expect(updates).toMatchSnapshot()
   })
@@ -222,13 +379,7 @@ describe('buildUpdates', () => {
       pipes: [],
       output: { test: 123 }
     }
-    const updates = buildUpdates([contentPlaceholder], {
-      strange: {
-        type: {
-          test: 123
-        }
-      }
-    })
+    const updates = buildUpdates([contentPlaceholder])
 
     expect(updates).toMatchSnapshot()
   })
@@ -242,7 +393,7 @@ describe('buildUpdates', () => {
       },
       type: 'comment'
     }
-    const updates = buildUpdates([contentPlaceholder], {})
+    const updates = buildUpdates([contentPlaceholder])
 
     expect(updates).toMatchSnapshot()
   })
@@ -256,7 +407,7 @@ describe('buildUpdates', () => {
       },
       type: 'not_real_type'
     }
-    const updates = buildUpdates([contentPlaceholder], {})
+    const updates = buildUpdates([contentPlaceholder])
 
     expect(updates).toMatchSnapshot()
   })

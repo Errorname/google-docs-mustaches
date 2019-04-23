@@ -7,7 +7,8 @@ import {
   MimeType
 } from './types'
 import interpolate, { buildUpdates } from './interpolation'
-import { GDoc, Request, Placeholder } from './interpolation/types'
+import { Placeholder } from './interpolation/types'
+import { GDoc, Request } from './interpolation/gdocTypes'
 import apis, { multipart } from './apis'
 import Blob from './polyfills/Blob'
 
