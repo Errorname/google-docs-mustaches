@@ -13,13 +13,19 @@ export interface InterpolationOptions {
   name?: string
   data: Object
   formatters?: Formatters
-  export?: MimeType
 }
 
 export interface DiscoveryOptions {
   source: ID
   data?: Object
   formatters?: Formatters
+}
+
+export interface ExportOptions {
+  file: ID
+  mimeType: MimeType
+  name?: string
+  destination?: ID
 }
 
 export enum MimeType {

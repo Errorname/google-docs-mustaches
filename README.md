@@ -55,6 +55,11 @@ mustaches.interpolate({
 
 ## Documentation
 
+- [Constructor](#new-mustachesoptions-constructoroptions)
+- [Interpolate](#mustachesinterpolateoptions-interpolationoptions-id) the file
+- [Discovery](#mustachesdiscoveryoptions-discoveryoptions-placeholder) of the placeholders
+- [Export](#mustachesexportoptions-exportoptions-id) of the file
+
 ### `new Mustaches(options: ConstructorOptions)`
 
 ```ts
@@ -81,13 +86,12 @@ This method will interpolate from the `source` file and put the generated file i
 ```ts
 type ID = string
 
-export interface InterpolationOptions {
+interface InterpolationOptions {
   source: ID
   destination?: ID
   name?: string
   data: Object
   formatters?: Formatters
-  export?: MimeType
 }
 
 interface Formatters {
@@ -95,11 +99,6 @@ interface Formatters {
 }
 
 type Formatter = (value: any, ...params: any[]) => string
-
-export enum MimeType {
-  pdf = 'application/pdf',
-  text = 'plain/text'
-}
 ```
 
 - `source` is the ID of the file which will be interpolated.
@@ -107,14 +106,13 @@ export enum MimeType {
 - `name` is the name of the newly created and interpolated google doc file.
 - `data` is the data given for the [interpolation](#interpolation)
 - `formatters` will be used for [interpolation](#interpolation)
-- `export` can be specified to export the file after the [interpolation](#interpolation)
 
 ### `mustaches.discovery(options: DiscoveryOptions): Placeholder[]`
 
 This methods returns all the placeholders found in the `source` file. The placeholders will be interpolated to see what would have been the results if `interpolate` was called. This method will **not** mutate your source file, nor create a new one.
 
 ```ts
-export interface DiscoveryOptions {
+interface DiscoveryOptions {
   source: ID
   data?: Object
   formatters?: Formatters
@@ -124,6 +122,31 @@ export interface DiscoveryOptions {
 - `source` is the ID of the file which will be interpolated.
 - `data` is the data given for the [interpolation](#interpolation)
 - `formatters` will be used for [interpolation](#interpolation)
+
+### `mustaches.export(options: ExportOptions): ID`
+
+This methods will copy a file into the mimeType given in argument. The method will return the id of the newly created file.
+
+```ts
+interface ExportOptions {
+  file: ID
+  mimeType: MimeType
+  name?: string
+  destination?: ID
+}
+
+enum MimeType {
+  pdf = 'application/pdf',
+  text = 'plain/text'
+}
+```
+
+- `file` is the ID of the file which will be exported.
+- `mimeType` is the type to export the file to.
+- `name` is the name of the newly exported file.
+- `destination` is the ID of the destination folder where the new file will be put. If no destination is given, the new file will be put next to the `file` to given in argument.
+
+> Note: This feature is not working in Node (See [#9](https://github.com/Errorname/google-docs-mustaches/issues/9))
 
 ## Interpolation
 
