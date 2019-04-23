@@ -241,6 +241,7 @@ Hi COURTOISON. Today is Tuesday, tomorrow is Wednesday.
 - **uppercase**: `wOrLd` => `WORLD`
 - **capitalize**: `heLLO wOrlD` => `Hello World`
 - **money(locale, currencyISO, fractionDigits = 0)**: `1500 | money("us", "USD", 2)` => `$1500.00`. (Currency ISO Codes)[https://en.wikipedia.org/wiki/ISO_4217#Active_codes]
+- **image(width, height)**: Transform an url string to an image
 - _More to come..._
 
 _Warning: If you use an undefined formatter it will be simply ignored, which could lead to unexpected results if you're chaining them._
