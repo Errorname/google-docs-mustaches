@@ -43,7 +43,7 @@ const evaluateInput = (
     return { raw, value: dot(raw, data) }
   } catch (error) {
     // Bubble up the error in strict mode
-    if (options && options.strict){
+    if (options && options.strict) {
       throw error
     }
     if ((options && options.fallback) === undefined) {
@@ -72,7 +72,7 @@ const transformValue = (
     }
   } catch (error) {
     // Bubble up the error in strict mode
-    if (options && options.strict){
+    if (options && options.strict) {
       throw error
     }
     // Ignore unknown/invalid formatters in non-strict mode
