@@ -2,10 +2,12 @@ import dot from './dot'
 import pipe from './pipe'
 import { Placeholder, ContentPlaceholder, Formatters } from '../types'
 
+const DEFAULT_FALLBACK = ''
+
 export default (
   placeholder: Placeholder,
   data: Object,
-  options?: { formatters?: Formatters; fallback?: string }
+  options?: { strict?: Boolean; formatters?: Formatters; fallback?: string }
 ): ContentPlaceholder => {
   const rawWithoutBrackets = placeholder.raw.slice(2, -2).trim()
 
@@ -35,13 +37,17 @@ export default (
 const evaluateInput = (
   raw: string,
   data: Object,
-  options?: { fallback?: string }
+  options?: { strict?: Boolean; fallback?: string }
 ): { raw: string; error?: Error; value: any } => {
   try {
     return { raw, value: dot(raw, data) }
   } catch (error) {
+    // Bubble up the error in strict mode
+    if (options && options.strict){
+      throw error
+    }
     if ((options && options.fallback) === undefined) {
-      return { raw, error, value: '' }
+      return { raw, error, value: DEFAULT_FALLBACK }
     } else {
       return { raw, error, value: options && options.fallback }
     }
@@ -52,7 +58,7 @@ const transformValue = (
   value: any,
   transformation: string,
   data: Object,
-  options?: { formatters?: Formatters; fallback?: string }
+  options?: { strict?: Boolean; formatters?: Formatters; fallback?: string }
 ) => {
   try {
     return {
@@ -65,7 +71,11 @@ const transformValue = (
       )
     }
   } catch (error) {
-    // Ignore unknown/invalid formatters
+    // Bubble up the error in strict mode
+    if (options && options.strict){
+      throw error
+    }
+    // Ignore unknown/invalid formatters in non-strict mode
     return { raw: transformation, error, output: value }
   }
 }

@@ -1,4 +1,5 @@
 import compute from './compute'
+import { UndefinedVariableError, UnknownFormatterError } from './errors'
 
 const buildPlaceholder = txt => ({
   raw: `{{ ${txt} }}`,
@@ -68,6 +69,33 @@ test('Default formatter - capitalize two words', () => {
   expect(interpolated).toMatchSnapshot()
 })
 
+test('Option formatters', () => {
+  const interpolated = compute(
+    buildPlaceholder('name | smurf'),
+    { name: 'Thibaud' },
+    {
+      formatters: { smurf: txt => 'Smurf!' }
+    }
+  )
+
+  expect(interpolated.output).toBe('Smurf!')
+  expect(interpolated).toMatchSnapshot()
+})
+
+test('Option formatters awaiting for param', () => {
+  const interpolated = compute(
+    buildPlaceholder('name | smurf(true)'),
+    { name: 'Thibaud' },
+    {
+      formatters: { smurf: (txt, smurf) => (smurf ? 'Smurf!' : txt) }
+    }
+  )
+
+  expect(interpolated.output).toBe('Smurf!')
+  expect(interpolated).toMatchSnapshot()
+})
+
+// Strict: false
 test('Unknown variable', () => {
   const interpolated = compute(buildPlaceholder('user.name'), {})
 
@@ -110,28 +138,33 @@ test('Unknown formatter in middle is ignored', () => {
   expect(interpolated).toMatchSnapshot()
 })
 
-test('Option formatters', () => {
-  const interpolated = compute(
-    buildPlaceholder('name | smurf'),
-    { name: 'Thibaud' },
-    {
-      formatters: { smurf: txt => 'Smurf!' }
-    }
-  )
-
-  expect(interpolated.output).toBe('Smurf!')
-  expect(interpolated).toMatchSnapshot()
+// Strict: true
+test('Unknown variable — strict', () => {
+  expect(() => {
+    compute(buildPlaceholder('user.name'), {}, { strict: true })
+  }).toThrow(UndefinedVariableError)
 })
 
-test('Option formatters awaiting for param', () => {
-  const interpolated = compute(
-    buildPlaceholder('name | smurf(true)'),
-    { name: 'Thibaud' },
-    {
-      formatters: { smurf: (txt, smurf) => (smurf ? 'Smurf!' : txt) }
-    }
-  )
+test('Unknown variable - with formatter — strict', () => {
+  expect(() => {
+    compute(buildPlaceholder('user.name | capitalize'), {}, { strict: true })
+  }).toThrow(UndefinedVariableError)
+})
 
-  expect(interpolated.output).toBe('Smurf!')
-  expect(interpolated).toMatchSnapshot()
+test('Unknown variable - with option fallback — strict', () => {
+  expect(() => {
+    compute(buildPlaceholder('user.name'), {}, { strict: true, fallback: 'Unknown' })
+  }).toThrow(UndefinedVariableError)
+})
+
+test('Unknown formatter — strict', () => {
+  expect(() => {
+    compute(buildPlaceholder('name | smurf'), { name: 'Thibaud' }, { strict: true })
+  }).toThrow(UnknownFormatterError)
+})
+
+test('Unknown formatter in middle — strict', () => {
+  expect(() => {
+    compute(buildPlaceholder('name | smurf | lowercase'), { name: 'Thibaud' }, { strict: true })
+  }).toThrow(UnknownFormatterError)
 })
