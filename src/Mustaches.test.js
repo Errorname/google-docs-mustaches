@@ -1,6 +1,7 @@
 import Mustaches from './Mustaches'
 import Blob from './polyfills/Blob'
 import crossFetch from 'cross-fetch'
+import { UndefinedVariableError, UnknownFormatterError } from './interpolation/compute/errors'
 
 jest.mock('cross-fetch', () => jest.fn())
 jest.mock('./polyfills/Blob')
@@ -121,6 +122,36 @@ describe('mustaches', () => {
     })
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
+  })
+
+  test('with strict mode - undefined variable ', async () => {
+    await expect(
+      mustaches.interpolate({
+        source: 'source-id-123',
+        destination: 'destination-id-123',
+        data: {
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        formatters: {
+          smurf: () => 'Smurf'
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UndefinedVariableError)
+  })
+
+  test('with strict mode - unknown formatter ', async () => {
+    await expect(
+      mustaches.interpolate({
+        source: 'source-id-123',
+        destination: 'destination-id-123',
+        data: {
+          name: 'Thibaud',
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UnknownFormatterError)
   })
 
   test('discovery', async () => {
