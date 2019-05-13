@@ -128,6 +128,10 @@ const buildUpdates = (placeholders: Placeholder[]): Request[] => {
   }
 
   // Sort updates
+  /* For Google Doc, updates are applied one after the other. This means that the origin
+  position of placeholders may change if a previous update was applied, (eg: with a long text)!
+  We need a better dynamic position system to handle this, but in the meantime,
+  we simply sort the imageUpdates first to mitigate the problem. */
   updates.sort((a, b) => {
     if (a.insertInlineImage && !b.insertInlineImage) return -1
     if (!a.insertInlineImage && b.insertInlineImage) return 1
