@@ -192,6 +192,35 @@ describe('mustaches', () => {
     expect(placeholders).toMatchSnapshot()
   })
 
+  test('discovery with strict mode: Undefined variable', async () => {
+    await expect(
+      mustaches.discovery({
+        source: 'source-id-123',
+        data: {
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        formatters: {
+          smurf: () => 'Smurf'
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UndefinedVariableError)
+  })
+
+  test('discovery with strict mode: Unknown formatter', async () => {
+    await expect(
+      mustaches.interpolate({
+        source: 'source-id-123',
+        destination: 'destination-id-123',
+        data: {
+          name: 'Thibaud',
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UnknownFormatterError)
+  })
+
   test('export', async () => {
     await mustaches.export({
       file: 'source-id-123',
