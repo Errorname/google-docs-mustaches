@@ -107,7 +107,7 @@ type Formatter = (value: any, ...params: any[]) => string
 - `name` is the name of the newly created and interpolated google doc file.
 - `data` is the data given for the [interpolation](#interpolation)
 - `formatters` will be used for [interpolation](#interpolation)
-- `strict` indicates whether to use [sctrict mode](#strict-mode) or not.
+- `strict` indicates whether to use [strict mode](#strict-mode) or not.
 
 ### `mustaches.discovery(options: DiscoveryOptions): Placeholder[]`
 
@@ -125,7 +125,7 @@ interface DiscoveryOptions {
 - `source` is the ID of the file which will be interpolated.
 - `data` is the data given for the [interpolation](#interpolation)
 - `formatters` will be used for [interpolation](#interpolation)
-- `strict` indicates whether to use [sctrict mode](#strict-mode) or not.
+- `strict` indicates whether to use [strict mode](#strict-mode) or not.
 
 ### `mustaches.export(options: ExportOptions): ID`
 
@@ -252,9 +252,9 @@ _Warning: If you use an undefined formatter it will be simply ignored, which cou
 
 ### Strict mode
 
-By default, _google-docs-mustaches_ is failing safely, which means that you don't have to worry about using an undefined variable or a unknow formatter, the generated errors will be catched and treated by the program itself. However, you might face unexepected behaviour if for example, you chain several formatters and one of them is misspelled, it would be ignored and the output of your formatters pipeline won't match your expectations.
+By default, _google-docs-mustaches_ is failing safely, which means that you don't have to worry about using an undefined variable or an unknow formatter, the generated errors will be catched and treated by the program itself. However, you might face unexpected behaviour if for example, you chain several formatters and one of them is misspelled, it would be ignored and the output of your formatters pipeline won't match your expectations.
 
-To avoid this, we provide a strict mode for `.interpolate` and `.discovery`. Instead of using an empty string or your fallback when encountering an undefined variable, it will throw an exception, aborting immediatly the interpolation of your document. 
+To avoid this, we provide a strict mode for `.interpolate` and `.discovery`. Instead of using an empty string or your fallback when encountering an undefined variable, it will throw an exception, aborting immediately the interpolation of your document.
 
 ## How to retrieve the Google token?
 
