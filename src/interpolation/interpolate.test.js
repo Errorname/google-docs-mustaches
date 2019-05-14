@@ -55,7 +55,7 @@ describe('interpolate', () => {
     expect(updates).toMatchSnapshot()
   })
 
-  test('full document — strict: Unknown formatter', () => {
+  test('full document — strict - Unknown formatter', () => {
     const document = {
       body: {
         content: [
@@ -116,7 +116,7 @@ describe('interpolate', () => {
     }).toThrow(UnknownFormatterError)
   })
 
-  test('full document — strict: Undefined variable', () => {
+  test('full document — strict - Undefined variable', () => {
     const document = {
       body: {
         content: [
@@ -177,7 +177,7 @@ describe('interpolate', () => {
     }).toThrow(UndefinedVariableError)
   })
 
-  test('full document — strict: First error is thrown first', () => {
+  test('full document — strict - First error is thrown first', () => {
     const document = {
       body: {
         content: [

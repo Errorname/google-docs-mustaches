@@ -287,56 +287,7 @@ Array [
 ]
 `;
 
-exports[`mustaches no destination given 1`] = `
-Array [
-  Array [
-    "https://www.googleapis.com/drive/v3/files/source-id-123?fields=parents",
-    Object {
-      "body": null,
-      "headers": Object {
-        "Content-Type": "application/json",
-        "authorization": "Bearer my-token",
-      },
-      "method": "GET",
-    },
-  ],
-  Array [
-    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
-    Object {
-      "body": "{\\"parents\\":[\\"parent-id-123\\"]}",
-      "headers": Object {
-        "Content-Type": "application/json",
-        "authorization": "Bearer my-token",
-      },
-      "method": "POST",
-    },
-  ],
-  Array [
-    "https://docs.googleapis.com/v1/documents/new-file-id-123",
-    Object {
-      "body": null,
-      "headers": Object {
-        "Content-Type": "application/json",
-        "authorization": "Bearer my-token",
-      },
-      "method": "GET",
-    },
-  ],
-  Array [
-    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
-    Object {
-      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
-      "headers": Object {
-        "Content-Type": "application/json",
-        "authorization": "Bearer my-token",
-      },
-      "method": "POST",
-    },
-  ],
-]
-`;
-
-exports[`mustaches nominal use case 1`] = `
+exports[`mustaches interpolate 1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
@@ -374,7 +325,7 @@ Array [
 ]
 `;
 
-exports[`mustaches with custom formatters  1`] = `
+exports[`mustaches interpolate with custom formatters  1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
@@ -412,12 +363,61 @@ Array [
 ]
 `;
 
-exports[`mustaches with name 1`] = `
+exports[`mustaches interpolate with name 1`] = `
 Array [
   Array [
     "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
     Object {
       "body": "{\\"parents\\":[\\"destination-id-123\\"],\\"name\\":\\"New interpolated file\\"}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://docs.googleapis.com/v1/documents/new-file-id-123:batchUpdate",
+    Object {
+      "body": "{\\"documentId\\":\\"new-file-id-123\\",\\"requests\\":[{\\"replaceAllText\\":{\\"replaceText\\":\\"Thibaud\\",\\"containsText\\":{\\"text\\":\\"{{ name | smurf }}\\",\\"matchCase\\":true}}},{\\"replaceAllText\\":{\\"replaceText\\":\\"lost in translation\\",\\"containsText\\":{\\"text\\":\\"{{ movies[0].title | lowercase }}\\",\\"matchCase\\":true}}}]}",
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`mustaches interpolate with no destination given 1`] = `
+Array [
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123?fields=parents",
+    Object {
+      "body": null,
+      "headers": Object {
+        "Content-Type": "application/json",
+        "authorization": "Bearer my-token",
+      },
+      "method": "GET",
+    },
+  ],
+  Array [
+    "https://www.googleapis.com/drive/v3/files/source-id-123/copy",
+    Object {
+      "body": "{\\"parents\\":[\\"parent-id-123\\"]}",
       "headers": Object {
         "Content-Type": "application/json",
         "authorization": "Bearer my-token",
