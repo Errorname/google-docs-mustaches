@@ -1,6 +1,7 @@
 import Mustaches from './Mustaches'
 import Blob from './polyfills/Blob'
 import crossFetch from 'cross-fetch'
+import { UndefinedVariableError, UnknownFormatterError } from './interpolation/compute/errors'
 
 jest.mock('cross-fetch', () => jest.fn())
 jest.mock('./polyfills/Blob')
@@ -68,7 +69,7 @@ describe('mustaches', () => {
     mustaches = new Mustaches({ token })
   })
 
-  test('nominal use case', async () => {
+  test('interpolate', async () => {
     await mustaches.interpolate({
       source: 'source-id-123',
       destination: 'destination-id-123',
@@ -81,7 +82,7 @@ describe('mustaches', () => {
     expect(crossFetch.mock.calls).toMatchSnapshot()
   })
 
-  test('no destination given', async () => {
+  test('interpolate with no destination given', async () => {
     await mustaches.interpolate({
       source: 'source-id-123',
       data: {
@@ -93,7 +94,7 @@ describe('mustaches', () => {
     expect(crossFetch.mock.calls).toMatchSnapshot()
   })
 
-  test('with name', async () => {
+  test('interpolate with name', async () => {
     await mustaches.interpolate({
       source: 'source-id-123',
       destination: 'destination-id-123',
@@ -107,7 +108,7 @@ describe('mustaches', () => {
     expect(crossFetch.mock.calls).toMatchSnapshot()
   })
 
-  test('with custom formatters ', async () => {
+  test('interpolate with custom formatters ', async () => {
     await mustaches.interpolate({
       source: 'source-id-123',
       destination: 'destination-id-123',
@@ -121,6 +122,36 @@ describe('mustaches', () => {
     })
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
+  })
+
+  test('interpolate with strict mode - undefined variable ', async () => {
+    await expect(
+      mustaches.interpolate({
+        source: 'source-id-123',
+        destination: 'destination-id-123',
+        data: {
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        formatters: {
+          smurf: () => 'Smurf'
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UndefinedVariableError)
+  })
+
+  test('interpolate with strict mode - unknown formatter ', async () => {
+    await expect(
+      mustaches.interpolate({
+        source: 'source-id-123',
+        destination: 'destination-id-123',
+        data: {
+          name: 'Thibaud',
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UnknownFormatterError)
   })
 
   test('discovery', async () => {
@@ -159,6 +190,35 @@ describe('mustaches', () => {
 
     expect(crossFetch.mock.calls).toMatchSnapshot()
     expect(placeholders).toMatchSnapshot()
+  })
+
+  test('discovery with strict mode - Undefined variable', async () => {
+    await expect(
+      mustaches.discovery({
+        source: 'source-id-123',
+        data: {
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        formatters: {
+          smurf: () => 'Smurf'
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UndefinedVariableError)
+  })
+
+  test('discovery with strict mode - Unknown formatter', async () => {
+    await expect(
+      mustaches.interpolate({
+        source: 'source-id-123',
+        destination: 'destination-id-123',
+        data: {
+          name: 'Thibaud',
+          movies: [{ title: 'Lost in Translation' }]
+        },
+        strict: true
+      })
+    ).rejects.toThrow(UnknownFormatterError)
   })
 
   test('export', async () => {

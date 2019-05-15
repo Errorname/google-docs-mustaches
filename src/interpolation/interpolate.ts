@@ -36,6 +36,7 @@ const analyzePlaceholders = (
   data: Record<string, any>,
   options?: {
     formatters?: Formatters
+    strict?: boolean
   }
 ): Placeholder[] => {
   return placeholders.map(placeholder => {
@@ -141,10 +142,15 @@ const buildUpdates = (placeholders: Placeholder[]): Request[] => {
   return updates
 }
 
-const interpolate = (doc: GDoc, data: any, formatters: Formatters): Placeholder[] => {
+const processPlaceholders = (
+  doc: GDoc,
+  data: any,
+  formatters: Formatters,
+  strict?: boolean
+): Placeholder[] => {
   let placeholders = findPlaceholders(doc)
-  return analyzePlaceholders(placeholders, data, { formatters })
+  return analyzePlaceholders(placeholders, data, { formatters, strict })
 }
 
-export default interpolate
+export default processPlaceholders
 export { findPlaceholders, analyzePlaceholders, buildUpdates }

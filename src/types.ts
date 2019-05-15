@@ -13,12 +13,14 @@ export interface InterpolationOptions {
   name?: string
   data: Object
   formatters?: Formatters
+  strict?: boolean
 }
 
 export interface DiscoveryOptions {
   source: ID
   data?: Object
   formatters?: Formatters
+  strict?: boolean
 }
 
 export interface ExportOptions {

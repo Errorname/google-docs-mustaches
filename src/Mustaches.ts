@@ -6,7 +6,7 @@ import {
   ExportOptions,
   MimeType
 } from './types'
-import interpolate, { buildUpdates } from './interpolation'
+import processPlaceholders, { buildUpdates } from './interpolation'
 import { Placeholder } from './interpolation/types'
 import { GDoc, Request } from './interpolation/gdocTypes'
 import apis, { multipart } from './apis'
@@ -24,7 +24,8 @@ class Mustaches {
     destination,
     name,
     data,
-    formatters = {}
+    formatters = {},
+    strict
   }: InterpolationOptions): Promise<ID> {
     // If no destination given, use same folder as source
     destination = destination || (await this.getParent(source))
@@ -35,7 +36,7 @@ class Mustaches {
     const copiedFile: ID = await this.copyFile(source, destination, copyOptions)
 
     // Compute updates
-    const placeholders = await this.discovery({ source: copiedFile, data, formatters })
+    const placeholders = await this.discovery({ source: copiedFile, data, formatters, strict })
     const updates = buildUpdates(placeholders)
 
     // Update copy with interpolations
@@ -47,10 +48,11 @@ class Mustaches {
   async discovery({
     source,
     data = {},
-    formatters = {}
+    formatters = {},
+    strict
   }: DiscoveryOptions): Promise<Placeholder[]> {
     const doc = await this.readDoc(source)
-    return interpolate(doc, data, formatters)
+    return processPlaceholders(doc, data, formatters, strict)
   }
 
   async export({ file, mimeType, name, destination }: ExportOptions): Promise<ID> {
