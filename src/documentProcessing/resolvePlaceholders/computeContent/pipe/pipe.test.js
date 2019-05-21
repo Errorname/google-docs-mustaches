@@ -1,5 +1,5 @@
 import pipe from './pipe'
-import { UnknownFormatterError, UnvalidFormatterError } from './errors'
+import { UnknownFormatterError, UnvalidFormatterError } from '../../errors'
 
 test('One transformation - without parenthesis', () => {
   const value = pipe(

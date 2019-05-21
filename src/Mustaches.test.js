@@ -1,7 +1,10 @@
 import Mustaches from './Mustaches'
 import Blob from './polyfills/Blob'
 import crossFetch from 'cross-fetch'
-import { UndefinedVariableError, UnknownFormatterError } from './interpolation/compute/errors'
+import {
+  UndefinedVariableError,
+  UnknownFormatterError
+} from './documentProcessing/resolvePlaceholders/errors'
 
 jest.mock('cross-fetch', () => jest.fn())
 jest.mock('./polyfills/Blob')

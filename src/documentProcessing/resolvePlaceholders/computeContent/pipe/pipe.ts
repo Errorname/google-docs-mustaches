@@ -1,7 +1,7 @@
-import { Formatters } from '../types'
-import defaultFormatters from './formatters'
-import dot from './dot'
-import { UnvalidFormatterError, UnknownFormatterError } from './errors'
+import { Formatters } from '../../../types'
+import { UnvalidFormatterError, UnknownFormatterError } from '../../errors'
+import defaultFormatters from '../defaultFormatters'
+import dot from '../dot'
 
 export default (
   value: any,

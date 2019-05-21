@@ -1,4 +1,4 @@
-import { UndefinedVariableError } from './errors'
+import { UndefinedVariableError } from '../../errors'
 
 export default (path: string, data: any): any => {
   const iterative: string[] = []

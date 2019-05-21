@@ -1,6 +1,6 @@
 import dot from './dot'
 import pipe from './pipe'
-import { Placeholder, ContentPlaceholder, Formatters } from '../types'
+import { Placeholder, ContentPlaceholder, Formatters } from '../../types'
 
 const DEFAULT_FALLBACK = ''
 

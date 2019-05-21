@@ -1,4 +1,4 @@
-import pipe from './pipe'
+import pipe from '../pipe'
 
 test('Default formatter - lowercase', () => {
   const value = pipe(

@@ -1,4 +1,4 @@
-import { Formatters } from './interpolation/types'
+import { Formatters } from './documentProcessing/types'
 
 export type ID = string
 export type AccessToken = string

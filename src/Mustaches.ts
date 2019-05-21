@@ -6,9 +6,9 @@ import {
   ExportOptions,
   MimeType
 } from './types'
-import processPlaceholders, { buildUpdates } from './interpolation'
-import { Placeholder } from './interpolation/types'
-import { GDoc, Request } from './interpolation/gdocTypes'
+import processPlaceholders, { buildUpdates } from './documentProcessing'
+import { Placeholder } from './documentProcessing/types'
+import { GDoc, Request } from './documentProcessing/gdocTypes'
 import apis, { multipart } from './apis'
 import Blob from './polyfills/Blob'
 

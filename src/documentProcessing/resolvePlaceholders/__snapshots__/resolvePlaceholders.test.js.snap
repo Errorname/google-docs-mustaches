@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`resolvePlaceholders commentPlaceholder 1`] = `
+Array [
+  Object {
+    "position": Object {
+      "end": 158,
+      "start": 134,
+    },
+    "raw": "{{ # This is a comment }}",
+    "type": "comment",
+    "value": "This is a comment",
+  },
+]
+`;
+
+exports[`resolvePlaceholders contentPlaceholder - image (width) 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "catUrl",
+      "value": "http://example.cat",
+    },
+    "output": Object {
+      "height": undefined,
+      "url": "http://example.cat",
+      "width": 150,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": undefined,
+          "url": "http://example.cat",
+          "width": 150,
+        },
+        "raw": "image(150)",
+      },
+    ],
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ catUrl | image(150) }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`resolvePlaceholders contentPlaceholder - image (with, height) 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "catUrl",
+      "value": "http://example.cat",
+    },
+    "output": Object {
+      "height": 80,
+      "url": "http://example.cat",
+      "width": 150,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": 80,
+          "url": "http://example.cat",
+          "width": 150,
+        },
+        "raw": "image(150, 80)",
+      },
+    ],
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ catUrl | image(150, 80) }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`resolvePlaceholders contentPlaceholder - image 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "catUrl",
+      "value": "http://example.cat",
+    },
+    "output": Object {
+      "height": undefined,
+      "url": "http://example.cat",
+      "width": undefined,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": undefined,
+          "url": "http://example.cat",
+          "width": undefined,
+        },
+        "raw": "image",
+      },
+    ],
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ catUrl | image }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`resolvePlaceholders contentPlaceholder - text 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "user.name.first",
+      "value": "Thibaud",
+    },
+    "output": "thibaud",
+    "pipes": Array [
+      Object {
+        "output": "thibaud",
+        "raw": "lowercase",
+      },
+    ],
+    "position": Object {
+      "end": 166,
+      "start": 134,
+    },
+    "raw": "{{ user.name.first | lowercase }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`resolvePlaceholders unknownPlaceholder - reserved symbol 1`] = `
+Array [
+  Object {
+    "position": Object {
+      "end": 158,
+      "start": 134,
+    },
+    "raw": "{{ % reserved symbol }}",
+  },
+]
+`;

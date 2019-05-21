@@ -1,5 +1,5 @@
 import dot from './dot'
-import { UndefinedVariableError } from './errors'
+import { UndefinedVariableError } from '../../errors'
 
 test('One level variable', () => {
   const value = dot('name', { name: 'Thibaud' })
