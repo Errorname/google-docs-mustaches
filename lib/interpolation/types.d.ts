@@ -1,5 +1,11 @@
 export interface GDoc {
+    headers: {
+        [key: string]: Header;
+    };
     body: Body;
+}
+export interface Header {
+    content: StructuralElement[];
 }
 export interface Body {
     content: StructuralElement[];

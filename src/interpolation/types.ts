@@ -7,41 +7,46 @@
 /* Document */
 
 export interface GDoc {
-  body: Body
+  headers: { [key: string]: Header };
+  body: Body;
+}
+
+export interface Header {
+  content: StructuralElement[];
 }
 
 export interface Body {
-  content: StructuralElement[]
+  content: StructuralElement[];
 }
 
 export interface StructuralElement {
-  paragraph?: Paragraph
+  paragraph?: Paragraph;
 }
 
 export interface Paragraph {
-  elements: ParagraphElement[]
+  elements: ParagraphElement[];
 }
 
 export interface ParagraphElement {
-  textRun?: TextRun
+  textRun?: TextRun;
 }
 
 export interface TextRun {
-  content: string
+  content: string;
 }
 
 /* Request */
 
 export interface Request {
-  replaceAllText?: ReplaceAllTextRequest
+  replaceAllText?: ReplaceAllTextRequest;
 }
 
 export interface ReplaceAllTextRequest {
-  replaceText: string
-  containsText: SubstringMatchCriteria
+  replaceText: string;
+  containsText: SubstringMatchCriteria;
 }
 
 export interface SubstringMatchCriteria {
-  text: string
-  matchCase: boolean
+  text: string;
+  matchCase: boolean;
 }

@@ -3,11 +3,7 @@ import { Formatters } from "../types";
 
 import dot from "./dot";
 
-const interpolate = (
-  doc: GDoc,
-  data: any,
-  formatters: Formatters
-): Request[] => {
+const interpolate = (doc: GDoc, data: any, formatters: Formatters): Request[] => {
   const placeholders = findPlaceholders(doc);
   return computeUpdates(placeholders, data, formatters);
 };
@@ -36,6 +32,10 @@ const findPlaceholders = (doc: GDoc): string[] => {
     });
   };
 
+  Object.keys(doc.headers).forEach(key => {
+    processContent(doc.headers[key].content);
+  });
+
   processContent(doc.body.content);
 
   return placeholders;
@@ -46,11 +46,7 @@ const availableFormatters: Formatters = {
   uppercase: (s: string) => s.toUpperCase()
 };
 
-const computeUpdates = (
-  placeholders: string[],
-  data: any,
-  formatters: Formatters
-): Request[] => {
+const computeUpdates = (placeholders: string[], data: any, formatters: Formatters): Request[] => {
   formatters = { ...availableFormatters, ...formatters };
 
   const replacements = placeholders.map(
