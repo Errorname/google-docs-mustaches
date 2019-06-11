@@ -21,7 +21,7 @@ const buildFetchImpl = crossFetch => {
     }
     // drive.export
     else if (url.includes('export?mimeType=')) {
-      return Promise.resolve({ status: 200, blob: () => 'BLOB123' })
+      return Promise.resolve({ status: 200, blob: () => ({ arrayBuffer: () => 'BLOB123' }) })
     }
     // drive.create
     else if (url.includes('?uploadType=')) {
