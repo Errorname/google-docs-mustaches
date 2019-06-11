@@ -16,7 +16,7 @@ export interface InterpolationOptions {
   strict?: boolean
 }
 
-export interface DiscoveryOptions {
+export interface DiscoverOptions {
   source: ID
   data?: Object
   formatters?: Formatters

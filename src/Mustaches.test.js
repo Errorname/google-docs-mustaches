@@ -157,8 +157,8 @@ describe('mustaches', () => {
     ).rejects.toThrow(UnknownFormatterError)
   })
 
-  test('discovery', async () => {
-    const placeholders = await mustaches.discovery({
+  test('discover', async () => {
+    const placeholders = await mustaches.discover({
       source: 'source-id-123',
       data: {
         name: 'Thibaud',
@@ -170,8 +170,8 @@ describe('mustaches', () => {
     expect(placeholders).toMatchSnapshot()
   })
 
-  test('discovery with no data', async () => {
-    const placeholders = await mustaches.discovery({
+  test('discover with no data', async () => {
+    const placeholders = await mustaches.discover({
       source: 'source-id-123'
     })
 
@@ -179,8 +179,8 @@ describe('mustaches', () => {
     expect(placeholders).toMatchSnapshot()
   })
 
-  test('discovery with formatters', async () => {
-    const placeholders = await mustaches.discovery({
+  test('discover with formatters', async () => {
+    const placeholders = await mustaches.discover({
       source: 'source-id-123',
       data: {
         name: 'Thibaud',
@@ -195,9 +195,9 @@ describe('mustaches', () => {
     expect(placeholders).toMatchSnapshot()
   })
 
-  test('discovery with strict mode - Undefined variable', async () => {
+  test('discover with strict mode - Undefined variable', async () => {
     await expect(
-      mustaches.discovery({
+      mustaches.discover({
         source: 'source-id-123',
         data: {
           movies: [{ title: 'Lost in Translation' }]
@@ -210,9 +210,9 @@ describe('mustaches', () => {
     ).rejects.toThrow(UndefinedVariableError)
   })
 
-  test('discovery with strict mode - Unknown formatter', async () => {
+  test('discover with strict mode - Unknown formatter', async () => {
     await expect(
-      mustaches.interpolate({
+      mustaches.discover({
         source: 'source-id-123',
         destination: 'destination-id-123',
         data: {

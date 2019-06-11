@@ -2,7 +2,7 @@ import {
   ID,
   ConstructorOptions,
   InterpolationOptions,
-  DiscoveryOptions,
+  DiscoverOptions,
   ExportOptions,
   MimeType
 } from './types'
@@ -36,7 +36,7 @@ class Mustaches {
     const copiedFile: ID = await this.copyFile(source, destination, copyOptions)
 
     // Compute updates
-    const placeholders = await this.discovery({ source: copiedFile, data, formatters, strict })
+    const placeholders = await this.discover({ source: copiedFile, data, formatters, strict })
     const updates = buildUpdates(placeholders)
 
     // Update copy with interpolations
@@ -45,12 +45,12 @@ class Mustaches {
     return copiedFile
   }
 
-  async discovery({
+  async discover({
     source,
     data = {},
     formatters = {},
     strict
-  }: DiscoveryOptions): Promise<Placeholder[]> {
+  }: DiscoverOptions): Promise<Placeholder[]> {
     const doc = await this.readDoc(source)
     return processPlaceholders(doc, data, formatters, strict)
   }
