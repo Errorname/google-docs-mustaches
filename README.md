@@ -267,6 +267,14 @@ If you are using `google-docs-mustaches` in Node.js, you can follow [this one](h
 > - https://www.googleapis.com/auth/drive
 > - https://www.googleapis.com/auth/documents
 
+## Limitations
+
+**google-docs-mustaches** uses Google Drive and Google Docs apis. This means any limitation and changes to those APIs may affect this library.
+
+Below is a list of the current known limitations:
+
+- There is a 10Mo limit to the `export` method of the Google Drive API. Trying to export a bigger file will result in an HTTP Error. [Source](https://developers.google.com/drive/api/v3/reference/files/export)
+
 ## Want to help?
 
 Great! If you want to contribute to **google-docs-mustaches**, go check out the [Contributor documentation](/dev) to get started!
