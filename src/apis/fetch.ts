@@ -1,6 +1,10 @@
 import crossFetch from 'cross-fetch'
 import Blob from '../polyfills/Blob'
 
+export class FetchError extends Error {
+  public error!: JSON
+}
+
 export const fetch = (token: Function): Function => (
   url: string,
   body: any = null,
@@ -56,8 +60,4 @@ export const multipart = (
   body.push(`--${boundary}--`)
 
   return new Blob(body)
-}
-
-export class FetchError extends Error {
-  error!: JSON
 }
