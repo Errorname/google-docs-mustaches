@@ -1,5 +1,5 @@
-import { Blob as BlobNode } from 'node-fetch'
+const Blob = require('fetch-blob')
 
-const realBlob = typeof window !== 'undefined' ? window.Blob : BlobNode
+const realBlob = typeof window !== 'undefined' ? window.Blob : Blob
 
 export default realBlob

@@ -39,8 +39,8 @@
   },
   "homepage": "https://github.com/errorname/google-docs-mustaches#readme",
   "dependencies": {
-    "cross-fetch": "^3.0.1",
-    "node-fetch": "^2.3.0"
+    "cross-fetch": "^3.0.4",
+    "fetch-blob": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
