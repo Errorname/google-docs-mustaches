@@ -1,6 +1,10 @@
 import crossFetch from 'cross-fetch'
 import Blob from '../polyfills/Blob'
 
+export class FetchError extends Error {
+  public error!: JSON
+}
+
 export const fetch = (token: Function): Function => (
   url: string,
   body: any = null,
@@ -23,7 +27,9 @@ export const fetch = (token: Function): Function => (
     ...rest
   }).then(async result => {
     if (result.status !== 200) {
-      throw new Error(`Fetch Error: status ${result.status}`)
+      const error = new FetchError(`Fetch Error: status ${result.status}`)
+      error.error = await result.json()
+      throw error
     }
     return raw ? result : result.json()
   })

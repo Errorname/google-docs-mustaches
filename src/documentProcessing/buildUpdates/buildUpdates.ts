@@ -1,65 +1,5 @@
-import { Formatters, Placeholder, ContentPlaceholder } from './types'
-import { GDoc, Request, Unit } from './gdocTypes'
-
-import computeContent from './compute'
-
-const findPlaceholders = (doc: GDoc): Placeholder[] => {
-  const placeholders: Placeholder[] = []
-
-  doc.body.content.map(c => {
-    if (c.paragraph) {
-      c.paragraph.elements.map(e => {
-        if (e.textRun) {
-          let textRun = e.textRun.content
-          const matches = textRun.match(/{{([^}]*)}}/gi) || []
-          for (let match of matches) {
-            const start = e.startIndex + textRun.indexOf(match)
-            textRun = textRun.replace(match, ''.padStart(match.length))
-            placeholders.push({
-              raw: match,
-              position: {
-                start,
-                end: start + match.length
-              }
-            })
-          }
-        }
-      })
-    }
-  })
-
-  return placeholders
-}
-
-const analyzePlaceholders = (
-  placeholders: Placeholder[],
-  data: Record<string, any>,
-  options?: {
-    formatters?: Formatters
-    strict?: boolean
-  }
-): Placeholder[] => {
-  return placeholders.map(placeholder => {
-    const rawWithoutBrackets = placeholder.raw.slice(2, -2).trim()
-
-    // CommentPlaceholder
-    if (rawWithoutBrackets.startsWith('#')) {
-      return {
-        ...placeholder,
-        type: 'comment',
-        value: rawWithoutBrackets.slice(1).trim()
-      }
-    }
-
-    if (['%', '@'].includes(rawWithoutBrackets[0])) {
-      // Reserved for later usage
-      return placeholder
-    }
-
-    // ContentPlaceholder
-    return computeContent(placeholder, data, options)
-  })
-}
+import { Placeholder, ContentPlaceholder } from '../types'
+import { Unit, Request } from '../gdocTypes'
 
 const buildUpdates = (placeholders: Placeholder[]): Request[] => {
   const updates: Request[] = []
@@ -142,15 +82,4 @@ const buildUpdates = (placeholders: Placeholder[]): Request[] => {
   return updates
 }
 
-const processPlaceholders = (
-  doc: GDoc,
-  data: any,
-  formatters: Formatters,
-  strict?: boolean
-): Placeholder[] => {
-  let placeholders = findPlaceholders(doc)
-  return analyzePlaceholders(placeholders, data, { formatters, strict })
-}
-
-export default processPlaceholders
-export { findPlaceholders, analyzePlaceholders, buildUpdates }
+export default buildUpdates

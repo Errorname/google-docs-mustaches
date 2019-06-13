@@ -1,4 +1,4 @@
-import { Formatters } from '../types'
+import { Formatters } from '../../../types'
 
 const defaultFormatters: Formatters = {
   lowercase: (s: string) => (s || '').toLowerCase(),

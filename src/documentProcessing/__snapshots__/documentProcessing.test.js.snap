@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`documentProcessing full document 1`] = `
+Array [
+  Object {
+    "input": Object {
+      "raw": "user.name",
+      "value": "Thibaud",
+    },
+    "output": "Thibaud",
+    "pipes": Array [],
+    "position": Object {
+      "end": 21,
+      "start": 6,
+    },
+    "raw": "{{ user.name }}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.title",
+      "value": "Lost in Translation",
+    },
+    "output": "LOST IN TRANSLATION",
+    "pipes": Array [
+      Object {
+        "output": "LOST IN TRANSLATION",
+        "raw": "uppercase",
+      },
+    ],
+    "position": Object {
+      "end": 64,
+      "start": 37,
+    },
+    "raw": "{{movie.title | uppercase}}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.rating",
+      "value": 5,
+    },
+    "output": 5,
+    "pipes": Array [],
+    "position": Object {
+      "end": NaN,
+      "start": NaN,
+    },
+    "raw": "{{ movie.rating }}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.poster",
+      "value": "http://example.img",
+    },
+    "output": Object {
+      "height": undefined,
+      "url": "http://example.img",
+      "width": undefined,
+    },
+    "pipes": Array [
+      Object {
+        "output": Object {
+          "height": undefined,
+          "url": "http://example.img",
+          "width": undefined,
+        },
+        "raw": "image",
+      },
+    ],
+    "position": Object {
+      "end": 150,
+      "start": 124,
+    },
+    "raw": "{{ movie.poster | image }}",
+    "type": "content",
+  },
+]
+`;
+
+exports[`documentProcessing full document 2`] = `
+Array [
+  Object {
+    "insertInlineImage": Object {
+      "location": Object {
+        "index": 124,
+        "segmentId": "",
+      },
+      "objectSize": Object {
+        "height": undefined,
+        "width": undefined,
+      },
+      "uri": "http://example.img",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ user.name }}",
+      },
+      "replaceText": "Thibaud",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{movie.title | uppercase}}",
+      },
+      "replaceText": "LOST IN TRANSLATION",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movie.rating }}",
+      },
+      "replaceText": "5",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movie.poster | image }}",
+      },
+      "replaceText": "",
+    },
+  },
+]
+`;

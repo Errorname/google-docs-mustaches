@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`findPlaceholders multiple paragraphs with multiple placeholders 1`] = `
+Array [
+  Object {
+    "position": Object {
+      "end": 21,
+      "start": 6,
+    },
+    "raw": "{{ user.name }}",
+  },
+  Object {
+    "position": Object {
+      "end": 64,
+      "start": 37,
+    },
+    "raw": "{{movie.title | uppercase}}",
+  },
+  Object {
+    "position": Object {
+      "end": NaN,
+      "start": NaN,
+    },
+    "raw": "{{ movie.rating }}",
+  },
+]
+`;

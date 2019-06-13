@@ -1,5 +1,5 @@
-import compute from './compute'
-import { UndefinedVariableError, UnknownFormatterError } from './errors'
+import compute from './computeContent'
+import { UndefinedVariableError, UnknownFormatterError } from '../errors'
 
 const buildPlaceholder = txt => ({
   raw: `{{ ${txt} }}`,

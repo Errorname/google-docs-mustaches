@@ -1,4 +1,4 @@
-import { Formatters } from './interpolation/types'
+import { Formatters } from './documentProcessing/types'
 
 export type ID = string
 export type AccessToken = string
@@ -16,7 +16,7 @@ export interface InterpolationOptions {
   strict?: boolean
 }
 
-export interface DiscoveryOptions {
+export interface DiscoverOptions {
   source: ID
   data?: Object
   formatters?: Formatters
