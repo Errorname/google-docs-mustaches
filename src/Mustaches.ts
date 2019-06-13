@@ -89,15 +89,17 @@ class Mustaches {
     })
   }
 
-  private upload(name: string, destination: ID, mimeType: MimeType, body: any): Promise<ID> {
+  private async upload(name: string, destination: ID, mimeType: MimeType, body: any): Promise<ID> {
     const metadata = { name, parents: [destination] }
+
+    const data = await body.arrayBuffer()
 
     return this.apis.drive
       .create(
         multipart(
           [
             { 'Content-Type': 'application/json; charset=UTF-8', data: JSON.stringify(metadata) },
-            { 'Content-Type': mimeType, 'Content-Encoding': 'base64', data: body }
+            { 'Content-Type': mimeType, 'Content-Encoding': 'base64', data }
           ],
           '--BOUNDARY'
         ),
