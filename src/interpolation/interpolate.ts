@@ -32,11 +32,15 @@ const findPlaceholders = (doc: GDoc): string[] => {
     });
   };
 
-  Object.keys(doc.headers).forEach(key => {
-    processContent(doc.headers[key].content);
-  });
+  if (doc.headers) {
+    Object.keys(doc.headers).forEach(key => {
+      processContent(doc.headers[key].content);
+    });
+  }
 
-  processContent(doc.body.content);
+  if (doc.body) {
+    processContent(doc.body.content);
+  }
 
   return placeholders;
 };
