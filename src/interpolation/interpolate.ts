@@ -3,9 +3,10 @@ import { Formatters } from "../types";
 
 import dot from "./dot";
 
-const interpolate = (doc: GDoc, data: any, formatters: Formatters): Request[] => {
+const interpolate = async (doc: GDoc, data: any, formatters: Formatters, resolver?: Function): Promise<Request[]> => {
   const placeholders = findPlaceholders(doc);
-  return computeUpdates(placeholders, data, formatters);
+
+  return computeUpdates(placeholders, data, formatters, resolver);
 };
 
 const findPlaceholders = (doc: GDoc): string[] => {
@@ -50,15 +51,26 @@ const availableFormatters: Formatters = {
   uppercase: (s: string) => s.toUpperCase()
 };
 
-const computeUpdates = (placeholders: string[], data: any, formatters: Formatters): Request[] => {
+const computeUpdates = async (placeholders: string[], data: any, formatters: Formatters, resolver?: Function): Promise<Request[]> => {
   formatters = { ...availableFormatters, ...formatters };
 
-  const replacements = placeholders.map(
-    (placeholder): [string, string] => {
-      const computed: string = `${dot(data, placeholder, { formatters })}`;
-      return [placeholder, computed];
+  const replacements = await Promise.all(placeholders.map(async (placeholder): Promise<[string, string]> => {
+    let computed: any;
+
+    try {
+      computed = dot(data, placeholder, {formatters});
+      if (!computed && resolver) {
+        computed = await resolver(placeholder);
+      }
+    } catch (e) {
+      if (resolver) {
+        computed = await resolver(placeholder);
+      }
     }
-  );
+
+      return [placeholder, `${computed}`];
+    }
+  ));
 
   return replacements.map(([placeholder, computed]) => ({
     replaceAllText: {

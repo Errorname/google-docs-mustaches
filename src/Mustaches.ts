@@ -16,6 +16,7 @@ class Mustaches {
     destination,
     name,
     data,
+    resolver,
     formatters = {},
     export: exportType
   }: InterpolationOptions): Promise<ID> {
@@ -29,7 +30,7 @@ class Mustaches {
 
     // Compute interpolations
     const doc = await this.readDoc(copiedFile)
-    const updates = interpolate(doc, data, formatters)
+    const updates = await interpolate(doc, data, formatters, resolver)
 
     // Update copy with interpolations
     await this.updateDoc(copiedFile, updates)

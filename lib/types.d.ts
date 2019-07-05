@@ -8,6 +8,7 @@ export interface InterpolationOptions {
     destination?: ID;
     name?: string;
     data: Object;
+    resolver?: Function;
     formatters?: Formatters;
     export?: MimeType;
 }
