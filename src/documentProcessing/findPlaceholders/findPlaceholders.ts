@@ -1,10 +1,14 @@
 import { Placeholder } from '../types'
-import { GDoc } from '../gdocTypes'
+import { GDoc, StructuralElement } from '../gdocTypes'
 
 const findPlaceholders = (doc: GDoc): Placeholder[] => {
   const placeholders: Placeholder[] = []
+  findInContent(placeholders, doc.body.content)
+  return placeholders
+}
 
-  doc.body.content.map(c => {
+const findInContent = (placeholders: Placeholder[], content:StructuralElement[]): void => {
+  content.map(c => {
     if (c.paragraph) {
       c.paragraph.elements.map(e => {
         if (e.textRun) {
@@ -23,10 +27,14 @@ const findPlaceholders = (doc: GDoc): Placeholder[] => {
           }
         }
       })
-    }
+    } else if (c.table) {
+      c.table.tableRows.forEach(r => {
+        r.tableCells.forEach(c => {
+          findInContent(placeholders, c.content)
+        })
+      })
+    } 
   })
-
-  return placeholders
 }
 
 export default findPlaceholders

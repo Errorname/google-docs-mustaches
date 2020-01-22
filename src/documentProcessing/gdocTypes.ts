@@ -16,6 +16,7 @@ export interface Body {
 
 export interface StructuralElement {
   paragraph?: Paragraph
+  table?: Table
 }
 
 export interface Paragraph {
@@ -30,6 +31,18 @@ export interface ParagraphElement {
 
 export interface TextRun {
   content: string
+}
+
+export interface Table {
+  tableRows: TableRow[]
+}
+
+export interface TableRow {
+  tableCells: TableCell[]
+}
+
+export interface TableCell {
+  content: StructuralElement[]
 }
 
 /* Request */
