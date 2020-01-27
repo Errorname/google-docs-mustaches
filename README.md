@@ -59,6 +59,7 @@ mustaches.interpolate({
 - [Interpolate](#mustachesinterpolateoptions-interpolationoptions-id) the file
 - [Discovery](#mustachesdiscoveryoptions-discoveryoptions-placeholder) of the placeholders
 - [Export](#mustachesexportoptions-exportoptions-id) of the file
+- [Read Doc](#mustachesreaddocfile-id-promisegdoc)
 
 ### `new Mustaches(options: ConstructorOptions)`
 
@@ -151,6 +152,12 @@ enum MimeType {
 - `destination` is the ID of the destination folder where the new file will be put. If no destination is given, the new file will be put next to the `file` to given in argument.
 
 > Note: This feature is not working in Node (See [#9](https://github.com/Errorname/google-docs-mustaches/issues/9))
+
+### `mustaches.readDoc(file: ID): Promise<GDoc>`
+
+This method will return the full content of the file.
+
+This is simply a wrapper of the GDoc API to read the content of the document.
 
 ## Interpolation
 
@@ -252,7 +259,7 @@ _Warning: If you use an undefined formatter it will be simply ignored, which cou
 
 ### Strict mode
 
-By default, _google-docs-mustaches_ is failing safely, which means that you don't have to worry about using an undefined variable or an unknow formatter, the generated errors will be catched and treated by the program itself. However, you might face unexpected behaviour if for example, you chain several formatters and one of them is misspelled, it would be ignored and the output of your formatters pipeline won't match your expectations.
+By default, _google-docs-mustaches_ is failing safely, which means that you don't have to worry about using an undefined variable or an unknown formatter, the generated errors will be catched and treated by the program itself. However, you might face unexpected behaviour if for example, you chain several formatters and one of them is misspelled, it would be ignored and the output of your formatters pipeline won't match your expectations.
 
 To avoid this, we provide a strict mode for `.interpolate` and `.discovery`. Instead of using an empty string or your fallback when encountering an undefined variable, it will throw an exception, aborting immediately the interpolation of your document.
 
@@ -281,11 +288,4 @@ Great! If you want to contribute to **google-docs-mustaches**, go check out the 
 
 ## Supported environments
 
-We use `cross-fetch` for compatibility with most environment.
-
-Those are the `cross-fetch` supported environments:
-
-- Node 6+
-- React-Native
-
-[![Browser compat](https://saucelabs.com/browser-matrix/cross-fetch.svg)](https://github.com/lquixada/cross-fetch)
+We use [cross-fetch](https://www.npmjs.com/package/cross-fetch) for compatibility with most environment.

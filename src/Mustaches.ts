@@ -68,6 +68,10 @@ class Mustaches {
     return this.upload(name || 'Export', destination, mimeType, exported)
   }
 
+  async readDoc(file: ID): Promise<GDoc> {
+    return this.apis.docs.get(file)
+  }
+
   private getParent(fileId: ID): Promise<ID> {
     return this.apis.drive.get(fileId).then(({ parents }: any) => parents[0])
   }
@@ -76,10 +80,6 @@ class Mustaches {
     return this.apis.drive
       .copy(source, { parents: [destination], ...options })
       .then(({ id }: any) => id)
-  }
-
-  private readDoc(file: ID): Promise<GDoc> {
-    return this.apis.docs.get(file)
   }
 
   private updateDoc(file: ID, updates: Request[]): Promise<any> {
