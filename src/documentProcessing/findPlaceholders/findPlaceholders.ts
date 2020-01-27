@@ -7,7 +7,7 @@ const findPlaceholders = (doc: GDoc): Placeholder[] => {
   return placeholders
 }
 
-const findInContent = (placeholders: Placeholder[], content:StructuralElement[]): void => {
+const findInContent = (placeholders: Placeholder[], content: StructuralElement[]): void => {
   content.map(c => {
     if (c.paragraph) {
       c.paragraph.elements.map(e => {
@@ -33,7 +33,7 @@ const findInContent = (placeholders: Placeholder[], content:StructuralElement[])
           findInContent(placeholders, c.content)
         })
       })
-    } 
+    }
   })
 }
 

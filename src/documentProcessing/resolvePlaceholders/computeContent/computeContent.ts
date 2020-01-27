@@ -63,12 +63,7 @@ const transformValue = (
   try {
     return {
       raw: transformation,
-      output: pipe(
-        value,
-        transformation,
-        data,
-        options
-      )
+      output: pipe(value, transformation, data, options)
     }
   } catch (error) {
     // Bubble up the error in strict mode

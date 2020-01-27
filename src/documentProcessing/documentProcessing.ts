@@ -11,7 +11,7 @@ const processPlaceholders = (
   formatters: Formatters,
   strict?: boolean
 ): Placeholder[] => {
-  let placeholders = findPlaceholders(doc)
+  const placeholders = findPlaceholders(doc)
   return resolvePlaceholders(placeholders, data, { formatters, strict })
 }
 
