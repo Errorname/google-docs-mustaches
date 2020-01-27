@@ -10,8 +10,8 @@ Array [
     "output": "Thibaud",
     "pipes": Array [],
     "position": Object {
-      "end": 21,
-      "start": 6,
+      "end": 22,
+      "start": 7,
     },
     "raw": "{{ user.name }}",
     "type": "content",
@@ -29,10 +29,10 @@ Array [
       },
     ],
     "position": Object {
-      "end": 64,
-      "start": 37,
+      "end": 65,
+      "start": 38,
     },
-    "raw": "{{movie.title | uppercase}}",
+    "raw": "{{movie.title | uppercase}}",
     "type": "content",
   },
   Object {
@@ -43,8 +43,8 @@ Array [
     "output": 5,
     "pipes": Array [],
     "position": Object {
-      "end": NaN,
-      "start": NaN,
+      "end": 116,
+      "start": 98,
     },
     "raw": "{{ movie.rating }}",
     "type": "content",
@@ -70,10 +70,66 @@ Array [
       },
     ],
     "position": Object {
-      "end": 150,
-      "start": 124,
+      "end": 153,
+      "start": 127,
     },
-    "raw": "{{ movie.poster | image }}",
+    "raw": "{{ movie.poster | image }}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.title",
+      "value": "Lost in Translation",
+    },
+    "output": "Lost in Translation",
+    "pipes": Array [],
+    "position": Object {
+      "end": 176,
+      "start": 159,
+    },
+    "raw": "{{ movie.title }}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "user.name",
+      "value": "Thibaud",
+    },
+    "output": "Thibaud",
+    "pipes": Array [],
+    "position": Object {
+      "end": 194,
+      "start": 179,
+    },
+    "raw": "{{ user.name }}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.rating",
+      "value": 5,
+    },
+    "output": 5,
+    "pipes": Array [],
+    "position": Object {
+      "end": 215,
+      "start": 197,
+    },
+    "raw": "{{ movie.rating }}",
+    "type": "content",
+  },
+  Object {
+    "input": Object {
+      "raw": "movie.poster",
+      "value": "http://example.img",
+    },
+    "output": "http://example.img",
+    "pipes": Array [],
+    "position": Object {
+      "end": 236,
+      "start": 218,
+    },
+    "raw": "{{ movie.poster }}",
     "type": "content",
   },
 ]
@@ -84,7 +140,7 @@ Array [
   Object {
     "insertInlineImage": Object {
       "location": Object {
-        "index": 124,
+        "index": 127,
         "segmentId": "",
       },
       "objectSize": Object {
@@ -107,7 +163,7 @@ Array [
     "replaceAllText": Object {
       "containsText": Object {
         "matchCase": true,
-        "text": "{{movie.title | uppercase}}",
+        "text": "{{movie.title | uppercase}}",
       },
       "replaceText": "LOST IN TRANSLATION",
     },
@@ -125,9 +181,45 @@ Array [
     "replaceAllText": Object {
       "containsText": Object {
         "matchCase": true,
-        "text": "{{ movie.poster | image }}",
+        "text": "{{ movie.poster | image }}",
       },
       "replaceText": "",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movie.title }}",
+      },
+      "replaceText": "Lost in Translation",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ user.name }}",
+      },
+      "replaceText": "Thibaud",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movie.rating }}",
+      },
+      "replaceText": "5",
+    },
+  },
+  Object {
+    "replaceAllText": Object {
+      "containsText": Object {
+        "matchCase": true,
+        "text": "{{ movie.poster }}",
+      },
+      "replaceText": "http://example.img",
     },
   },
 ]

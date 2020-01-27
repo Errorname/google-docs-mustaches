@@ -1,77 +1,58 @@
 import findPlaceholders from './findPlaceholders'
 
+const Body = content => ({ body: { content } })
+const Paragraph = elements => ({ paragraph: { elements } })
+const TextRun = content => ({ textRun: { content } })
+const Table = rows => ({
+  tableRows: rows.map(row => ({ tableCells: row.map(cell => ({ content: cell })) }))
+})
+
 describe('findPlaceholders', () => {
   test('empty document', () => {
-    const document = {
-      body: {
-        content: []
-      }
-    }
+    const document = Body([])
     const placeholders = findPlaceholders(document)
 
     expect(placeholders).toEqual([])
   })
 
   test('document with unknown content', () => {
-    const document = {
-      body: {
-        content: [{}, {}]
-      }
-    }
+    const document = Body([{}, {}])
     const placeholders = findPlaceholders(document)
 
     expect(placeholders).toEqual([])
   })
 
   test('single paragraph with no placeholders', () => {
-    const document = {
-      body: {
-        content: [
-          {
-            paragraph: {
-              elements: [{ textRun: { content: 'Hello world!' } }]
-            }
-          }
-        ]
-      }
-    }
+    const document = Body([Paragraph([TextRun('Hello world!')])])
+
     const placeholders = findPlaceholders(document)
 
     expect(placeholders).toEqual([])
   })
 
   test('multiple paragraphs with multiple placeholders', () => {
-    const document = {
-      body: {
-        content: [
-          {
-            paragraph: {
-              elements: [
-                { textRun: { content: 'Hello {{ user.name }}!' }, startIndex: 0, endIndex: 21 }
-              ]
-            }
-          },
-          {
-            paragraph: {
-              elements: [
-                {
-                  textRun: { content: 'Have you seen {{movie.title | uppercase}}?' },
-                  startIndex: 23,
-                  endIndex: 64
-                },
-                {
-                  textRun: {
-                    content: 'In my opinion, I would rate it {{ movie.rating }} out of 5',
-                    startIndex: 66,
-                    endIndex: 123
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
+    const document = Body([
+      Paragraph([TextRun('Hello {{ user.name }}')]),
+      Paragraph([
+        TextRun('Have you seen {{movie.title | uppercase}}?'),
+        TextRun('In my opinion, I would rate it {{ movie.rating }} out of 5')
+      ])
+    ])
+
+    const placeholders = findPlaceholders(document)
+
+    expect(placeholders).toMatchSnapshot()
+  })
+
+  test('table with placeholders', () => {
+    const document = Body([
+      Paragraph([TextRun('Hello {{ user.name }}')]),
+      Table([
+        [Paragraph([TextRun('{{ upper_left }}')]), Paragraph([TextRun('{{ upper_right }}')])],
+        [Paragraph([TextRun('{{ bottom_left }}')]), Paragraph([TextRun('{{ bottom_right }}')])]
+      ])
+    ])
+
     const placeholders = findPlaceholders(document)
 
     expect(placeholders).toMatchSnapshot()
