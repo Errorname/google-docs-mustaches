@@ -1,6 +1,6 @@
 {
   "name": "google-docs-mustaches",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "📝Interpolate Google Doc files using mustaches and formatters",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -40,22 +40,23 @@
   "homepage": "https://github.com/errorname/google-docs-mustaches#readme",
   "dependencies": {
     "cross-fetch": "^3.0.4",
-    "fetch-blob": "^1.0.3"
+    "fetch-blob": "^1.0.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.1",
-    "@babel/preset-typescript": "^7.3.3",
-    "@typescript-eslint/eslint-plugin": "^1.4.2",
-    "@typescript-eslint/parser": "^1.4.2",
-    "babel-jest": "^24.5.0",
-    "eslint": "^5.15.3",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "jest": "^24.5.0",
-    "googleapis": "^38.0.0",
-    "prettier": "^1.16.4",
-    "typescript": "^3.3.4000"
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/node": "^13.5.0",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-jest": "^24.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "googleapis": "^47.0.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5"
   },
   "prettier": {
     "printWidth": 100,
