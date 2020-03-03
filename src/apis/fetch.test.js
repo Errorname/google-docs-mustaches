@@ -6,7 +6,7 @@ jest.mock('cross-fetch', () => jest.fn())
 jest.mock('../polyfills/Blob')
 
 describe('fetch', () => {
-  const token = () => 'my-token'
+  const token = async () => 'my-token'
 
   beforeEach(() => {
     crossFetch.mockReset()

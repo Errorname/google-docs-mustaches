@@ -5,7 +5,7 @@ export class FetchError extends Error {
   public error!: JSON
 }
 
-export const fetch = (token: Function): Function => (
+export const fetch = (token: Function): Function => async (
   url: string,
   body: any = null,
   options: { method?: string; headers?: any; raw?: boolean } = {}
@@ -20,7 +20,7 @@ export const fetch = (token: Function): Function => (
     method: method || (body ? 'POST' : 'GET'),
     body,
     headers: {
-      authorization: `Bearer ${token()}`,
+      authorization: `Bearer ${await token()}`,
       'Content-Type': 'application/json',
       ...headers
     },
