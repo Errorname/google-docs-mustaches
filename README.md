@@ -67,7 +67,7 @@ mustaches.interpolate({
 type AccessToken = string
 
 interface ConstructorOptions {
-  token: () => AccessToken
+  token: () => Promise<AccessToken> | AccessToken
 }
 ```
 

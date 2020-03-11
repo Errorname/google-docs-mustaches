@@ -4,7 +4,7 @@ export type ID = string
 export type AccessToken = string
 
 export interface ConstructorOptions {
-  token: () => Promise<AccessToken>
+  token: () => Promise<AccessToken> | AccessToken
 }
 
 export interface InterpolationOptions {
