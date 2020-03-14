@@ -151,8 +151,6 @@ enum MimeType {
 - `name` is the name of the newly exported file.
 - `destination` is the ID of the destination folder where the new file will be put. If no destination is given, the new file will be put next to the `file` to given in argument.
 
-> Note: This feature is not working in Node (See [#9](https://github.com/Errorname/google-docs-mustaches/issues/9))
-
 ### `mustaches.readDoc(file: ID): Promise<GDoc>`
 
 This method will return the full content of the file.
