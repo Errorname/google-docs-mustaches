@@ -1,7 +1,7 @@
 {
   "name": "google-docs-mustaches",
   "version": "1.2.1",
-  "description": "📝Interpolate Google Doc files using mustaches and formatters",
+  "description": "📝Interpolate Google Docs files using mustaches and formatters",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
