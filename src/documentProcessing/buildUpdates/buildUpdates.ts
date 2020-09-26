@@ -9,7 +9,7 @@ const buildUpdates = (placeholders: Placeholder[]): Request[] => {
     if (placeholder.type == 'content') {
       const contentPlaceholder = placeholder as ContentPlaceholder
       // Image
-      if (contentPlaceholder.output.url) {
+      if (contentPlaceholder.output && contentPlaceholder.output.url) {
         const output = contentPlaceholder.output
         // Insert image
         updates.push({
