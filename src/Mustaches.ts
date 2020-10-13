@@ -39,6 +39,18 @@ class Mustaches {
     const placeholders = await this.discover({ source: copiedFile, data, formatters, strict })
     const updates = buildUpdates(placeholders)
 
+    // TEMP: Sort updates to prevent image bug
+    updates.sort((a, b) => {
+      if (a.insertInlineImage && b.insertInlineImage) {
+        if (!b.insertInlineImage.location || !a.insertInlineImage.location) return 0
+        return b.insertInlineImage.location.index - a.insertInlineImage.location.index
+      } else if (a.insertInlineImage) {
+        return -1
+      } else {
+        return 1
+      }
+    })
+
     // Update copy with interpolations
     await this.updateDoc(copiedFile, updates)
 
