@@ -25,7 +25,7 @@ export default (
 
   let typedParams = []
   if (matches.groups.params) {
-    typedParams = normalizeParams(matches.groups.params.split(','), data, options)
+    typedParams = normalizeParams(matches.groups.params.split(/,(?=(?:[^“”"']|[“"'][^“”"']*[”"'])*$)/), data, options)
   }
 
   return formatter(value, ...typedParams)
