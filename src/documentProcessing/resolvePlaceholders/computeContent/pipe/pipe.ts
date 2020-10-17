@@ -16,7 +16,7 @@ export default (
     throw new UnvalidFormatterError(`${transformation} is not a valid formatter.`)
   }
 
-  const formatterName = matches.groups.formatter.toLowerCase()
+  const formatterName = matches.groups.formatter
   const formatter = formatters[formatterName]
 
   if (!formatter) {
