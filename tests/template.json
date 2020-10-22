@@ -674,14 +674,41 @@
       },
       {
         "startIndex": 238,
-        "endIndex": 239,
+        "endIndex": 240,
         "paragraph": {
           "elements": [
             {
               "startIndex": 238,
               "endIndex": 239,
+              "pageBreak": {
+                "textStyle": {}
+              }
+            },
+            {
+              "startIndex": 239,
+              "endIndex": 240,
               "textRun": {
                 "content": "\n",
+                "textStyle": {}
+              }
+            }
+          ],
+          "paragraphStyle": {
+            "namedStyleType": "NORMAL_TEXT",
+            "direction": "LEFT_TO_RIGHT"
+          }
+        }
+      },
+      {
+        "startIndex": 240,
+        "endIndex": 247,
+        "paragraph": {
+          "elements": [
+            {
+              "startIndex": 240,
+              "endIndex": 247,
+              "textRun": {
+                "content": "Blabla\n",
                 "textStyle": {}
               }
             }
@@ -694,10 +721,113 @@
       }
     ]
   },
+  "headers": {
+    "kix.qza1pefqsohm": {
+      "headerId": "kix.qza1pefqsohm",
+      "content": [
+        {
+          "endIndex": 16,
+          "paragraph": {
+            "elements": [
+              {
+                "endIndex": 16,
+                "textRun": {
+                  "content": "{{ user.name }}\n",
+                  "textStyle": {}
+                }
+              }
+            ],
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT"
+            }
+          }
+        }
+      ]
+    },
+    "kix.jes08gyv9n0w": {
+      "headerId": "kix.jes08gyv9n0w",
+      "content": [
+        {
+          "endIndex": 18,
+          "paragraph": {
+            "elements": [
+              {
+                "endIndex": 18,
+                "textRun": {
+                  "content": "{{ movie.title }}\n",
+                  "textStyle": {}
+                }
+              }
+            ],
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "footers": {
+    "kix.l49c35v2o76r": {
+      "footerId": "kix.l49c35v2o76r",
+      "content": [
+        {
+          "endIndex": 19,
+          "paragraph": {
+            "elements": [
+              {
+                "endIndex": 19,
+                "textRun": {
+                  "content": "{{ movie.rating }}\n",
+                  "textStyle": {}
+                }
+              }
+            ],
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "direction": "LEFT_TO_RIGHT"
+            }
+          }
+        }
+      ]
+    },
+    "kix.ousisqqd6wyn": {
+      "footerId": "kix.ousisqqd6wyn",
+      "content": [
+        {
+          "endIndex": 20,
+          "paragraph": {
+            "elements": [
+              {
+                "endIndex": 20,
+                "textRun": {
+                  "content": " {{ movie.poster }}\n",
+                  "textStyle": {}
+                }
+              }
+            ],
+            "paragraphStyle": {
+              "namedStyleType": "NORMAL_TEXT",
+              "lineSpacing": 100,
+              "direction": "LEFT_TO_RIGHT",
+              "avoidWidowAndOrphan": false
+            }
+          }
+        }
+      ]
+    }
+  },
   "documentStyle": {
     "background": {
       "color": {}
     },
+    "defaultHeaderId": "kix.qza1pefqsohm",
+    "defaultFooterId": "kix.ousisqqd6wyn",
+    "firstPageHeaderId": "kix.jes08gyv9n0w",
+    "firstPageFooterId": "kix.l49c35v2o76r",
+    "useFirstPageHeaderFooter": true,
     "pageNumberStart": 1,
     "marginTop": {
       "magnitude": 72,
@@ -1077,7 +1207,7 @@
       }
     ]
   },
-  "revisionId": "AOV_f48tVLrSOG5iI8CPeKnGbiM8NX_KPtR3fPkEzwrsUk8IKfRrtDr7riUDBYtW1-gvdJ9CMTkOGVWOFD0YOQ",
+  "revisionId": "ALm37BV85YAQVbSYcYrXp4tJ1C-W8ce5vuZYQ2SI0Qv_kdMIys29G98R8TIntFjd54ZWrJnaGG5HqoTnBYHM3g",
   "suggestionsViewMode": "SUGGESTIONS_INLINE",
   "documentId": "14RQqzcHrEBEQUZu1P7H2c251PBYEltAks2MhWTS32Ls"
 }

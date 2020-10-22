@@ -4,16 +4,19 @@ import {
   InterpolationOptions,
   DiscoverOptions,
   ExportOptions,
-  MimeType
+  GDoc,
+  TypedPlaceholder,
+  MimeType,
+  Request,
 } from './types'
-import processPlaceholders, { buildUpdates } from './documentProcessing'
-import { Placeholder } from './documentProcessing/types'
-import { GDoc, Request } from './documentProcessing/gdocTypes'
 import apis, { multipart } from './apis'
+import { listFormatters } from './formatters'
+import { processPlaceholders } from './placeholders'
+import buildUpdates from './updates'
 import Blob from './polyfills/Blob'
 
 class Mustaches {
-  apis: any
+  apis: ReturnType<typeof apis>
 
   constructor(options: ConstructorOptions) {
     this.apis = apis(options.token)
@@ -25,7 +28,7 @@ class Mustaches {
     name,
     data,
     formatters = {},
-    strict
+    strict,
   }: InterpolationOptions): Promise<ID> {
     // If no destination given, use same folder as source
     destination = destination || (await this.getParent(source))
@@ -49,9 +52,10 @@ class Mustaches {
     source,
     data = {},
     formatters = {},
-    strict
-  }: DiscoverOptions): Promise<Placeholder[]> {
+    strict = false,
+  }: DiscoverOptions): Promise<TypedPlaceholder[]> {
     const doc = await this.readDoc(source)
+    formatters = listFormatters(formatters)
     return processPlaceholders(doc, data, formatters, strict)
   }
 
@@ -85,7 +89,7 @@ class Mustaches {
   private updateDoc(file: ID, updates: Request[]): Promise<any> {
     return this.apis.docs.update(file, {
       documentId: file,
-      requests: updates
+      requests: updates,
     })
   }
 
@@ -99,15 +103,15 @@ class Mustaches {
         multipart(
           [
             { 'Content-Type': 'application/json; charset=UTF-8', data: JSON.stringify(metadata) },
-            { 'Content-Type': mimeType, 'Content-Encoding': 'base64', data }
+            { 'Content-Type': mimeType, 'Content-Encoding': 'base64', data },
           ],
           '--BOUNDARY'
         ),
         {
           headers: {
             ['Content-Type']: 'multipart/related; boundary=--BOUNDARY',
-            Accept: 'application/json'
-          }
+            Accept: 'application/json',
+          },
         }
       )
       .then(({ id }: any) => id)
