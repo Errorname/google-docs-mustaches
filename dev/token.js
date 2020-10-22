@@ -59,13 +59,17 @@ const getNewToken = oAuth2Client =>
   })
 
 const refreshToken = (oAuth2Client, token) =>
-  new Promise(async resolve => {
-    oAuth2Client.setCredentials(token)
-    const accessToken = (await oAuth2Client.getRequestHeaders()).Authorization.split(' ')[1]
-    token.access_token = accessToken
-    await writeFile(TOKEN_PATH, token)
-    console.log('Token refreshed')
-    resolve()
+  new Promise(async (resolve, reject) => {
+    try {
+      oAuth2Client.setCredentials(token)
+      const accessToken = (await oAuth2Client.getRequestHeaders()).Authorization.split(' ')[1]
+      token.access_token = accessToken
+      await writeFile(TOKEN_PATH, token)
+      console.log('Token refreshed')
+      resolve()
+    } catch(e) {
+      reject(e)
+    }
   })
 
 ;(async () => {
@@ -76,7 +80,7 @@ const refreshToken = (oAuth2Client, token) =>
   try {
     token = await readFile(TOKEN_PATH)
     oAuth2Client.setCredentials(token)
-    refreshToken(oAuth2Client, token)
+    await refreshToken(oAuth2Client, token)
   } catch (err) {
     console.error(err)
     token = await getNewToken(oAuth2Client)

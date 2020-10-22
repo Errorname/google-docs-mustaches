@@ -3,3 +3,6 @@ dev/credentials.json
 dev/token.json
 dev/playground.js
 lib/
+
+# TO REMOVE
+old

@@ -1,11 +1,12 @@
 import crossFetch from 'cross-fetch'
 import Blob from '../polyfills/Blob'
+import { GetToken } from '../types'
 
 export class FetchError extends Error {
   public error!: JSON
 }
 
-export const fetch = (token: Function): Function => async (
+export const fetch = (token: GetToken) => async (
   url: string,
   body: any = null,
   options: { method?: string; headers?: any; raw?: boolean } = {}
@@ -22,10 +23,10 @@ export const fetch = (token: Function): Function => async (
     headers: {
       authorization: `Bearer ${await token()}`,
       'Content-Type': 'application/json',
-      ...headers
+      ...headers,
     },
-    ...rest
-  }).then(async result => {
+    ...rest,
+  }).then(async (result) => {
     if (result.status !== 200) {
       const error = new FetchError(`Fetch Error: status ${result.status}`)
       error.error = await result.json()
@@ -44,13 +45,13 @@ export const multipart = (
 ): Blob => {
   const body = []
 
-  parts.map(part => {
+  parts.map((part) => {
     const { data, ...headers } = part
     body.push(
       [
         `--${boundary}`,
         ...Object.entries(headers).map(([key, value]) => `${key}: ${value}`),
-        '\n'
+        '\n',
       ].join('\n')
     )
     body.push(data)
