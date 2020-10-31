@@ -26,7 +26,9 @@ const compute = (
       evaluateToken(part, null, { ...options.formatters, ...data }, true)
     )
 
-    return evaluatedParts.reduce((prev, formatter) => formatter(prev))
+    return typeof evaluatedParts[0] !== 'undefined'
+      ? evaluatedParts.reduce((prev, formatter) => formatter(prev))
+      : undefined
   } catch (error) {
     if (options.strict) {
       throw error
