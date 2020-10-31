@@ -11,7 +11,7 @@ const matchRegex = (str: string, regexp: RegExp) => {
 const parseExpression = (str: string): string[] => {
   const [token, rest] = matchRegex(
     str,
-    /^(\w+(?:(?:\.\w+)|(?:\[.*\])|(?:\(.*\)))*)(?:\s*\|\s*(.+))?$/
+    /^(\w+(?:(?:\.\w+)|(?:\[.*\])|(?:\(.*\))|(?: \w+))*)(?:\s*\|\s*(.+))?$/
   )
 
   if (rest) {
@@ -23,7 +23,7 @@ const parseExpression = (str: string): string[] => {
 const parseToken = (str: string): PropertyToken | undefined => {
   if (!str) return undefined
 
-  const [name, rest] = matchRegex(str, /^(\w+)(.*)$/)
+  const [name, rest] = matchRegex(str, /^([\w ]+)(.*)$/)
 
   return {
     type: 'property',
