@@ -40,7 +40,7 @@
   "homepage": "https://github.com/errorname/google-docs-mustaches#readme",
   "dependencies": {
     "cross-fetch": "^3.0.4",
-    "fetch-blob": "^1.0.5"
+    "fetch-blob": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
